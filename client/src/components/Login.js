@@ -3,6 +3,7 @@
 // CSS Libraries: Bootstrap, Material UI - UI Library
 
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -18,15 +19,15 @@ const Login = () => {
 
   // For when component loads - happens only ONCE
   useEffect(() => {
-    // Grab back end data <- Should change to Axios
-    fetch("/api").then(
-      res => res.json()
-    ).then(
-      data => {
-        setBackendData(data);
-      }
-    )
-  }, [])
+    
+    axios.get('/api')
+      .then(response => {
+        setBackendData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   // For when there is an error - when user changes username or password, it refreshes and set the error message to blank
   useEffect(() => {
