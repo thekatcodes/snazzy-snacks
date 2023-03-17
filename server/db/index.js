@@ -16,4 +16,4 @@ pool.query(`
 })
 .catch(err => console.error('query error', err.stack))
 
-
+module.exports = pool

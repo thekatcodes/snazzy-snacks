@@ -1,3 +1,7 @@
+// Communications with backend should be done with Axios
+// Check react router
+// CSS Libraries: Bootstrap, Material UI - UI Library
+
 import { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -14,7 +18,7 @@ const Login = () => {
 
   // For when component loads - happens only ONCE
   useEffect(() => {
-    // Grab back end data
+    // Grab back end data <- Should change to Axios
     fetch("/api").then(
       res => res.json()
     ).then(
@@ -36,7 +40,9 @@ const Login = () => {
     try {
       for(const data of backendData) {
         if(data.name == user && data.password == pwd) {
-          return await setSuccess(true);  
+          setSuccess((prev) => !prev);  
+          console.log(success, "This is in the if statement");
+          return success;
         }
       }
       setUser('');
@@ -51,10 +57,7 @@ const Login = () => {
       } else {
         setErrMsg("Login Failed");
       } 
-    } finally {
-      // MENTOR QUESTION: Why does this return false, even when setSuccess is set to true when the id/pw match? 
-      console.log(success);
-    }
+    } 
   }
 
   return (
