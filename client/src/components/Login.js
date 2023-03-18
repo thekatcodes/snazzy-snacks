@@ -41,8 +41,7 @@ const Login = () => {
     try {
       for(const data of backendData) {
         if(data.name == user && data.password == pwd) {
-          setSuccess((prev) => !prev);  
-          console.log(success, "This is in the if statement");
+          setSuccess((prev) => !prev);
           return success;
         }
       }
