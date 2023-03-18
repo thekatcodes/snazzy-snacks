@@ -5,3 +5,5 @@
 
 # Within server directory, type npm install to install dependencies for backend
 # Within client directory, type npm install to install dependencies for frontend
+ 
+ Hi - Samma
