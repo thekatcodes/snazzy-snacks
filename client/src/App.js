@@ -1,27 +1,41 @@
 import './App.css';
 import Login from './components/Login';
+import Register from './components/Register';
 import NavigationBar from './components/NavigationBar';
 import { useState } from 'react';
 
 function App() {
   
-  const [ loginComplete, setLoginComplete ] = useState(false);
+  // FUTURE LOGIC - create an object with all the states, and make a function that turns everything but selected false so it renders only one page at a time
+
+  const [login, setLogin] = useState(false);
+  const [register, setRegister] = useState(false);
 
   const handleLogin = () => {
-    setLoginComplete(true);
+    setLogin(true);
+    setRegister(false);
+  }
+
+  const handleRegister = () => {
+    setRegister(true);
+    setLogin(false);
   }
 
   return (
     <div className="App">
-      <NavigationBar />
-      {!loginComplete && 
+      <NavigationBar 
+        setLogin={handleLogin}
+        setRegister={handleRegister}
+      />
+      {login && 
         <Login 
-          setLoginComplete={handleLogin}
+          setLogin={handleLogin}
+          setRegister={handleRegister}
         />
       }
-      {/* {loginComplete &&
-
-      } */}
+      {register && 
+        <Register /> 
+      }
     </div>
   );
 }

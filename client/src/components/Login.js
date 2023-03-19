@@ -45,72 +45,36 @@ const Login = (props) => {
     } 
   }
 
-  // Register Link -> Front End (INCOMPLETE)
-  function handleSignUp() {
-    axios.get('/register')
-      .then(() => {
-        console.log("clicked on register");
-        
-      })
-      .catch(error => {
-      console.log(error);
-    })
-  };
-
   return (
-    <>
-      { success ? (
-        // Currently, if login is successful, login screen below is NOT rendered (this is within ternary operator)
-        <section>
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            {/* Placeholder to home link */}
-            <a href="#">Go to Home</a>
-          </p>
-        </section>
-      ) : ( 
-        <section>
-          {/* Error message display */}
-          <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
-          <h1>Log In</h1>
-          <form onSubmit={handleLogin}>
-            <label htmlFor="username">Username: </label>
-            <br>
-            </br>
-            <input 
-              type="text" 
-              id="username"
-              autoComplete="off"
-              onChange={(event) => setUser(event.target.value)}
-              value={user}
-              required
-            />
-            <br>
-            </br>
-            <br>
-            </br>
-            <label htmlFor="password">Password</label>
-            <br>
-            </br>
-            <input 
-              type="password" 
-              id="password"
-              onChange={(event) => setPwd(event.target.value)}
-              value={pwd}
-              required
-            />
-            <br></br>
-            <br></br>
-            <button>Log In</button>
-          </form>
-          <p>
-            Don't have an account yet? Sign up&nbsp;
-            <a href="/register" onClick={handleSignUp}>here</a>  
-          </p>
-        </section>
-      )}
-    </>
+    <section>
+      {/* Error message display */}
+      <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+      <h1>Log In</h1>
+      <form onSubmit={handleLogin}>
+        <label htmlFor="username">Username </label><br></br>
+        <input 
+          type="text" 
+          id="username"
+          autoComplete="off"
+          onChange={(event) => setUser(event.target.value)}
+          value={user}
+          required
+        /><br></br><br></br>
+        <label htmlFor="password">Password</label><br></br>
+        <input 
+          type="password" 
+          id="password"
+          onChange={(event) => setPwd(event.target.value)}
+          value={pwd}
+          required
+        /><br></br><br></br>
+        <button>Log In</button>
+      </form>
+      <p>
+        Don't have an account yet? Sign up&nbsp;
+        <a href="/" onClick={props.setRegister}>here</a>  
+      </p>
+    </section>
   )
 }
 
