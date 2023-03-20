@@ -17,6 +17,7 @@ const Login = (props) => {
     try {
       await axios.post('/login', {username: user, password: pwd})
       .then((res) => {
+        console.log(res.data.login);
         if(res.data.login) {
           props.setIndex();
         }

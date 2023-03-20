@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-// const bcrypt = require("bcryptjs");
-// const cookieSession = require('cookie-session');  
+const bcrypt = require("bcryptjs");
 const PORT = 8080;
 
+// Helper and component specific functions
 const { getUsers, updateUsers } = require('./users');
 
 // Middleware to read req.body
@@ -19,26 +19,28 @@ app.get("/api", async(req, res) => {
   }
 });
 
+// console.log(bcrypt.hashSync('123456', 10));
+// console.log(bcrypt.hashSync('abcdef', 10));
+
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
   try {
     const users = await getUsers();
-    let login = { login: false };
+    let login = false;
+    let username = req.body.username;
+    let password = req.body.password;
     
     for(const user of users) {
-      if(user.name == req.body.username && user.password == req.body.password) {
+      if(user.name === username && bcrypt.compareSync(password, user.password)) {
         login = true;
       }
     }
 
-    console.log("Username: ", req.body.username);
-    console.log("Password: ", req.body.password);
-
-    if(!login.login) {
+    if(!login) {
       return res.status(400).send('Login Failed! Please check your username and password.')
     }
 
-    res.json(login);
+    res.json({login: login});
   } catch (err) {
     console.log(err);
   }
@@ -48,24 +50,28 @@ app.post("/login", async(req, res) => {
 app.post('/register', async(req, res) => {
   try {
     const users = await getUsers();
-    const regis = {registration: false };
+    let regis = false;
 
-    while (!regis.registration) {
+    let username = req.body.username;
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, 10);
+
+    while (!regis) {
       if (req.body.password !== req.body.password2) {
         return res.status(400).send('Passwords do not match!');
       }
   
       for(const user of users) {
-        if(user.name === req.body.username || user.email === req.body.email) {
+        if(user.name === username || user.email === email) {
           return res.status(400).send('Username or Email already exists!');
         } 
       }
 
-      regis.registration = true;
-      updateUsers(req.body.username, req.body.email, req.body.password, '');
+      regis = true;
+      updateUsers(username, email, password, '');
     }
 
-    res.json(regis);
+    res.json({registration: regis});
 
   } catch(err) {
     console.log(err);
