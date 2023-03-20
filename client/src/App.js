@@ -11,6 +11,11 @@ function App() {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
 
+  const handleIndex = () => {
+    setLogin(false);
+    setRegister(false);
+  }
+
   const handleLogin = () => {
     setLogin(true);
     setRegister(false);
@@ -24,17 +29,22 @@ function App() {
   return (
     <div className="App">
       <NavigationBar 
+        setIndex={handleIndex}
         setLogin={handleLogin}
         setRegister={handleRegister}
       />
       {login && 
         <Login 
+          setIndex={handleIndex}
           setLogin={handleLogin}
           setRegister={handleRegister}
         />
       }
       {register && 
-        <Register /> 
+        <Register 
+          setIndex={handleIndex}
+          setRegister={handleRegister}
+        /> 
       }
     </div>
   );

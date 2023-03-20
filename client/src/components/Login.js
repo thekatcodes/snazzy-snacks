@@ -2,7 +2,7 @@
 // Check react router
 // CSS Libraries: Bootstrap, Material UI - UI Library
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const Login = (props) => {
@@ -10,14 +10,6 @@ const Login = (props) => {
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  
-  // This is temporary for seeing if login is successful
-  const [success, setSuccess] = useState(false);
-
-  // For when there is an error - when user changes username or password, it refreshes and set the error message to blank
-  useEffect(() => {
-    setErrMsg('');
-  }, [user, pwd])
 
   // Login Function
   const handleLogin = async (event) => {
@@ -25,23 +17,17 @@ const Login = (props) => {
     try {
       await axios.post('/login', {username: user, password: pwd})
       .then((res) => {
-        setSuccess(res.data.login);
-        setUser('');
-        setPwd('');
+        if(res.data.login) {
+          props.setIndex();
+        }
       })
       .catch((err) => {
-        console.log(err)
-      })
+        setUser('');
+        setPwd('');
+        setErrMsg(err.response.data);
+      });
     } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      } 
+      console.log(err);
     } 
   }
 
@@ -72,7 +58,7 @@ const Login = (props) => {
       </form>
       <p>
         Don't have an account yet? Sign up&nbsp;
-        <a href="/" onClick={props.setRegister}>here</a>  
+        <a href="javascript:void(0);" onClick={props.setRegister}>here</a>  
       </p>
     </section>
   )

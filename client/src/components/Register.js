@@ -1,34 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-const Register = () => {
+const Register = (props) => {
 
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwd2, setPwd2] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-  useEffect(() => {
-    axios.get('/register')
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  })
-
-  // Registration Form Submission -> Back End
-  // How to pass post request login details to backend
-  function handleSignUp() {
-    axios.post('/register')
-      .then(() => {
-
+  // Registration Function
+  const handleSignUp = async (event) => {
+    event.preventDefault(); 
+    try {
+      await axios.post('/register', {username: user, email: email, password: pwd, password2: pwd2})
+      .then((res) => {
+        if(res.data.registration) {
+          props.setIndex();
+        }
       })
+      .catch((err) => {
+        setUser('');
+        setEmail('');
+        setPwd('');
+        setPwd2('');
+        setErrMsg(err.response.data);
+      });
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   return (
     <section>
+      {/* Error message display */}
+      <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Register</h1>
       <form onSubmit={handleSignUp}>
         <label htmlFor="username">Username </label> <br></br>
@@ -42,7 +48,7 @@ const Register = () => {
         /><br></br><br></br>
         <label htmlFor="email">Email</label><br></br>
         <input 
-          type="text" 
+          type="email" 
           id="email"
           autoComplete="off"
           onChange={(event) => setEmail(event.target.value)}
@@ -71,4 +77,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Register;
