@@ -54,3 +54,5 @@ VALUES
 (1, 3),
 (1, 5),
 (1, 7);
+
+-- comment for testing purpose

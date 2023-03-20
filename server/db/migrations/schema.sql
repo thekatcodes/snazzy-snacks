@@ -38,3 +38,5 @@ CREATE TABLE selections (
   box_id INTEGER REFERENCES boxes(id) ON DELETE CASCADE,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE
 );
+
+-- comment for testing purpose
