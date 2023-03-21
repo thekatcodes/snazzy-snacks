@@ -1,3 +1,7 @@
+INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code) VALUES ('example1@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Samma', 'Su', '1 Street', 'Toronto', 'Ontario', 'Canada', 'A1AA1A');
+INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code) VALUES ('example2@example.com', '$2a$10$MR8lu1PZ68iwyi9XgTXQOewAMode11V2lNiMw84xsebub5yjoqaFa', 'Katie', 'Liu', '2 Street', 'Toronto', 'Ontario', 'Canada', 'B2BB2B');
+INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code) VALUES ('example3@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Lyon', 'Lee', '3 Street', 'Toronto', 'Ontario', 'Canada', 'C3CC3C');
+
 INSERT INTO users (email, password)
 VALUES
 ('jdoe@gmail.ca', 1234),

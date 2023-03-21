@@ -5,8 +5,6 @@ import './NavigationBar.css';
 
 const NavigationBar = (props) => {
 
-  // const [cookieValue, setCookieValue] = useState('');
-
   const logout = async (event) => {
     event.preventDefault();
     try{
@@ -55,20 +53,3 @@ const NavigationBar = (props) => {
 }
 
 export default NavigationBar;
-
-
-  // Function to return cookie value... why did I do this
-  // const hasCookie = async () => {
-  //   try {
-  //     const response = await axios.get('/cookie');
-  //     const cookieBoolean = response.data.hasCookie;
-  //     const cookieValue = response.data.cookie;
-  //     return { hasCookie: cookieBoolean, cookie: cookieValue };
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  // hasCookie().then((res) => {
-  //   console.log("CookieBoolean: ", res.hasCookie)
-  //   console.log("cookie value: ", res.cookie)  
-  // });

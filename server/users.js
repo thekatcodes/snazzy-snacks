@@ -14,15 +14,15 @@ async function getUsers() {
 }
 
 // Updates users table from PSQL when registration is successful
-async function updateUsers(name, email, password, address) {
+async function updateNewUser(first_name, last_name, email, password) {
   try {
     await pool.query(`
-      INSERT INTO users (name, email, password, address)
-      VALUES ($1, $2, $3, $4)`, [name, email, password, address]);
+      INSERT INTO users (first_name, last_name, email, password)
+      VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, password]);
     return ("User created successfully");
   } catch (err) {
     console.log(err);
   }
 }
 
-module.exports = { getUsers, updateUsers };
+module.exports = { getUsers, updateNewUser };

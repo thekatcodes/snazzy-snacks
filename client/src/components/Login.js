@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Login = (props) => {
 
-  const [user, setUser] = useState('');
+  const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
@@ -15,19 +15,20 @@ const Login = (props) => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('/login', {username: user, password: pwd})
+      await axios.post('/login', {email: email, password: pwd})
       .then((res) => {
         if(res.data.login) {
           console.log("Response received: ", res);
           // console.log("cookie was set to: ", res.data.cookie);
-          
-          props.setCookieValue(user);
-          
+          console.log("This is the name from backend: ", res.data.firstname)
+
+          props.setCookieValue(res.data.firstname);
+
           props.setIndex();
         }
       })
       .catch((err) => {
-        setUser('');
+        setEmail('');
         setPwd('');
         setErrMsg(err.response.data);
       });
@@ -42,13 +43,13 @@ const Login = (props) => {
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Log In</h1>
       <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username</label><br></br>
+        <label htmlFor="email">Email</label><br></br>
         <input 
-          type="text" 
-          id="username"
+          type="email" 
+          id="email"
           autoComplete="off"
-          onChange={(event) => setUser(event.target.value)}
-          value={user}
+          onChange={(event) => setEmail(event.target.value)}
+          value={email}
           required
         /><br></br><br></br>
         <label htmlFor="password">Password</label><br></br>

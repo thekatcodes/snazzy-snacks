@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const Register = (props) => {
 
-  const [user, setUser] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwd2, setPwd2] = useState('');
@@ -13,15 +14,16 @@ const Register = (props) => {
   const handleSignUp = async (event) => {
     event.preventDefault(); 
     try {
-      await axios.post('/register', {username: user, email: email, password: pwd, password2: pwd2})
+      await axios.post('/register', {firstname: firstname, lastname: lastname, email: email, password: pwd, password2: pwd2})
       .then((res) => {
         if(res.data.registration) {
-          props.setCookieValue(user);
+          props.setCookieValue(res.data.firstname);
           props.setIndex();
         }
       })
       .catch((err) => {
-        setUser('');
+        setFirstname('');
+        setLastname('');
         setEmail('');
         setPwd('');
         setPwd2('');
@@ -38,13 +40,22 @@ const Register = (props) => {
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Register</h1>
       <form onSubmit={handleSignUp}>
-        <label htmlFor="username">Username </label> <br></br>
+        <label htmlFor="firstname">First Name</label> <br></br>
         <input 
           type="text" 
-          id="username"
+          id="firstname"
           autoComplete="off"
-          onChange={(event) => setUser(event.target.value)}
-          value={user}
+          onChange={(event) => setFirstname(event.target.value)}
+          value={firstname}
+          required
+        /><br></br><br></br>
+        <label htmlFor="lastname">Last Name</label> <br></br>
+        <input 
+          type="text" 
+          id="lastname"
+          autoComplete="off"
+          onChange={(event) => setLastname(event.target.value)}
+          value={lastname}
           required
         /><br></br><br></br>
         <label htmlFor="email">Email</label><br></br>

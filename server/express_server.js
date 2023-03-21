@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const PORT = 8080;
 
 // Helper and component specific functions
-const { getUsers, updateUsers } = require('./users');
+const { getUsers, updateNewUser } = require('./users');
 
 // Middleware to read req.body
 app.use(express.json());
@@ -31,40 +31,31 @@ app.post("/login", async(req, res) => {
   try {
     const users = await getUsers();
     let login = false;
-    let username = req.body.username;
+    let email = req.body.email;
     let password = req.body.password;
     
+    let index = 0;
+
     for(const user of users) {
-      if(user.name === username && bcrypt.compareSync(password, user.password)) {
-        req.session.cookie = username;
+      if(user.email === email && bcrypt.compareSync(password, user.password)) {
+        req.session.cookie = user.first_name;
         console.log("setsessioncookieset", req.session.cookie);
         login = true;
+        break;
       }
+      index++;
     }
 
     if(!login) {
       return res.status(400).send('Login failed! Please check your username and password.');
     }
-
-    res.json({ login: login, cookie: req.session.cookie });
+    
+    res.json({ login: login, firstname: users[index].first_name});
   } catch (err) {
     console.log(err);
   }
 });
 
-// Checking if cookies exist (REFERENCE FOR LATER)
-// app.get("/cookie", async(req, res) => {
-//   try {
-//     console.log("request received from frontend");
-//     console.log("Cookies value: ", req.cookies.cookie);
-//     console.log("Cookie unencrypted: ", req.session.cookie);
-//     const cookie = req.cookies.cookie ? req.cookies.cookie : '' ;
-//     const hasCookie =  req.cookies.cookie ? true : false;
-//     res.json({ cookie, hasCookie });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// })
 
 // Returning username
 app.get('/cookie', async(req, res) => {
@@ -81,29 +72,33 @@ app.post('/register', async(req, res) => {
   try {
     const users = await getUsers();
     let regis = false;
-
-    let username = req.body.username;
+    
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
     let email = req.body.email;
     let password = bcrypt.hashSync(req.body.password, 10);
+    
+    console.log("This is first name: ", firstname);
+    console.log("This is last name: ", lastname);
 
     while (!regis) {
       if (req.body.password !== req.body.password2) {
         return res.status(400).send('Passwords do not match!');
       }
-  
+      
       for(const user of users) {
-        if(user.name === username || user.email === email) {
-          return res.status(400).send('Username or Email already exists!');
+        if(user.email === email) {
+          return res.status(400).send('Email already exists!');
         } 
       }
-
+      
       regis = true;
-      req.session.cookie = username;
-      updateUsers(username, email, password, '');
+      req.session.cookie = firstname;
+      updateNewUser(firstname, lastname, email, password);
     }
-
-    res.json({ registration: regis, cookie: username });
-
+    
+    res.json({ registration: regis, firstname: firstname });
+    
   } catch(err) {
     console.log(err);
   }
@@ -119,3 +114,17 @@ app.post('/logout', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
+
+// Checking if cookies exist (REFERENCE FOR LATER)
+// app.get("/cookie", async(req, res) => {
+//   try {
+//     console.log("request received from frontend");
+//     console.log("Cookies value: ", req.cookies.cookie);
+//     console.log("Cookie unencrypted: ", req.session.cookie);
+//     const cookie = req.cookies.cookie ? req.cookies.cookie : '' ;
+//     const hasCookie =  req.cookies.cookie ? true : false;
+//     res.json({ cookie, hasCookie });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// })
