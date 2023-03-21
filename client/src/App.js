@@ -1,13 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
 import './App.scss';
-import Login from './components/Button';
+import Landing from "./components/Landing";
 
 function App() {
   return <Routes>
-    <Route>
-      
-    </Route>
+    <Route path="/" element={<Landing />} />
   </Routes>
 }
 
