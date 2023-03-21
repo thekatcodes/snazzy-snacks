@@ -18,7 +18,13 @@
 }
 
 .login,
+.logout,
 .register {
   font-size: 18px;
   padding: 5px 10px;
+}
+
+.intro {
+  font-size: 20px;
+  font-weight: bold;
 }

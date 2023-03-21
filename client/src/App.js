@@ -2,14 +2,16 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavigationBar from './components/NavigationBar';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 function App() {
-  
-  // FUTURE LOGIC - create an object with all the states, and make a function that turns everything but selected false so it renders only one page at a time
+  // React Router may be the answer
 
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
+
+  const [cookieValue, setCookieValue] = useState('');
 
   const handleIndex = () => {
     setLogin(false);
@@ -28,20 +30,24 @@ function App() {
 
   return (
     <div className="App">
-      <NavigationBar 
+      <NavigationBar
+        cookieValue={cookieValue}
+        setCookieValue={setCookieValue}
         setIndex={handleIndex}
         setLogin={handleLogin}
         setRegister={handleRegister}
       />
       {login && 
         <Login 
+          setCookieValue={setCookieValue}
           setIndex={handleIndex}
           setLogin={handleLogin}
           setRegister={handleRegister}
         />
       }
       {register && 
-        <Register 
+        <Register
+          setCookieValue={setCookieValue} 
           setIndex={handleIndex}
           setRegister={handleRegister}
         /> 

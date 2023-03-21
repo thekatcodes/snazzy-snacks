@@ -16,6 +16,7 @@ const Register = (props) => {
       await axios.post('/register', {username: user, email: email, password: pwd, password2: pwd2})
       .then((res) => {
         if(res.data.registration) {
+          props.setCookieValue(user);
           props.setIndex();
         }
       })

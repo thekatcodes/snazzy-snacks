@@ -17,8 +17,12 @@ const Login = (props) => {
     try {
       await axios.post('/login', {username: user, password: pwd})
       .then((res) => {
-        console.log(res.data.login);
         if(res.data.login) {
+          console.log("Response received: ", res);
+          // console.log("cookie was set to: ", res.data.cookie);
+          
+          props.setCookieValue(user);
+          
           props.setIndex();
         }
       })
@@ -38,7 +42,7 @@ const Login = (props) => {
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Log In</h1>
       <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username </label><br></br>
+        <label htmlFor="username">Username</label><br></br>
         <input 
           type="text" 
           id="username"

@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const bcrypt = require("bcryptjs");
+const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser'); 
 const PORT = 8080;
 
 // Helper and component specific functions
@@ -8,6 +10,11 @@ const { getUsers, updateUsers } = require('./users');
 
 // Middleware to read req.body
 app.use(express.json());
+app.use(cookieSession({
+  name: 'cookie',
+  keys: ['ae2201ymno3imKSaLa0t', '1i0aomteayS3mL20an2K']
+}));
+app.use(cookieParser());
 
 // Grabs data from psql to send to front end
 app.get("/api", async(req, res) => {
@@ -19,9 +26,6 @@ app.get("/api", async(req, res) => {
   }
 });
 
-// console.log(bcrypt.hashSync('123456', 10));
-// console.log(bcrypt.hashSync('abcdef', 10));
-
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
   try {
@@ -32,19 +36,45 @@ app.post("/login", async(req, res) => {
     
     for(const user of users) {
       if(user.name === username && bcrypt.compareSync(password, user.password)) {
+        req.session.cookie = username;
+        console.log("setsessioncookieset", req.session.cookie);
         login = true;
       }
     }
 
     if(!login) {
-      return res.status(400).send('Login Failed! Please check your username and password.')
+      return res.status(400).send('Login failed! Please check your username and password.');
     }
 
-    res.json({login: login});
+    res.json({ login: login, cookie: req.session.cookie });
   } catch (err) {
     console.log(err);
   }
 });
+
+// Checking if cookies exist (REFERENCE FOR LATER)
+// app.get("/cookie", async(req, res) => {
+//   try {
+//     console.log("request received from frontend");
+//     console.log("Cookies value: ", req.cookies.cookie);
+//     console.log("Cookie unencrypted: ", req.session.cookie);
+//     const cookie = req.cookies.cookie ? req.cookies.cookie : '' ;
+//     const hasCookie =  req.cookies.cookie ? true : false;
+//     res.json({ cookie, hasCookie });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// })
+
+// Returning username
+app.get('/cookie', async(req, res) => {
+  try {
+    console.log("Sending back: ", req.session.cookie);
+    res.send(req.session.cookie);
+  } catch (err) {
+    console.log(err);
+  }
+})
 
 // Receives data from register (axios), and add the information to the database
 app.post('/register', async(req, res) => {
@@ -68,15 +98,23 @@ app.post('/register', async(req, res) => {
       }
 
       regis = true;
+      req.session.cookie = username;
       updateUsers(username, email, password, '');
     }
 
-    res.json({registration: regis});
+    res.json({ registration: regis, cookie: username });
 
   } catch(err) {
     console.log(err);
   }
 })
+
+// Logout button, clears cookies in backend
+app.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+})
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
