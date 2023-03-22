@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 import Register from './components/Register';
+// import Profile from './components/Profile';
 
 function App() {
 
@@ -35,6 +36,12 @@ function App() {
           setCookieValue={setCookieValue} 
         /> 
       } />
+      {/* <Route path="/profile" element={
+        <Profile
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue} 
+        /> 
+      } /> */}
     </Routes>
     </>
   );
