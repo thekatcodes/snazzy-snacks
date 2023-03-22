@@ -61,7 +61,6 @@ const NavigationBar = (props) => {
               </li>
               <li>
                 <NavLink className="inactive" to="/register">
-                  {/* <button className="register">Sign Up</button> */}
                   Sign Up
                 </NavLink>
               </li>
