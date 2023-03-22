@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const PORT = 8080;
 
 //used for Stripe
-const YOUR_DOMAIN = "http://localhost:8080";
+const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(
 	process.env.STRIPE_SECRET_KEY
@@ -141,7 +141,7 @@ app.post("/create-checkout-session", async (req, res) => {
         success_url: `${YOUR_DOMAIN}/order-confirmation`,
         
         //^^^ redirects to http://localhost:8080/order-confirmation 
-        // page shows: Cannot GET /order-confirmation
+        // TO DO: CREATE order-confirmation router path + component
 
 		cancel_url: `${YOUR_DOMAIN}/subscriptions`,
 		billing_address_collection: "required",
