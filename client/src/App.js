@@ -40,20 +40,17 @@ function App() {
             setCookieValue={setCookieValue} 
           /> 
         } />
-        {/* <Route path="/profile" element={
-          <Profile
-            cookieValue={cookieValue}
-            setCookieValue={setCookieValue} 
-          /> 
-        } /> */}
         <Route path="/subscriptions" element={
         <Subscriptions
           cookieValue={cookieValue}
           setCookieValue={setCookieValue}
         />
       } />    
-        {/* <Route path="/" element={<Landing />} />
-        <Route path="/temp" element={<Temp />} /> */}
+        {/* <Route path="/" element={<Landing />} /> */}
+        <Route path="/temp" element={
+        <Temp 
+        />
+      } />
       </Routes>
     </>
   );
