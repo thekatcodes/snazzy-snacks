@@ -143,7 +143,7 @@ app.post("/create-checkout-session", async (req, res) => {
         //^^^ redirects to http://localhost:8080/order-confirmation 
         // page shows: Cannot GET /order-confirmation
 
-		cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+		cancel_url: `${YOUR_DOMAIN}/subscriptions`,
 		billing_address_collection: "required",
 		shipping_address_collection: {
 			allowed_countries: ["CA"],
