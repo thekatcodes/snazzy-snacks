@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -18,16 +18,16 @@ function App() {
 
   return (
     <>
-      {/* <NavigationBar
+      <NavigationBar
         cookieValue={cookieValue}
         setCookieValue={setCookieValue}
-      /> */}
+      />
       <Routes>
-        {/* <Route path="/" element={
+        <Route path="/" element={
           <Home 
             cookieValue={cookieValue}
           />
-        } /> */}
+        } />
         <Route path="/login" element={
           <Login 
             cookieValue={cookieValue}
@@ -52,8 +52,8 @@ function App() {
           setCookieValue={setCookieValue}
         />
       } />    
-        <Route path="/" element={<Landing />} />
-        <Route path="/temp" element={<Temp />} />
+        {/* <Route path="/" element={<Landing />} />
+        <Route path="/temp" element={<Temp />} /> */}
       </Routes>
     </>
   );
