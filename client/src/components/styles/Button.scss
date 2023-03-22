@@ -2,13 +2,13 @@
 @import "../../styles/variables.scss";
 
 .button {
-  border-radius: .3rem;
+  border-radius: 0.5rem;
   border: 0;
   font-size: 1.1rem;
   color: $atomic-tangerine;
   background-color: $white;
-  padding: 0.7rem 0.5rem;
-  padding-top: 1rem;
+  padding: 0.6rem 0.5rem;
+  padding-top: 0.8rem;
   margin-top: 1.5rem;
   min-width: 7rem;
 }
@@ -20,26 +20,18 @@
   background-color: $atomic-tangerine;
 }
 
-.button--danger {
-  color: $danger-color;
-  border-color: $danger-color;
-  background-color: transparent;
-}
-
-.button--confirm {
-  color: $confirm-color;
-  border-color: $confirm-color;
-  background-color: transparent;
-}
-
-.button--danger:hover {
+.button--orangy {
   color: $white;
-  background-color: $danger-color;
+  background-color: $atomic-tangerine;
+  border-color: $atomic-tangerine;
+  border: 2px solid;
 }
 
-.button--confirm:hover {
-  color: $white;
-  background-color: $confirm-color;
+.button--orangy:hover {
+  color: $atomic-tangerine;
+  background-color: $white;
+  border-color: $atomic-tangerine;
+  border: 2px solid;
 }
 
 .button:focus {

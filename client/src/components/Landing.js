@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Button from "./Button";
 
 import "./styles/Landing.scss";
@@ -5,8 +7,9 @@ import candy from "../images/candy.png";
 import snack from "../images/snack.png";
 
 export default function Landing() {
+
   return (
-    <section className="landing-background layout">
+    <section className="landing-background landing-layout layout">
       <div className="coiny">
         <h1>SNAZZY SNACKS</h1>
       </div>
@@ -17,7 +20,9 @@ export default function Landing() {
         <h5>*starting at 20$/mo</h5>
       </div>
       <div>
-        <Button>GET SNACKING!</Button>
+        <Link to="/temp">
+          <Button>GET SNACKING!</Button>
+        </Link>
       </div>
       <div className="landing-img">
         <img src={candy} alt="Candy" />

@@ -6,6 +6,23 @@ body {
   font-family: $regular-font;
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
 .coiny {
   font-family: $coiny-font;
+}
+
+@media only screen and (max-width: 960px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  html {
+    font-size: 10px;
+  }
 }
