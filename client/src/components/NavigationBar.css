@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.login-register {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.login,
+.logout,
+.register {
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.intro {
+  font-size: 20px;
+  font-weight: bold;
+}

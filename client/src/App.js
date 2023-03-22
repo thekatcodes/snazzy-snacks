@@ -1,14 +1,56 @@
+import './App.scss';
+import { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 
-import './App.scss';
+import Home from "./components/Home";
+import NavigationBar from './components/NavigationBar';
 import Landing from "./components/Landing";
+import Login from './components/Login';
+import Register from './components/Register';
+
 import Temp from "./components/Temp";
+// import Profile from './components/Profile';
 
 function App() {
-  return <Routes>
-    <Route path="/" element={<Landing />} />
-    <Route path="/temp" element={<Temp />} />
-  </Routes>
+
+  const [cookieValue, setCookieValue] = useState('');
+
+  return (
+    <>
+      {/* <NavigationBar
+        cookieValue={cookieValue}
+        setCookieValue={setCookieValue}
+      /> */}
+      <Routes>
+        {/* <Route path="/" element={
+          <Home 
+            cookieValue={cookieValue}
+          />
+        } /> */}
+        <Route path="/login" element={
+          <Login 
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } />
+        <Route path="/register" element={
+          <Register
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue} 
+          /> 
+        } />
+        {/* <Route path="/profile" element={
+          <Profile
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue} 
+          /> 
+        } /> */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/temp" element={<Temp />} />
+      </Routes>
+    </>
+  );
+
 }
 
 export default App;
