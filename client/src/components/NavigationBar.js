@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import axios from 'axios';
 import './NavigationBar.css';
 
@@ -34,26 +34,29 @@ const NavigationBar = (props) => {
   }, [props.cookieValue]);
 
   return (
-    <div className="header">
-      <div className="logo">Snazzy Snacks</div>
-      <div className="login-register">
-        { props.cookieValue ?
-        <>
-          <div className="intro">Hello {props.cookieValue}! Please buy our snacks!</div>
-          <button className="logout" onClick={logout}>Log Out</button>
-        </>
-        :
-        <>
-          <Link to="/login">
-            <button className="login">Log In</button>
-          </Link>
-          <Link to="/register">
-            <button className="register">Register</button>
-          </Link>
-        </>
-        }
+    <>
+      <div className="header">
+        <div className="logo">Snazzy Snacks</div>
+        <div className="login-register">
+          { props.cookieValue ?
+          <>
+            <div className="intro">Hello {props.cookieValue}! Please buy our snacks!</div>
+            <button className="logout" onClick={logout}>Log Out</button>
+          </>
+          :
+          <>
+            <Link to="/login">
+              <button className="login">Log In</button>
+            </Link>
+            <Link to="/register">
+              <button className="register">Register</button>
+            </Link>
+          </>
+          }
+        </div>
       </div>
-    </div>
+      <Outlet />
+    </>
   )
 }
 
