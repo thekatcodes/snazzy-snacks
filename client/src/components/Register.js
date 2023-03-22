@@ -31,7 +31,7 @@ const Register = (props) => {
       .then((res) => {
         if(res.data.registration) {
           props.setCookieValue(res.data.firstname);
-          navigate("/");
+          navigate("/Subscriptions");
         }
       })
       .catch((err) => {
