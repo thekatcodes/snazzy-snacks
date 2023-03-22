@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import axios from 'axios';
 import './styles/NavigationBar.scss';
 
@@ -40,8 +40,16 @@ const NavigationBar = (props) => {
         <div className="login-register">
           { props.cookieValue ?
             <>
-              <div className="intro">Hello {props.cookieValue}! Please buy our snacks!</div>
-              <button className="logout" onClick={logout}>Log Out</button>
+              <div className="intro">Hello {props.cookieValue}!</div>
+              <div className="dropdown">
+                <i class="fa-regular fa-user fa-xl dropdown-hover"></i>
+                <div className="dropdown-menu">
+                  <Link to="/account">
+                    <button>My Account</button>
+                  </Link>
+                  <button className="logout" onClick={logout}>Log Out</button>
+                </div>
+              </div>
             </>
             :
             <ul className="login-register">

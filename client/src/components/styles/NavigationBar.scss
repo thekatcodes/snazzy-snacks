@@ -1,4 +1,6 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
 
 .header {
   display: flex;
@@ -23,7 +25,7 @@
   
   a:-webkit-any-link {
     text-decoration: none;
-    cursor: pointer;
+    @include button-active;
   }
 }
 
@@ -36,6 +38,45 @@
 }
 
 .intro {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1rem;
+  color: $robin-egg-blue;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 99;
+}
+
+.dropdown-hover {
+  display: inline-block;
+  cursor: pointer;
+  color: $imperial-red;
+}
+
+.dropdown-menu {
+  position: absolute;
+  display: none;
+  top: 100%;
+  right: 0;
+
+  button {
+    font-family: $regular-font;
+    border: 0;
+    border-radius: 0.5rem;
+    color: $imperial-red;
+    font-size: 1rem;
+    background-color: transparent;
+    padding: 0.5rem;
+    width: 6.5rem;
+    @include button-active;
+  }
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu button:hover {
+  background-color: rgb(240, 239, 239);
 }
