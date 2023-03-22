@@ -33,8 +33,9 @@ const Login = (props) => {
         if(res.data.login) {
           console.log("Response received: ", res);
           console.log("This is the name from backend: ", res.data.firstname)
-          props.setCookieValue(res.data.firstname);
-          navigate("/");
+            props.setCookieValue(res.data.firstname);
+        //**TO UPDATE** currently navigating to /subscriptions (tier choosing) on successful login. TO DO LATER: implement a direct route to My Account if the user has an active subscription */
+          navigate("/subscriptions");
         }
       })
       .catch((err) => {
