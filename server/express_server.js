@@ -139,10 +139,6 @@ app.post("/create-checkout-session", async (req, res) => {
 		],
 		mode: "subscription",
         success_url: `${YOUR_DOMAIN}/order-confirmation`,
-        
-        //^^^ redirects to http://localhost:8080/order-confirmation 
-        // TO DO: CREATE order-confirmation router path + component
-
 		cancel_url: `${YOUR_DOMAIN}/subscriptions`,
 		billing_address_collection: "required",
 		shipping_address_collection: {
