@@ -40,7 +40,11 @@ app.post("/create-checkout-session", async (req, res) => {
 			},
 		],
 		mode: "subscription",
-		success_url: `${YOUR_DOMAIN}?success=true`,
+        success_url: `${YOUR_DOMAIN}/order-confirmation`,
+        
+        //^^^ redirects to http://localhost:8080/order-confirmation 
+        // page shows: Cannot GET /order-confirmation
+
 		cancel_url: `${YOUR_DOMAIN}?canceled=true`,
 		billing_address_collection: "required",
 		shipping_address_collection: {
@@ -52,6 +56,18 @@ app.post("/create-checkout-session", async (req, res) => {
 	// res.json({ id: session.id });
 	res.redirect(303, session.url);
 });
+
+// app.post("/webhooks/stripe", async (req, res) => {
+//     const event = req.body;
+    
+//     if (event.type === "checkout.session.completed") {
+//       const session = event.data.object;
+//       // Here, you can retrieve the payment data from the `session` object
+//       console.log(session);
+//     }
+    
+//     res.sendStatus(200);
+//   });
 
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}!`);
