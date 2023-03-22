@@ -1,0 +1,51 @@
+@import "../../styles/variables.scss";
+
+.landing-background {
+  background-image: radial-gradient(circle at 84.96% 15.64%, #F39563, transparent 74%),radial-gradient(circle at 45.03% 51.05%, #F45156, transparent 71%),radial-gradient(circle at 88.92% 85.85%, #ffeb87, transparent 100%),radial-gradient(circle at 53.83% 41.02%, #ffffff, transparent 37%),radial-gradient(circle at 17.06% 4.64%, #ff722b, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  text-align: center;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h3{
+    margin: 0;
+  }
+
+}
+
+.landing-img {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  margin: 5rem;
+  
+  img {
+    width: 7rem;
+  }
+
+  .landing-snack {
+    transform: rotate(30deg);
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  html {
+    font-size: 10px;
+  }
+}

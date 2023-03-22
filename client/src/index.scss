@@ -1,0 +1,11 @@
+@import "~normalize.css/normalize.css";
+
+@import "./styles/variables.scss";
+
+body {
+  font-family: $regular-font;
+}
+
+.coiny {
+  font-family: $coiny-font;
+}

@@ -1,10 +1,18 @@
-$font-family: "Source Sans Pro", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+$coiny-font: "Coiny", cursive;
+$regular-font: "Nunito", sans-serif;
 
 $active-opacity: 1;
 $inactive-opacity: 0.15;
 
 $white: #fff;
 $black: #000;
+$imperial-red: #f45156ff;
+$atomic-tangerine: #f39563ff;
+$jet: #353535ff;
+$robin-egg-blue: #00c2d1ff;
 
 $dark-background: #222f3e;
 
