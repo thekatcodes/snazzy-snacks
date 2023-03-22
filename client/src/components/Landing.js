@@ -1,8 +1,8 @@
 import Button from "./Button";
 
 import "./styles/Landing.scss";
-import candy from "../icons/candy.png";
-import snack from "../icons/snack.png";
+import candy from "../images/candy.png";
+import snack from "../images/snack.png";
 
 export default function Landing() {
   return (
