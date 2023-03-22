@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import CheckoutForm from "./components/CheckoutForm";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -8,6 +7,7 @@ import NavigationBar from './components/NavigationBar';
 import Login from "./components/Login";
 import Register from './components/Register';
 // import Profile from './components/Profile';
+import Subscriptions from "./components/Subscriptions";
 
 function App() {
 
@@ -43,6 +43,12 @@ function App() {
           setCookieValue={setCookieValue} 
         /> 
       } /> */}
+        <Route path="/subscriptions" element={
+        <Subscriptions
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      } />    
     </Routes>
     </>
   );
