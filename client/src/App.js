@@ -4,13 +4,14 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home";
 import NavigationBar from './components/NavigationBar';
-import Landing from "./components/Landing";
+// import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
 
-import Temp from "./components/Temp";
+// import Temp from "./components/Temp";
 // import Profile from './components/Profile';
 import Subscriptions from "./components/Subscriptions";
+import OrderConfirmation from "./components/OrderConfirmation"
 
 function App() {
 
@@ -52,6 +53,12 @@ function App() {
           setCookieValue={setCookieValue}
         />
       } />    
+        <Route path="/order-confirmation" element={
+        <OrderConfirmation
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      } />  
         {/* <Route path="/" element={<Landing />} />
         <Route path="/temp" element={<Temp />} /> */}
       </Routes>
