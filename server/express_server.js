@@ -29,6 +29,7 @@ app.get("/api", async(req, res) => {
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
   try {
+
     const users = await getUsers();
     let login = false;
     let email = req.body.email;
@@ -55,7 +56,6 @@ app.post("/login", async(req, res) => {
     console.log(err);
   }
 });
-
 
 // Returning username
 app.get('/cookie', async(req, res) => {

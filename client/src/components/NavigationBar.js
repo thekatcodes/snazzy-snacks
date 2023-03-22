@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import './NavigationBar.css';
 
@@ -43,8 +44,12 @@ const NavigationBar = (props) => {
         </>
         :
         <>
-          <button className="login" onClick={props.setLogin}>Log In</button>
-          <button className="register"onClick={props.setRegister}>Register</button>
+          <Link to="/login">
+            <button className="login">Log In</button>
+          </Link>
+          <Link to="/register">
+            <button className="register">Register</button>
+          </Link>
         </>
         }
       </div>

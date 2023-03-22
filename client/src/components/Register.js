@@ -1,7 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Register = (props) => {
+
+  const navigate = useNavigate();
+
+  // If cookie exist, it automatically redirects to homepage - blocks access to register page once logged in
+  useEffect(() => {
+    if(props.cookieValue) {
+      console.log("Hello");
+      navigate("/");
+    } else {
+      navigate("/register");
+    }
+  }, [props.cookieValue, navigate])
 
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -11,14 +24,14 @@ const Register = (props) => {
   const [errMsg, setErrMsg] = useState('');
 
   // Registration Function
-  const handleSignUp = async (event) => {
+  const handleSignUp = (event) => {
     event.preventDefault(); 
     try {
-      await axios.post('/register', {firstname: firstname, lastname: lastname, email: email, password: pwd, password2: pwd2})
+      axios.post('/register', {firstname: firstname, lastname: lastname, email: email, password: pwd, password2: pwd2})
       .then((res) => {
         if(res.data.registration) {
           props.setCookieValue(res.data.firstname);
-          props.setIndex();
+          navigate("/");
         }
       })
       .catch((err) => {

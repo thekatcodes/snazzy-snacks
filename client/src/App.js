@@ -1,58 +1,42 @@
 import './App.css';
+import { useState } from 'react';
+import { Route, Routes } from "react-router-dom";
+
+import Home from "./components/Home";
+import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 import Register from './components/Register';
-import NavigationBar from './components/NavigationBar';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 
 function App() {
-  // React Router may be the answer
-
-  const [login, setLogin] = useState(false);
-  const [register, setRegister] = useState(false);
 
   const [cookieValue, setCookieValue] = useState('');
 
-  const handleIndex = () => {
-    setLogin(false);
-    setRegister(false);
-  }
-
-  const handleLogin = () => {
-    setLogin(true);
-    setRegister(false);
-  }
-
-  const handleRegister = () => {
-    setRegister(true);
-    setLogin(false);
-  }
-
   return (
-    <div className="App">
+    <>
       <NavigationBar
         cookieValue={cookieValue}
         setCookieValue={setCookieValue}
-        setIndex={handleIndex}
-        setLogin={handleLogin}
-        setRegister={handleRegister}
       />
-      {login && 
-        <Login 
-          setCookieValue={setCookieValue}
-          setIndex={handleIndex}
-          setLogin={handleLogin}
-          setRegister={handleRegister}
+    <Routes>
+      <Route path="/" element={
+        <Home 
+          cookieValue={cookieValue}
         />
-      }
-      {register && 
+      } />
+      <Route path="/login" element={
+        <Login 
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      } />
+      <Route path="/register" element={
         <Register
+          cookieValue={cookieValue}
           setCookieValue={setCookieValue} 
-          setIndex={handleIndex}
-          setRegister={handleRegister}
         /> 
-      }
-    </div>
+      } />
+    </Routes>
+    </>
   );
 }
 

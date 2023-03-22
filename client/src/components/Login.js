@@ -2,29 +2,39 @@
 // Check react router
 // CSS Libraries: Bootstrap, Material UI - UI Library
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Login = (props) => {
+
+  const navigate = useNavigate();
+
+  // If cookie exist, it automatically redirects to homepage - blocks access to login page once logged in
+  useEffect(() => {
+    if(props.cookieValue) {
+      console.log("Hello");
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, [props.cookieValue, navigate])
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
   // Login Function
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
     try {
-      await axios.post('/login', {email: email, password: pwd})
+      axios.post('/login', {email: email, password: pwd})
       .then((res) => {
         if(res.data.login) {
           console.log("Response received: ", res);
-          // console.log("cookie was set to: ", res.data.cookie);
           console.log("This is the name from backend: ", res.data.firstname)
-
           props.setCookieValue(res.data.firstname);
-
-          props.setIndex();
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -64,10 +74,10 @@ const Login = (props) => {
       </form>
       <p>
         Don't have an account yet? Sign up&nbsp;
-        <a href="javascript:void(0);" onClick={props.setRegister}>here</a>  
+        <Link to="/register">here</Link>
       </p>
     </section>
   )
 }
 
-export default Login
+export default Login;
