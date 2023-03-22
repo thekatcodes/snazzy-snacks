@@ -3,7 +3,8 @@ import React from "react";
 
 
 
-function OrderConfirmation() {
+function OrderConfirmation(props) {
+    console.log(props.cookieValue)
     return (
         <>
             <h1>Your order is complete!</h1>
