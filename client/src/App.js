@@ -1,5 +1,5 @@
-import './App.scss';
-import { useState } from 'react';
+import React, { useState } from "react";
+import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -10,6 +10,7 @@ import Register from './components/Register';
 
 import Temp from "./components/Temp";
 // import Profile from './components/Profile';
+import Subscriptions from "./components/Subscriptions";
 
 function App() {
 
@@ -45,6 +46,12 @@ function App() {
             setCookieValue={setCookieValue} 
           /> 
         } /> */}
+        <Route path="/subscriptions" element={
+        <Subscriptions
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      } />    
         <Route path="/" element={<Landing />} />
         <Route path="/temp" element={<Temp />} />
       </Routes>

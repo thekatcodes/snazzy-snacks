@@ -1,9 +1,22 @@
+const pool = require("./db/index");
+
 const express = require("express");
+const e = require("express");
 const app = express();
 const bcrypt = require("bcryptjs");
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser'); 
 const PORT = 8080;
+
+//used for Stripe
+const YOUR_DOMAIN = "http://localhost:3000";
+require("dotenv").config();
+const stripe = require("stripe")(
+	process.env.STRIPE_SECRET_KEY
+);
+
+app.use(express.json());
+app.use(express.urlencoded());
 
 // Helper and component specific functions
 const { getUsers, updateNewUser } = require('./users');
@@ -109,6 +122,51 @@ app.post('/logout', (req, res) => {
   req.session = null;
   res.redirect('/');
 })
+
+
+//Render Stripe integrated checkout page
+app.post("/create-checkout-session", async (req, res) => {
+	console.log("test");
+	console.log(req.body);
+	const { priceId } = req.body;
+
+	const session = await stripe.checkout.sessions.create({
+		line_items: [
+			{
+				price: priceId,
+				quantity: 1,
+			},
+		],
+		mode: "subscription",
+        success_url: `${YOUR_DOMAIN}/order-confirmation`,
+        
+        //^^^ redirects to http://localhost:8080/order-confirmation 
+        // TO DO: CREATE order-confirmation router path + component
+
+		cancel_url: `${YOUR_DOMAIN}/subscriptions`,
+		billing_address_collection: "required",
+		shipping_address_collection: {
+			allowed_countries: ["CA"],
+		},
+	});
+
+	// res.json('test');
+	// res.json({ id: session.id });
+	res.redirect(303, session.url);
+});
+
+// Retrieve payment data after successful checkout
+// app.post("/webhooks/stripe", async (req, res) => {
+//     const event = req.body;
+    
+//     if (event.type === "checkout.session.completed") {
+//       const session = event.data.object;
+//       // Here, you can retrieve the payment data from the `session` object
+//       console.log(session);
+//     }
+    
+//     res.sendStatus(200);
+//   });
 
 
 app.listen(PORT, () => {
