@@ -29,18 +29,22 @@ async function updateAddress(street, city, province, country, postalCode, subscr
 }
   
 // Updates boxes table with new row (order number)
-// async function createOrderNumber(userId) {
-//     try {
-//       await pool.query(`
-//       INSERT INTO boxes (customer_id)
-//       VALUES ($1);
-//       `, [userId]);
-        
-//       return "Order number created successfully";
-//     } catch (err) {
-//       console.log(err);
-//     }
-// }
+
+async function createOrderNumber(userId, orderDate) {
+    await userId.then(function(result) {
+         // console.log(result);
+         // console.log('TESTEST')
+         try {
+             pool.query(`
+             INSERT INTO boxes (customer_id, order_date)
+             VALUES ($1, $2);
+             `, [result, orderDate]);
+             console.log("Order number created successfully") ;
+           } catch (err) {
+             console.log("Error creating boxes table row",err);
+         }
+     })
+   }
 
 
 
