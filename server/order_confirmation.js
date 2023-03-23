@@ -14,12 +14,12 @@ async function getUsers() {
 }
 
 // Updates users table with address
-async function updateAddress(street, city, province, country, postalCode) {
+async function updateAddress(street, city, province, country, postalCode, email) {
     try {
       await pool.query(`
         UPDATE users SET street=$1, city=$2, province=$3, country=$4, postal_code=$5
-        WHERE id=6
-      `, [street, city, province, country, postalCode]);
+        WHERE email LIKE $6
+      `, [street, city, province, country, postalCode, email]);
       return "Address updated successfully";
     } catch (err) {
       console.log(err);
