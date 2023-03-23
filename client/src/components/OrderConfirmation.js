@@ -22,9 +22,9 @@ function OrderConfirmation() {
     <>
       <h1>Your order is complete!</h1>
       <div>
-        <p>Order number: </p>
         {userData && userData.map((order, index) => (
-          <div key={index}>
+            <div key={index}>
+              <p>Order number: </p>
             <p>Email address: {order.email}</p>
             <p>
               Shipping address: {order.street}, {order.city},{" "}
