@@ -15,7 +15,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const {
 	findUserId,
 	updateAddress,
-	createOrderNumber,
+    createOrderNumber,
+    orderSummary
 } = require("./order_confirmation");
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
@@ -257,6 +258,17 @@ app.post("/create-checkout-session", async (req, res) => {
 	// res.json('test');
 	// res.json({ id: session.id });
 	res.redirect(303, session.url);
+});
+
+// Grabs data from psql to send to front end
+// Could be renamed as order-confirmation
+app.get("/order-summary", async (req, res) => {
+	try {
+		const summary = await orderSummary();
+		res.json(summary);
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 app.listen(PORT, () => {
