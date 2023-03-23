@@ -12,8 +12,7 @@ const PORT = 8080;
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-//TO DO: STORE SECRET IN .env 
+const { getUsers, updateAddress } = require("./order-confirmation");
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
@@ -67,6 +66,9 @@ app.post(
 			const country = address.country;
 			const countryName = countryCodes[country];
             console.log(countryName); // prints 'Canada'
+
+            updateAddress(street, city, province, country, postalCode);
+
 		}
 
 		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
