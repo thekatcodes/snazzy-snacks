@@ -20,6 +20,7 @@ app.use(express.urlencoded());
 // Retrieve payment data after successful checkout
 // DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
 // MUST KEEP AT THE TOP!
+// in terminal run: stripe listen --forward-to localhost:8080/webhook
 app.post(
 	"/webhook",
 	express.raw({ type: "application/json" }),
@@ -46,10 +47,31 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			const address = session.customer_details;
+			console.log("customer details:", session.customer_details);
+            const address = session.customer_details.address;
+            console.log(address)
 
-			console.log(session.customer_details);
-		}
+            const street = address.line1 + ', ' + address.line2;
+            console.log('street:', street);
+            const city = address.city;
+            console.log('city:', city);
+            const province = address.state;
+            console.log('province:', province);
+            const postalCode = address.postal_code;
+            console.log('postal code:', postalCode);
+
+			const countryCodes = {
+				CA: "Canada",
+			};
+			const country = address.country;
+			const countryName = countryCodes[country];
+			console.log(countryName); // prints 'Canada'
+
+        }
+
+        //retrieve price id (if price id = 'price id' -> set user subscription tier to that) 
+        if (event.type === "payment_intent.succeeded") {
+			const session = event.data.object;
 
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
