@@ -17,6 +17,7 @@ CREATE TABLE users (
   postal_code VARCHAR(255),
   subscription_tier VARCHAR(255),
   stripe_sub_id VARCHAR(255),
+  price INTEGER,
   CONSTRAINT user_email UNIQUE (email)
 );
 
