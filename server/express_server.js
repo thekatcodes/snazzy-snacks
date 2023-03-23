@@ -12,7 +12,7 @@ const PORT = 8080;
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { getUsers, updateAddress } = require("./order-confirmation");
+const { updateAddress } = require('./order_confirmation');
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
@@ -47,11 +47,17 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			// console.log("customer details:", session.customer_details);
+			console.log("customer details:", session.customer_details);
 			const address = session.customer_details.address;
 			// console.log(address);
 			//retrieve address details to store in database
-			const street = address.line1 + ", " + address.line2;
+            let street
+            if (!address.line2) {
+                street = address.line1;
+            } else {
+                street = address.line1 + ", " + address.line2;
+            }
+
 			console.log("street:", street);  // '123 Queen Street West, unit 100'
 			const city = address.city;
 			console.log("city:", city); //prints 'Toronto'
@@ -59,15 +65,16 @@ app.post(
 			console.log("province:", province); //prints 'ON'
 			const postalCode = address.postal_code;
 			console.log("postal code:", postalCode); //prints 'A1A 1A1'
-
 			const countryCodes = {
 				CA: "Canada",
 			};
 			const country = address.country;
 			const countryName = countryCodes[country];
             console.log(countryName); // prints 'Canada'
+            const email = session.customer_details.email;
+            console.log(email)
 
-            updateAddress(street, city, province, country, postalCode);
+            updateAddress(street, city, province, country, postalCode, email);
 
 		}
 
