@@ -29,22 +29,6 @@ async function updateAddress(street, city, province, countryName, postalCode, su
 }
   
 // Updates boxes table with new row (order number)
-// async function createOrderNumber(userId, orderDate) {
-//     await userId.then(function(id) {
-//          // console.log(id);
-//          // console.log('TESTEST')
-//          try {
-//              pool.query(`
-//              INSERT INTO boxes (customer_id, order_date)
-//              VALUES ($1, $2);
-//              `, [id, orderDate]);
-//              console.log("Order number created successfully") ;
-//            } catch (err) {
-//              console.log("Error creating boxes table row",err);
-//          }
-//      })
-//    }
-
 async function createOrderNumber(userId, formattedDate) {
     try {
       const id = await userId;
@@ -56,27 +40,9 @@ async function createOrderNumber(userId, formattedDate) {
     } catch (err) {
       console.log("Error creating boxes table row", err);
     }
-  }
+}
+  
 // Grab order summary for GET request on the front-end
-// async function orderSummary(userId) {
-//     await userId.then(function(id) {
-//     console.log('TEST order summary', id)
-//           try {
-//             const order =  pool.query(`
-//             SELECT users.id AS user_id, email, street, city, province, country, postal_code, subscription_tier, boxes.id AS order_number
-//             FROM users
-//             INNER JOIN boxes ON users.id = boxes.customer_id
-//             WHERE users.id=$1
-//             ORDER BY order_number DESC;      
-//             `, [id]);
-      
-//             console.log('Order summary ready');
-//             return order.rows;
-//            } catch (error) {
-//             console.log(error);
-//         }
-//     })
-// }
 async function orderSummary() {
           try {
             const order = await pool.query(`
