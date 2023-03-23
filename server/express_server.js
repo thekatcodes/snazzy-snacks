@@ -12,8 +12,9 @@ const PORT = 8080;
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const endpointSecret =
-	"whsec_58df9d8747617bf0d8fe7afc0f4409ebbd4ed8ff53b950be68c3ea236dfa62d5";
+
+//TO DO: STORE SECRET IN .env 
+const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
 
@@ -47,31 +48,35 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			console.log("customer details:", session.customer_details);
-            const address = session.customer_details.address;
-            console.log(address)
-
-            const street = address.line1 + ', ' + address.line2;
-            console.log('street:', street);
-            const city = address.city;
-            console.log('city:', city);
-            const province = address.state;
-            console.log('province:', province);
-            const postalCode = address.postal_code;
-            console.log('postal code:', postalCode);
+			// console.log("customer details:", session.customer_details);
+			const address = session.customer_details.address;
+			// console.log(address);
+			//retrieve address details to store in database
+			const street = address.line1 + ", " + address.line2;
+			console.log("street:", street);  // '123 Queen Street West, unit 100'
+			const city = address.city;
+			console.log("city:", city); //prints 'Toronto'
+			const province = address.state;
+			console.log("province:", province); //prints 'ON'
+			const postalCode = address.postal_code;
+			console.log("postal code:", postalCode); //prints 'A1A 1A1'
 
 			const countryCodes = {
 				CA: "Canada",
 			};
 			const country = address.country;
 			const countryName = countryCodes[country];
-			console.log(countryName); // prints 'Canada'
+            console.log(countryName); // prints 'Canada'
+		}
 
-        }
-
-        //retrieve price id (if price id = 'price id' -> set user subscription tier to that) 
-        if (event.type === "payment_intent.succeeded") {
-			const session = event.data.object;
+		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
+		if (event.type === "payment_intent.succeeded") {
+            const session = event.data.object;
+            console.log('PAYMENT INTENT SUCCESS:', session);
+            const price = session.amount / 100; //prints 20
+            console.log('Price paid:', price)
+            // ^^^ 
+		}
 
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
