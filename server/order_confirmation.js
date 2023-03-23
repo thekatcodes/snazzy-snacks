@@ -16,12 +16,12 @@ async function findUserId(email) {
   }
 
 // Updates users table with address
-async function updateAddress(street, city, province, country, postalCode, subscriptionTier, subscriptionId, email) {
+async function updateAddress(street, city, province, countryName, postalCode, subscriptionTier, subscriptionId, price, email) {
     try {
       await pool.query(`
-        UPDATE users SET street=$1, city=$2, province=$3, country=$4, postal_code=$5, subscription_tier=$6, stripe_sub_id=$7 
-        WHERE email LIKE $8
-      `, [street, city, province, country, postalCode, subscriptionId, subscriptionTier, email]);
+        UPDATE users SET street=$1, city=$2, province=$3, country=$4, postal_code=$5, subscription_tier=$6, stripe_sub_id=$7, price=$8
+        WHERE email LIKE $9
+      `, [street, city, province, countryName, postalCode, subscriptionId, subscriptionTier, price, email]);
       return "Address updated successfully";
     } catch (err) {
       console.log(err);
@@ -29,23 +29,34 @@ async function updateAddress(street, city, province, country, postalCode, subscr
 }
   
 // Updates boxes table with new row (order number)
-async function createOrderNumber(userId, orderDate) {
-    await userId.then(function(id) {
-         // console.log(id);
-         // console.log('TESTEST')
-         try {
-             pool.query(`
-             INSERT INTO boxes (customer_id, order_date)
-             VALUES ($1, $2);
-             `, [id, orderDate]);
-             console.log("Order number created successfully") ;
-           } catch (err) {
-             console.log("Error creating boxes table row",err);
-         }
-     })
-   }
+// async function createOrderNumber(userId, orderDate) {
+//     await userId.then(function(id) {
+//          // console.log(id);
+//          // console.log('TESTEST')
+//          try {
+//              pool.query(`
+//              INSERT INTO boxes (customer_id, order_date)
+//              VALUES ($1, $2);
+//              `, [id, orderDate]);
+//              console.log("Order number created successfully") ;
+//            } catch (err) {
+//              console.log("Error creating boxes table row",err);
+//          }
+//      })
+//    }
 
-
+async function createOrderNumber(userId, formattedDate) {
+    try {
+      const id = await userId;
+      await pool.query(`
+        INSERT INTO boxes (customer_id, order_date)
+        VALUES ($1, $2);
+      `, [id, formattedDate]);
+      console.log("Order number created successfully");
+    } catch (err) {
+      console.log("Error creating boxes table row", err);
+    }
+  }
 // Grab order summary for GET request on the front-end
 // async function orderSummary(userId) {
 //     await userId.then(function(id) {
@@ -68,21 +79,20 @@ async function createOrderNumber(userId, orderDate) {
 // }
 async function orderSummary() {
           try {
-            const order =  pool.query(`
-            SELECT users.id AS user_id, first_name, last_name, email, street, city, province, country, postal_code, subscription_tier, boxes.id AS order_number
+            const order = await pool.query(`
+            SELECT users.id AS user_id, first_name, last_name, email, street, city, province, country, postal_code, subscription_tier, price, boxes.id AS order_number, boxes.order_date AS order_date
             FROM users
             INNER JOIN boxes ON users.id = boxes.customer_id
-            ORDER BY order_number DESC;      
+            ORDER BY order_number DESC;
             `);
     
             console.log('Order summary ready');
             return order.rows;
            } catch (error) {
-            console.log(error);
+              console.log(error);
+              throw new Error('Could not retrieve order summary');
+
         }
     }
-
-
-
 
 module.exports = { findUserId, updateAddress, createOrderNumber, orderSummary };
