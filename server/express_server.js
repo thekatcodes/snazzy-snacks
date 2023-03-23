@@ -12,7 +12,7 @@ const PORT = 8080;
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { updateAddress } = require('./order_confirmation');
+const { findUserId, updateAddress, createOrderNumber } = require('./order_confirmation');
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
@@ -73,20 +73,24 @@ app.post(
             console.log(countryName); // prints 'Canada'
             const email = session.customer_details.email;
             console.log(email)
-
-            updateAddress(street, city, province, country, postalCode, email);
-
+            const userId = findUserId(email);
+            console.log(userId);
 		}
 
 		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
+        
 		if (event.type === "payment_intent.succeeded") {
             const session = event.data.object;
             console.log('PAYMENT INTENT SUCCESS:', session);
             const price = session.amount / 100; //prints 20
             console.log('Price paid:', price)
             // ^^^ 
-		}
-
+        }
+        if (event.type === "payment_intent.succeeded") {
+        }
+        
+        createOrderNumber(userId);
+        updateAddress(street, city, province, country, postalCode, email);
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
 	}
