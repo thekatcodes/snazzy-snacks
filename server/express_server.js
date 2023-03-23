@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // Helper and component specific functions
-const { getUsers, updateNewUser } = require('./users');
+const { getUsers, updateNewUser, updateUser } = require('./users');
 
 // Middleware to read req.body
 app.use(express.json());
@@ -110,8 +110,44 @@ app.post('/register', async(req, res) => {
       updateNewUser(firstname, lastname, email, password);
     }
     
-    res.json({ registration: regis, firstname: firstname });
+    res.json({ update: regis, firstname: firstname });
     
+  } catch(err) {
+    console.log(err);
+  }
+})
+
+// Updates user information in the database
+app.put('/account/profile', async(req, res) => {
+  try {
+    const users = await getUsers();
+    let update = false;
+    
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, 10);
+    let cookie = req.session.cookie;
+
+    console.log("This is the logged in user: ", cookie);
+
+    if (req.body.password !== req.body.password2) {
+      return res.status(400).send('Passwords do not match!');
+    }
+      
+    for (const user of users) {
+      if(user.email === email) {
+        return res.status(400).send('Email already exists!');
+      } 
+    }
+      
+    if (updateUser(firstname, lastname, email, password, cookie)) {
+      update = true;
+      req.session.cookie = firstname;
+      res.json({ update: update, firstname: firstname });
+    } else {
+      res.json({ update: update, firstname: cookie })
+    }
   } catch(err) {
     console.log(err);
   }

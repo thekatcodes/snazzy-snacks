@@ -1,0 +1,38 @@
+.sidebar {
+  font-weight: bold;
+  height: 50vh; /* half of the viewport height */
+  width: 25vw; /* quarter of the viewport width */
+  padding: 5em;
+  position: fixed;
+  top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
+  left: 0;
+}
+
+.sidebar-title {
+  color: #F39563;
+  padding: 0 20px;
+  font-size: 30px;
+  margin-bottom: 1.75em;
+}
+
+.sidebar-row {
+  font-size: 20px;
+  margin-bottom: 1.5em;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  text-decoration: none;
+  color:lightgray
+}
+
+.link.active {
+  color:black
+}
+
+.link:hover {
+  background-color: gray;
+}

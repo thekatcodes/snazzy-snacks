@@ -8,9 +8,12 @@ import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
 
+import Account from './components/Account';
+import Subscription from './components/Subscription';
+import Profile from './components/Profile';
+import RENAME from './components/RENAME';
+
 import Temp from "./components/Temp";
-// import Profile from './components/Profile';
-import Subscriptions from "./components/Subscriptions";
 
 function App() {
 
@@ -40,17 +43,38 @@ function App() {
             setCookieValue={setCookieValue} 
           /> 
         } />
-        <Route path="/subscriptions" element={
-        <Subscriptions
-          cookieValue={cookieValue}
-          setCookieValue={setCookieValue}
-        />
-      } />    
+        <Route path="/account">
+          <Route index element={
+            <Account 
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          } />
+          {/* rename to this  */}
+          <Route path="subscription" element={
+            <Subscription 
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          } />
+          <Route path="rename" element={
+            <RENAME 
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          } />
+          <Route path="profile" element={
+          <Profile 
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } />
+        </Route>    
         {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/temp" element={
-        <Temp 
-        />
-      } />
+          <Temp 
+          />
+        } />
       </Routes>
     </>
   );

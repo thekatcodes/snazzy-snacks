@@ -1,11 +1,10 @@
 import React from "react";
 import CheckoutForm from "./CheckoutForm";
 
-
-function Subscriptions() {
+function Subscription() {
     return (
         <CheckoutForm />
     )
 }
 
-export default Subscriptions;
+export default Subscription;

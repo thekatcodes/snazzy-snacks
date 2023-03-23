@@ -1,0 +1,52 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+
+.account {
+  position: relative;
+  margin-left: 25vw; /* If this is changed, make sure to change Sidebar.scss as well */
+  top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
+  padding: 3em;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderby {
+  font-size: 15px;
+  margin-bottom: 1em;
+  margin-right: auto;
+}
+
+table {
+  font-size: 20px;
+  width: 100%;
+  border-collapse: separate;
+  border: solid black 1px;
+  border-radius: 10px;
+  border-spacing: 0;
+}
+
+th,
+td {
+  border-left: solid black 1px;
+  border-top: solid black 1px;
+  padding: .5em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  border-top: none;
+  font-weight: bold;
+}
+
+td {
+  font-weight: lighter;
+}
+
+td:first-child, th:first-child {
+  border-left: none;
+}
+

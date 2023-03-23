@@ -1,0 +1,21 @@
+.rename {
+  // copy pasta from account.scss
+  position: relative;
+  margin-left: 25vw; /* If this is changed, make sure to change Sidebar.scss as well */
+  top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
+  padding: 3em;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  flex-direction: row;
+}
+
+.info {
+  font-size: 25px;
+}
