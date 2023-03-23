@@ -108,19 +108,6 @@ app.post(
 			createOrderNumber(userId, orderDate);
 		}
 
-		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
-
-		// if (event.type === "payment_intent.succeeded") {
-		// 	const session = event.data.object;
-		// 	// console.log('PAYMENT INTENT SUCCESS:', session);
-		// 	const price = session.amount / 100; //prints 20
-		// 	console.log("Price paid:", price);
-		// 	// 
-        //     if (price === 20) {
-        //         console.log('TIER 2!!!!')
-        //     }
-		// }
-
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
 	}
