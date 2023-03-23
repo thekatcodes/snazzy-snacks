@@ -29,7 +29,6 @@ async function updateAddress(street, city, province, country, postalCode, subscr
 }
   
 // Updates boxes table with new row (order number)
-
 async function createOrderNumber(userId, orderDate) {
     await userId.then(function(id) {
          // console.log(id);
@@ -47,7 +46,7 @@ async function createOrderNumber(userId, orderDate) {
    }
 
 
-// Grab order summary
+// Grab order summary for GET request on the front-end
 async function orderSummary(userId) {
     await userId.then(function(id) {
     console.log('TEST order summary', id)
