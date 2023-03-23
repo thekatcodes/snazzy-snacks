@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+import Button from "./Button";
+import Footer from "./Footer";
+
+import "./styles/Login-Registration.scss";
+
 const Register = (props) => {
 
   const navigate = useNavigate();
@@ -48,56 +53,62 @@ const Register = (props) => {
   }
 
   return (
-    <section>
+    <section className="login-layout layout">
       {/* Error message display */}
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
-      <h1>Register</h1>
-      <form onSubmit={handleSignUp}>
-        <label htmlFor="firstname">First Name</label> <br></br>
+      <h1>Create An Account</h1>
+      <form className="form-layout" onSubmit={handleSignUp}>
+        <label htmlFor="firstname" />
         <input 
           type="text" 
           id="firstname"
           autoComplete="off"
           onChange={(event) => setFirstname(event.target.value)}
           value={firstname}
+          placeholder="First Name"
           required
-        /><br></br><br></br>
-        <label htmlFor="lastname">Last Name</label> <br></br>
+        />
+        <label htmlFor="lastname" />
         <input 
           type="text" 
           id="lastname"
           autoComplete="off"
           onChange={(event) => setLastname(event.target.value)}
           value={lastname}
+          placeholder="Last Name"
           required
-        /><br></br><br></br>
-        <label htmlFor="email">Email</label><br></br>
+        />
+        <label htmlFor="email" />
         <input 
           type="email" 
           id="email"
           autoComplete="off"
           onChange={(event) => setEmail(event.target.value)}
           value={email}
+          placeholder="Email"
           required
-        /><br></br><br></br>
-        <label htmlFor="password">Password</label><br></br>
+        />
+        <label htmlFor="password" />
         <input 
           type="password" 
           id="password"
           onChange={(event) => setPwd(event.target.value)}
           value={pwd}
+          placeholder="Password"
           required
-        /><br></br><br></br>
-        <label htmlFor="password">Confirm Password</label><br></br>
+        />
+        <label htmlFor="password" />
         <input 
           type="password" 
           id="password2"
           onChange={(event) => setPwd2(event.target.value)}
           value={pwd2}
+          placeholder="Confirm Password"
           required
-        /><br></br><br></br>
-        <button>Register</button>
+        />
+        <Button orangy>Sign Up</Button>
       </form>
+      <div><Footer /></div>
     </section>
   )
 }

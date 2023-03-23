@@ -6,6 +6,11 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+import Button from "./Button";
+import Footer from "./Footer";
+
+import "./styles/Login-Registration.scss";
+
 const Login = (props) => {
 
   const navigate = useNavigate();
@@ -49,34 +54,38 @@ const Login = (props) => {
   }
 
   return (
-    <section>
+    <section className="login-layout layout">
       {/* Error message display */}
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Log In</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label><br></br>
+      <form className="form-layout" onSubmit={handleLogin}>
+        <label htmlFor="email" />
         <input 
           type="email" 
           id="email"
           autoComplete="off"
           onChange={(event) => setEmail(event.target.value)}
           value={email}
+          placeholder="Email"
           required
-        /><br></br><br></br>
-        <label htmlFor="password">Password</label><br></br>
+        />
+        <label htmlFor="password" />
         <input 
           type="password" 
           id="password"
           onChange={(event) => setPwd(event.target.value)}
           value={pwd}
+          placeholder="Password"
           required
-        /><br></br><br></br>
-        <button>Log In</button>
+        />
+        <Button orangy>Log In</Button>
       </form>
-      <p>
+      <br />
+      <p className="register-link">
         Don't have an account yet? Sign up&nbsp;
         <Link to="/register">here</Link>
       </p>
+      <div><Footer /></div>
     </section>
   )
 }

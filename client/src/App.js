@@ -7,9 +7,7 @@ import NavigationBar from './components/NavigationBar';
 import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
-import Temp from './components/Temp';
 
-// import Temp from "./components/Temp";
 // import Profile from './components/Profile';
 import Subscriptions from "./components/Subscriptions";
 import OrderConfirmation from "./components/OrderConfirmation"
@@ -27,10 +25,6 @@ function App() {
           setCookieValue={setCookieValue}
         />
       }>
-        <Route path="/temp" element={
-          <Temp 
-          />
-        } />
         {/* <Route path="/" element={
           <Home 
             cookieValue={cookieValue}
