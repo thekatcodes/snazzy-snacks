@@ -15,6 +15,8 @@ CREATE TABLE users (
   province VARCHAR(255),
   country VARCHAR(255),
   postal_code VARCHAR(255),
+  subscription_tier VARCHAR(255),
+  stripe_sub_id VARCHAR(255),
   CONSTRAINT user_email UNIQUE (email)
 );
 
