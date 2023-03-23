@@ -47,7 +47,7 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			console.log("customer details:", session.customer_details);
+			// console.log("customer details:", session.customer_details);
 			const address = session.customer_details.address;
 			// console.log(address);
 			//retrieve address details to store in database
