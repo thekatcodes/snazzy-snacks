@@ -52,7 +52,7 @@ app.post(
 			const session = event.data.object;
 			// console.log('SESSION PLS', session);
 			const subscriptionId = session.subscription;
-			console.log("sub id:", subscriptionId);
+			// console.log("sub id:", subscriptionId);
 			const address = session.customer_details.address;
 			// console.log(address);
 			//retrieve address details to store in database
@@ -63,24 +63,25 @@ app.post(
 				street = address.line1 + ", " + address.line2;
 			}
 
-			console.log("street:", street); // '123 Queen Street West, unit 100'
+			// console.log("street:", street); // '123 Queen Street West, unit 100'
 			const city = address.city;
-			console.log("city:", city); //prints 'Toronto'
+			// console.log("city:", city); //prints 'Toronto'
 			const province = address.state;
-			console.log("province:", province); //prints 'ON'
+			// console.log("province:", province); //prints 'ON'
 			const postalCode = address.postal_code;
-			console.log("postal code:", postalCode); //prints 'A1A 1A1'
+			// console.log("postal code:", postalCode); //prints 'A1A 1A1'
 			const countryCodes = {
 				CA: "Canada",
 			};
 			const country = address.country;
 			const countryName = countryCodes[country];
-			console.log(countryName); // prints 'Canada'
+			// console.log(countryName); // prints 'Canada'
 			const email = session.customer_details.email;
-			console.log(email);
+			// console.log(email);
 			const userId = findUserId(email);
-			console.log(userId);
-            const orderDate = "2023-02-23";
+		
+            const formattedDate = new Date().toISOString().substring(0, 10);
+
             // Retrieve price data and set tier
             const price = session.amount_total / 100;
             let subscriptionTier;
@@ -96,14 +97,15 @@ app.post(
 				street,
 				city,
 				province,
-				country,
+				countryName,
 				postalCode,
 				subscriptionId,
-				subscriptionTier,
+                subscriptionTier,
+                price,
 				email
 			);
 
-			createOrderNumber(userId, orderDate);
+			createOrderNumber(userId, formattedDate);
 		}
 
 		// Return a 200 response to acknowledge receipt of the event
@@ -249,7 +251,7 @@ app.post("/create-checkout-session", async (req, res) => {
 // Could be renamed as order-confirmation
 app.get("/order-summary", async (req, res) => {
 	try {
-		const summary = await orderSummary(userId);
+		const summary = await orderSummary();
 		res.json(summary);
 	} catch (error) {
 		console.log('could not get orderSummary', error);
