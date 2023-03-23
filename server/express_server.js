@@ -47,7 +47,9 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			// console.log("customer details:", session.customer_details);
+            // console.log('SESSION PLS', session);
+            const subscriptionId = session.subscription;
+            console.log("sub id:", subscriptionId)
 			const address = session.customer_details.address;
 			// console.log(address);
 			//retrieve address details to store in database
@@ -75,6 +77,9 @@ app.post(
             console.log(email)
             const userId = findUserId(email);
             console.log(userId);
+
+            updateAddress(street, city, province, country, postalCode, email);
+            createOrderNumber(userId);
 		}
 
 		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
@@ -86,11 +91,7 @@ app.post(
             console.log('Price paid:', price)
             // ^^^ 
         }
-        if (event.type === "payment_intent.succeeded") {
-        }
-        
-        createOrderNumber(userId);
-        updateAddress(street, city, province, country, postalCode, email);
+       
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
 	}
