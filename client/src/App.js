@@ -19,17 +19,23 @@ function App() {
   const [cookieValue, setCookieValue] = useState('');
 
   return (
-    <>
-      <NavigationBar
-        cookieValue={cookieValue}
-        setCookieValue={setCookieValue}
-      />
-      <Routes>
-        <Route path="/" element={
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route element={
+        <NavigationBar
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      }>
+        <Route path="/temp" element={
+          <Temp 
+          />
+        } />
+        {/* <Route path="/" element={
           <Home 
             cookieValue={cookieValue}
           />
-        } />
+        } /> */}
         <Route path="/login" element={
           <Login 
             cookieValue={cookieValue}
@@ -43,24 +49,19 @@ function App() {
           /> 
         } />
         <Route path="/subscriptions" element={
-        <Subscriptions
-          cookieValue={cookieValue}
-          setCookieValue={setCookieValue}
-        />
-      } />    
+          <Subscriptions
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } />
         <Route path="/order-confirmation" element={
         <OrderConfirmation
           cookieValue={cookieValue}
           setCookieValue={setCookieValue}
         />
       } />  
-        {/* <Route path="/" element={<Landing />} /> */}
-        <Route path="/temp" element={
-        <Temp 
-        />
-      } />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 
 }

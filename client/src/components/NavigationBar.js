@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import axios from 'axios';
-import './NavigationBar.css';
+import './styles/NavigationBar.scss';
 
 const NavigationBar = (props) => {
 
@@ -34,26 +34,42 @@ const NavigationBar = (props) => {
   }, [props.cookieValue]);
 
   return (
-    <div className="header">
-      <div className="logo">Snazzy Snacks</div>
-      <div className="login-register">
-        { props.cookieValue ?
-        <>
-          <div className="intro">Hello {props.cookieValue}! Please buy our snacks!</div>
-          <button className="logout" onClick={logout}>Log Out</button>
-        </>
-        :
-        <>
-          <Link to="/login">
-            <button className="login">Log In</button>
-          </Link>
-          <Link to="/register">
-            <button className="register">Register</button>
-          </Link>
-        </>
-        }
+    <>
+      <div className="header coiny">
+        <div className="logo">SNAZZY<br />SNACKS</div>
+        <div className="login-register">
+          { props.cookieValue ?
+            <>
+              <div className="intro">Hello {props.cookieValue}!</div>
+              <div className="dropdown">
+                <i class="fa-regular fa-user fa-xl dropdown-hover"></i>
+                <div className="dropdown-menu">
+                  <Link to="/account">
+                    <button>My Account</button>
+                  </Link>
+                  <button className="logout" onClick={logout}>Log Out</button>
+                </div>
+              </div>
+            </>
+            :
+            <ul className="login-register">
+              <li>
+                <NavLink className="inactive" to="/login">
+                  {/* <button >Log In</button> */}
+                  Log In
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="inactive" to="/register">
+                  Sign Up
+                </NavLink>
+              </li>
+            </ul>
+          }
+        </div>
       </div>
-    </div>
+      <Outlet />
+    </>
   )
 }
 
