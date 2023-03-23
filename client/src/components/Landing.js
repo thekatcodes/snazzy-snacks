@@ -20,7 +20,7 @@ export default function Landing() {
         <h5>*starting at 20$/mo</h5>
       </div>
       <div>
-        <Link to="/temp">
+        <Link to="/login">
           <Button>GET SNACKING!</Button>
         </Link>
       </div>
