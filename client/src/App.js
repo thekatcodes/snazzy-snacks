@@ -9,28 +9,24 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 import Account from './components/Account';
-import Subscription from './components/Subscription';
 import Profile from './components/Profile';
-import RENAME from './components/RENAME';
-
-import Temp from "./components/Temp";
+import Subscription from './components/Subscription';
+import Subscriptions from "./components/Subscriptions";
+// import Profile from './components/Profile';
 
 function App() {
 
   const [cookieValue, setCookieValue] = useState('');
 
   return (
-    <>
-      <NavigationBar
-        cookieValue={cookieValue}
-        setCookieValue={setCookieValue}
-      />
-      <Routes>
-        <Route path="/" element={
-          <Home 
-            cookieValue={cookieValue}
-          />
-        } />
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route element={
+        <NavigationBar
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      }>
         <Route path="/login" element={
           <Login 
             cookieValue={cookieValue}
@@ -43,6 +39,12 @@ function App() {
             setCookieValue={setCookieValue} 
           /> 
         } />
+        <Route path="/subscriptions" element={
+          <Subscriptions
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } />
         <Route path="/account">
           <Route index element={
             <Account 
@@ -50,35 +52,22 @@ function App() {
               setCookieValue={setCookieValue}
             />
           } />
-          {/* rename to this  */}
           <Route path="subscription" element={
             <Subscription 
               cookieValue={cookieValue}
               setCookieValue={setCookieValue}
             />
           } />
-          <Route path="rename" element={
-            <RENAME 
+          <Route path="profile" element={
+            <Profile
               cookieValue={cookieValue}
               setCookieValue={setCookieValue}
             />
           } />
-          <Route path="profile" element={
-          <Profile 
-            cookieValue={cookieValue}
-            setCookieValue={setCookieValue}
-          />
-        } />
-        </Route>    
-        {/* <Route path="/" element={<Landing />} /> */}
-        <Route path="/temp" element={
-          <Temp 
-          />
-        } />
-      </Routes>
-    </>
+        </Route>
+      </Route>
+    </Routes>
   );
-
 }
 
 export default App;

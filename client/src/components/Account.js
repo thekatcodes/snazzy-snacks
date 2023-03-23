@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
-import Button from "./Button";
+import Footer from './Footer';
 
 import "./styles/Account.scss";
 
@@ -13,25 +13,27 @@ const Account = (props) => {
 
   const [orderHistory, setOrderHistory] = useState([]);
 
+  console.log(props.cookieValue);
+
   // Function to return username - need to run it because if update profile is updated, it needs to re-render
   useEffect(() => {
     axios.get('/cookie')
       .then((res) => {
-        props.setCookieValue(res.data);
+        props.setCookieValue(res.data.cookie);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [props.cookieValue]);
 
-  // Logic for grabbing order history from backend - does not work atm
+  // Logic for grabbing order history from backend - no backend at the moment
   useEffect(() => {
     axios.get('/api/order_history')
       .then((res) => {
         setOrderHistory(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("It doesn't work right now, so don't worry about it");
       })
   }, []);
 
@@ -52,7 +54,7 @@ const Account = (props) => {
           <>
             <div>Order History</div>
             <br></br><br></br>
-            <div class="orderby">Order placed by: {props.cookieValue}</div>
+            <div className="orderby">Order placed by: {props.cookieValue}</div>
             <table>
               <thead>
                 <tr>
@@ -60,7 +62,6 @@ const Account = (props) => {
                   <th>Product</th>
                   <th>Order Date</th>
                   <th>Price</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -69,11 +70,6 @@ const Account = (props) => {
                   <td>Best one</td>
                   <td>Today</td>
                   <td>Tree fiddy</td>
-                  <td>
-                    {/* Need to add the cart img */}
-                    <i class="fa-sharp fa-regular fa-cart-shopping"></i>
-                    <a href="/account/subscription">Reorder</a>
-                  </td>
                 </tr>
                 {orderHistory.map((order, index) => (
                   <tr>
@@ -81,10 +77,6 @@ const Account = (props) => {
                     <td>{order.product}</td>
                     <td>{order.date}</td>
                     <td>$ {order.price}</td>
-                    <td>
-                    {/* Need to add the cart img */}
-                    <a href="/account/subscription">Reorder</a>
-                  </td>
                   </tr>
                 ))}
               </tbody>
@@ -92,6 +84,7 @@ const Account = (props) => {
           </>
         {/* } */}
       </div>
+      <div><Footer /></div>
     </section>  
   )
 }

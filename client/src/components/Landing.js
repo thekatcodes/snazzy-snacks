@@ -5,6 +5,8 @@ import Button from "./Button";
 import "./styles/Landing.scss";
 import candy from "../images/candy.png";
 import snack from "../images/snack.png";
+import chips from "../images/crisps.png";
+import snack2 from "../images/snack2.png";
 
 export default function Landing() {
 
@@ -20,7 +22,7 @@ export default function Landing() {
         <h5>*starting at 20$/mo</h5>
       </div>
       <div>
-        <Link to="/temp">
+        <Link to="/login">
           <Button>GET SNACKING!</Button>
         </Link>
       </div>
@@ -28,6 +30,8 @@ export default function Landing() {
         <img src={candy} alt="Candy" />
         <img className="landing-snack" src={snack} alt="Snack" />
       </div>
+      <img className="landing-chip" src={chips} alt="Chips" />
+      <img className="landing-bar" src={snack2} alt="Snack" />
     </section>
   );
 }

@@ -1,26 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import { logout } from '../helpers/logout';
+
 import "./styles/Sidebar.scss";
 import "./styles/Button.scss";
 
-import axios from 'axios';
-
 const Sidebar = (props) => {
 
-  // Copied from navigationbar - Make this reusable later?
-  const logout = async (event) => {
-    event.preventDefault();
-    try{
-      await axios.post('/logout')
-      .then((res) => {
-        props.setCookieValue('');
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(props.setCookieValue);
+    navigate('/');
+  };
 
   const path = window.location.pathname;
   console.log(path === '/account');
@@ -31,7 +24,7 @@ const Sidebar = (props) => {
         <a href="/account" className={`sidebar-row link ${path === '/account' ? 'active' : ''}`}>Orders</a>
         <a href="/account/subscription" className={`sidebar-row link ${path === '/account/subscription' ? 'active' : ''}`}>Subscription</a>
         <a href="/account/profile" className={`sidebar-row link ${path === '/account/profile' ? 'active' : ''}`}>Update Profile</a>
-        <a href="#" onClick={logout} className="sidebar-row link">Log Out</a>
+        <a href="#" onClick={handleLogout} className="sidebar-row link">Log Out</a>
     </section>
     </>
   )

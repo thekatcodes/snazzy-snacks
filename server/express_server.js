@@ -18,7 +18,7 @@ const stripe = require("stripe")(
 app.use(express.json());
 app.use(express.urlencoded());
 
-// Helper and component specific functions
+// Helper functions for querying Users table
 const { getUsers, updateNewUser, updateUser } = require('./users');
 
 // Middleware to read req.body
@@ -52,8 +52,13 @@ app.post("/login", async(req, res) => {
 
     for(const user of users) {
       if(user.email === email && bcrypt.compareSync(password, user.password)) {
-        req.session.cookie = user.first_name;
+        const name = user.first_name;
+        const email = user.email;
+        
+        req.session.cookie = {cookie: name, email: email};
         console.log("setsessioncookieset", req.session.cookie);
+        console.log("Cookie's name: ", req.session.cookie.cookie);
+        console.log("Cookie's email: ", req.session.cookie.email);
         login = true;
         break;
       }
@@ -106,7 +111,7 @@ app.post('/register', async(req, res) => {
       }
       
       regis = true;
-      req.session.cookie = firstname;
+      req.session.cookie = {cookie: firstname, email: email};
       updateNewUser(firstname, lastname, email, password);
     }
     
@@ -123,11 +128,9 @@ app.put('/account/profile', async(req, res) => {
     const users = await getUsers();
     let update = false;
     
-    let firstname = req.body.firstname;
-    let lastname = req.body.lastname;
     let email = req.body.email;
     let password = bcrypt.hashSync(req.body.password, 10);
-    let cookie = req.session.cookie;
+    let cookie = req.session.cookie.email;
 
     console.log("This is the logged in user: ", cookie);
 
@@ -141,13 +144,10 @@ app.put('/account/profile', async(req, res) => {
       } 
     }
       
-    if (updateUser(firstname, lastname, email, password, cookie)) {
+    if (updateUser(email, password, cookie)) {
       update = true;
-      req.session.cookie = firstname;
-      res.json({ update: update, firstname: firstname });
-    } else {
-      res.json({ update: update, firstname: cookie })
-    }
+    } 
+    res.json({ update: update, firstname: cookie });
   } catch(err) {
     console.log(err);
   }
