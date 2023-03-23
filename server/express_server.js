@@ -12,7 +12,11 @@ const PORT = 8080;
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { findUserId, updateAddress, createOrderNumber } = require('./order_confirmation');
+const {
+	findUserId,
+	updateAddress,
+	createOrderNumber,
+} = require("./order_confirmation");
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
@@ -47,20 +51,20 @@ app.post(
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-            // console.log('SESSION PLS', session);
-            const subscriptionId = session.subscription;
-            console.log("sub id:", subscriptionId)
+			// console.log('SESSION PLS', session);
+			const subscriptionId = session.subscription;
+			console.log("sub id:", subscriptionId);
 			const address = session.customer_details.address;
 			// console.log(address);
 			//retrieve address details to store in database
-            let street
-            if (!address.line2) {
-                street = address.line1;
-            } else {
-                street = address.line1 + ", " + address.line2;
-            }
+			let street;
+			if (!address.line2) {
+				street = address.line1;
+			} else {
+				street = address.line1 + ", " + address.line2;
+			}
 
-			console.log("street:", street);  // '123 Queen Street West, unit 100'
+			console.log("street:", street); // '123 Queen Street West, unit 100'
 			const city = address.city;
 			console.log("city:", city); //prints 'Toronto'
 			const province = address.state;
@@ -72,26 +76,50 @@ app.post(
 			};
 			const country = address.country;
 			const countryName = countryCodes[country];
-            console.log(countryName); // prints 'Canada'
-            const email = session.customer_details.email;
-            console.log(email)
-            const userId = findUserId(email);
-            console.log(userId);
+			console.log(countryName); // prints 'Canada'
+			const email = session.customer_details.email;
+			console.log(email);
+			const userId = findUserId(email);
+			console.log(userId);
+            const orderDate = "2023-02-23";
+            // Retrieve price data and set tier
+            const price = session.amount_total / 100;
+            let subscriptionTier;
+            if (price === 20) {
+                subscriptionTier = "Tier 1"
+            } else if (price === 40) {
+                subscriptionTier = "Tier 2"
+            } else if (price === 60) {
+                subscriptionTier = "Tier 3"
+            }
+            
+			updateAddress(
+				street,
+				city,
+				province,
+				country,
+				postalCode,
+				subscriptionId,
+				subscriptionTier,
+				email
+			);
 
-            updateAddress(street, city, province, country, postalCode, email);
-            createOrderNumber(userId);
+			createOrderNumber(userId, orderDate);
 		}
 
 		//retrieve price (if price = tier (20, 40, 60) -> set user subscription tier to that)
-        
-		if (event.type === "payment_intent.succeeded") {
-            const session = event.data.object;
-            console.log('PAYMENT INTENT SUCCESS:', session);
-            const price = session.amount / 100; //prints 20
-            console.log('Price paid:', price)
-            // ^^^ 
-        }
-       
+
+		// if (event.type === "payment_intent.succeeded") {
+		// 	const session = event.data.object;
+		// 	// console.log('PAYMENT INTENT SUCCESS:', session);
+		// 	const price = session.amount / 100; //prints 20
+		// 	console.log("Price paid:", price);
+		// 	// 
+        //     if (price === 20) {
+        //         console.log('TIER 2!!!!')
+        //     }
+		// }
+
 		// Return a 200 response to acknowledge receipt of the event
 		response.send();
 	}
