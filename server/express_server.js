@@ -48,8 +48,6 @@ app.post(
 			}
 		}
 
-		// console.log(event.data.object.customer_details);
-
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
 			// console.log('SESSION PLS', session);
@@ -251,10 +249,10 @@ app.post("/create-checkout-session", async (req, res) => {
 // Could be renamed as order-confirmation
 app.get("/order-summary", async (req, res) => {
 	try {
-		const summary = await orderSummary();
+		const summary = await orderSummary(userId);
 		res.json(summary);
 	} catch (error) {
-		console.log(error);
+		console.log('could not get orderSummary', error);
 	}
 });
 
