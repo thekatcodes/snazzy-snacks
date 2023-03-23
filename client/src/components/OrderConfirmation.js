@@ -8,8 +8,8 @@ function OrderConfirmation() {
   useEffect(() => {
     async function fetchData() {
       try {
-          const response = await axios.get("/api");
-          console.log(response.data)
+        const response = await axios.get("/order-summary");
+        console.log("order confirmation response:", response.data);
         setUserData(response.data);
       } catch (error) {
         console.log(error);
@@ -23,15 +23,15 @@ function OrderConfirmation() {
       <h1>Your order is complete!</h1>
       <div>
         <p>Order number: </p>
-        {userData && (
-          <>
-            <p>Email address: {userData.email}</p>
+        {userData && userData.map((order, index) => (
+          <div key={index}>
+            <p>Email address: {order.email}</p>
             <p>
-              Shipping address: {userData.street}, {userData.city},{" "}
-              {userData.province}, {userData.country} {userData.postal_code}
+              Shipping address: {order.street}, {order.city},{" "}
+              {order.province}, {order.country} {order.postal_code}
             </p>
-          </>
-        )}
+          </div>
+        ))}
         <p>Order summary:</p>
       </div>
           <button>View order history</button>
