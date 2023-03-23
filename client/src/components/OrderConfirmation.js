@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Footer from './Footer'
 
 function OrderConfirmation() {
   const [userData, setUserData] = useState(null);
@@ -34,7 +34,8 @@ function OrderConfirmation() {
         )}
         <p>Order summary:</p>
       </div>
-      <button>View order history</button>
+          <button>View order history</button>
+          <Footer />
     </>
   );
 }
