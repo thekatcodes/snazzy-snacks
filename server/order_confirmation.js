@@ -47,25 +47,41 @@ async function createOrderNumber(userId, orderDate) {
 
 
 // Grab order summary for GET request on the front-end
-async function orderSummary(userId) {
-    await userId.then(function(id) {
-    console.log('TEST order summary', id)
+// async function orderSummary(userId) {
+//     await userId.then(function(id) {
+//     console.log('TEST order summary', id)
+//           try {
+//             const order =  pool.query(`
+//             SELECT users.id AS user_id, email, street, city, province, country, postal_code, subscription_tier, boxes.id AS order_number
+//             FROM users
+//             INNER JOIN boxes ON users.id = boxes.customer_id
+//             WHERE users.id=$1
+//             ORDER BY order_number DESC;      
+//             `, [id]);
+      
+//             console.log('Order summary ready');
+//             return order.rows;
+//            } catch (error) {
+//             console.log(error);
+//         }
+//     })
+// }
+async function orderSummary() {
           try {
             const order =  pool.query(`
-            SELECT users.id AS user_id, email, street, city, province, country, postal_code, subscription_tier, boxes.id AS order_number
+            SELECT users.id AS user_id, first_name, last_name, email, street, city, province, country, postal_code, subscription_tier, boxes.id AS order_number
             FROM users
             INNER JOIN boxes ON users.id = boxes.customer_id
-            WHERE users.id=$1
             ORDER BY order_number DESC;      
-            `, [id]);
-      
+            `);
+    
             console.log('Order summary ready');
             return order.rows;
            } catch (error) {
             console.log(error);
         }
-    })
-  }
+    }
+
 
 
 
