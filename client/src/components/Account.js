@@ -6,14 +6,9 @@ import Footer from './Footer';
 
 import "./styles/Account.scss";
 
-// Did not add shopping cart, since it required installing dependency - is there an easier way to do this? 
-//https://fontawesome.com/icons/cart-shopping?f=sharp&s=regular the link to shopping cart
-
 const Account = (props) => {
 
   const [orderHistory, setOrderHistory] = useState([]);
-
-  console.log(props.cookieValue);
 
   // Function to return username - need to run it because if update profile is updated, it needs to re-render
   useEffect(() => {

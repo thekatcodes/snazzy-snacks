@@ -85,6 +85,17 @@ app.get('/cookie', async(req, res) => {
   }
 })
 
+// Returning email
+app.get('/email', async(req, res) => {
+  try {
+    console.log("This is the cookie: ", req.session.cookie);
+    console.log("Sending back email: ", req.session.cookie.email);
+    res.send(req.session.cookie.email);
+  } catch (err) {
+    console.log(err);
+  }
+})
+
 // Receives data from register (axios), and add the information to the database
 app.post('/register', async(req, res) => {
   try {
