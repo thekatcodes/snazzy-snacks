@@ -23,7 +23,8 @@ export default function OrderConfirmation(props) {
 
 	//replace with pretty loader later
 	if (!userData) {
-		return <Loader />;
+		// return <Loader />;
+    return <></>
 	}
 
 	console.log(userData[0]); //logs the most recent order
