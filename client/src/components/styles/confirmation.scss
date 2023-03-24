@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+
+.button--orangy {
+    color: $white;
+    background-color: $atomic-tangerine;
+    border-color: $atomic-tangerine;
+    border: 2px solid;
+}
+
+.button--orangy:hover {
+    color: $atomic-tangerine;
+    background-color: $white;
+    border-color: $atomic-tangerine;
+    border: 2px solid;
+}
