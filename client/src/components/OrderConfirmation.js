@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
-import confirmation from "./styles/confirmation.scss";
+import Loader from "./Loader";
+import "./styles/confirmation.scss";
 
 export default function OrderConfirmation(props) {
 	// console.log(props.cookieValue); // -> first_name
@@ -22,7 +23,7 @@ export default function OrderConfirmation(props) {
 
 	//replace with pretty loader later
 	if (!userData) {
-		return <div>Loading...</div>;
+		return <Loader />;
 	}
 
 	console.log(userData[0]); //logs the most recent order
