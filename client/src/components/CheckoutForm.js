@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import tier1 from '../images/tier1_image.png';
+// import tier1 from '../images/tier1_image.png';
+import Button from "./Button";
 
 const ProductDisplay = () => (
     <section>
-      <div className="product">
+      {/* <div className="product">
         <img
           src={tier1}
           alt="Tier 1"
@@ -12,12 +13,12 @@ const ProductDisplay = () => (
         <h3>Tier 1</h3>
         <h5>$20.00</h5>
         </div>
-      </div>
+      </div> */}
         <form action="/create-checkout-session" method="POST">
             <input type="hidden" name="priceId" value="price_1MncSlGdWagE6Ui8ya3zUfDR" />
-            <button type="submit">
-            Checkout
-            </button>
+            <Button orangy type="submit">
+            Continue
+            </Button>
         </form>
     </section>
   );

@@ -1,0 +1,57 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.subs-layout {
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-family: $coiny-font;
+    color: $atomic-tangerine;
+  }
+}
+
+.tier-list {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+}
+
+.tier-card {
+  @include button-active;
+
+  display: flex;
+  flex-direction: column;
+  background-color: $robin-egg-blue;
+  width: 25vw;
+  height: fit-content;
+  align-items: center;
+  text-align: center;
+  color: $white;
+  border-radius: 1.5rem;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  h2 {
+    font-family: $coiny-font;
+    margin-top: 1.5rem;
+  }
+
+  img {
+    width: 13rem;
+  }
+
+  p {
+    margin-top: 3rem;
+  }
+
+  h3 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.halfOP {
+  opacity: 0.5;
+}
