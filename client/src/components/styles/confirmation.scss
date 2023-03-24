@@ -1,6 +1,26 @@
 @import "../../styles/variables.scss";
 
 
+    
+.tier-wrapper {
+    border-bottom: 1px solid $jet;
+}
+
+
+.details-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    // grid-gap: 39px;
+    color: $jet;
+}
+
+.c-order-confirmation__label {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+
+}
+
 .c-order-confirmation h1, 
 .button-container{
     display: flex;
@@ -17,14 +37,8 @@
     justify-content: space-around;
     text-align: left;
     // flex-direction: column;
-    }
-
-.c-order-confirmation__label {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 50px;
-
 }
+
 // .c-order-confirmation__value {
 //     // text-align: right;
 // }
