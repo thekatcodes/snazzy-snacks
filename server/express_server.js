@@ -101,11 +101,10 @@ app.post(
 				postalCode,
 				subscriptionId,
                 subscriptionTier,
-                price,
 				email
 			);
 
-			createOrderNumber(userId, formattedDate);
+			createOrderNumber(userId, price, formattedDate);
 		}
 
 		// Return a 200 response to acknowledge receipt of the event
