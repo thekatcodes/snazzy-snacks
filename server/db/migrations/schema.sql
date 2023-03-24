@@ -17,7 +17,6 @@ CREATE TABLE users (
   postal_code VARCHAR(255),
   subscription_tier VARCHAR(255),
   stripe_sub_id VARCHAR(255),
-  price INTEGER,
   CONSTRAINT user_email UNIQUE (email)
 );
 
@@ -33,6 +32,7 @@ CREATE TABLE products (
 CREATE TABLE boxes (
   id SERIAL PRIMARY KEY NOT NULL,
   customer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  price INTEGER,
   order_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
