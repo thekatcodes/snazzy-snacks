@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
 
-function OrderConfirmation(props) {
+export default function OrderConfirmation(props) {
 	console.log(props.cookieValue); // -> first_name
 	const [userData, setUserData] = useState(null);
 
@@ -10,7 +10,7 @@ function OrderConfirmation(props) {
 		async function fetchData() {
 			try {
 				const response = await axios.get("/order-summary");
-				console.log("order confirmation response:", response.data);
+				console.log("order confirmation response:", response.data[0]);
 				setUserData(response.data);
 			} catch (error) {
 				console.log(error);
@@ -19,41 +19,56 @@ function OrderConfirmation(props) {
 		fetchData();
 	}, []);
 
-	return (
-		<>
-			<h1>Your order is complete!</h1>
-			<div>
-				{userData &&
-          userData.map((order, index) => {
-            
-						// Filter orders by first name & cookieValue
-            if (order.first_name === props.cookieValue) {
-
-              // In case a user has previous purchases, at new checkout, the data will be filtered to render the highest order number (aka most recent order)
-              const maxOrderNumber = Math.max(...userData.map(order => order.order_number));
-              const mostRecentOrder = userData.find(order => order.order_number === maxOrderNumber);
-              console.log(mostRecentOrder);
-
-							return (
-								<div key={index}>
-									<p>Order number: {mostRecentOrder.order_number}</p>
-									<p>Email address: {mostRecentOrder.email}</p>
-									<p>
-										Shipping address: {mostRecentOrder.street}, {mostRecentOrder.city},{" "}
-										{mostRecentOrder.province}, {mostRecentOrder.country} {mostRecentOrder.postal_code}
-									</p>
-									<p>Order summary: {mostRecentOrder.price}</p>
+	console.log(userData[0]);
+	if (userData[0].first_name === props.cookieValue) {
+		return (
+			<div className="c-order-confirmation">
+				<h1>Your order is complete!</h1>
+				<div>
+					<div className="c-order-confirmation__grid">
+						<p>Order number: {userData[0].order_number}</p>
+					</div>
+					<div className="c-order-confirmation__grid">
+						<h6>Email address</h6>
+						<p>{userData[0].email}</p>
+					</div>
+					<div className="c-order-confirmation__grid">
+						<h6>Shipping address</h6>
+						<p>{userData[0].street}</p>
+						<p>
+							{userData[0].city}, {userData[0].province}{" "}
+							{userData[0].postal_code}
+						</p>
+						<p>{userData[0].country}</p>
+					</div>
+					<div className="c-order-confirmation__grid">
+						<div className="c-order-confirmation__total">
+							<div className="c-order-confirmation__total-wrapper">
+								<div className="c-order-confirmation__label">
+									<p>{userData[0].subscription_tier} box</p>
 								</div>
-							);
-						}
-						// If order doesn't match the if condition, return null
-						return null;
-					})}
-			</div>
-			<button>View order history</button>
-			<Footer />
-		</>
-	);
-}
+								<div className="c-order-confirmation__value">
+									<p>{userData[0].price}</p>
+								</div>
+							</div>
+							<div className="c-order-confirmation__total-wrapper">
+								<div className="c-order-confirmation__label">
+									<p>TOTAL</p>
+								</div>
+								<div className="c-order-confirmation__value">
+									<p>{userData[0].price}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-export default OrderConfirmation;
+				<button>View order history</button>
+				<Footer />
+			</div>
+		);
+	}
+	// else {
+	//   //   <h1>You do not have access rights to this page</h1>;
+	//   // }
+}
