@@ -83,7 +83,8 @@ export default function OrderConfirmation(props) {
 					</div>
 				</div>
 			</div>
-			<div className="button-container">
+        <h2>HAPPY SNACKING!</h2>
+      <div className="button-container">
 				<button
 					className="button coiny button--orangy"
 					onClick={handleViewOrderHistory}
