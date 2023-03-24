@@ -1,6 +1,17 @@
 @import "../../styles/variables.scss";
 
+h1 {
+    font-family: $coiny-font;
+    color: $atomic-tangerine;
+}
 
+h4 {
+font-family: $coiny-font;
+}
+
+p {
+    font-family: $regular-font;
+}
     
 .tier-wrapper {
     border-bottom: 1px solid $jet;
