@@ -68,7 +68,7 @@ export default function OrderConfirmation(props) {
 			</div>
 		);
 	}
-	// else {
-	//   //   <h1>You do not have access rights to this page</h1>;
-	//   // }
+	else {
+	    <h1>You do not have access to this page</h1>
+	  }
 }
