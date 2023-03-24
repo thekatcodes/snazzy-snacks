@@ -71,7 +71,6 @@ export default function OrderConfirmation(props) {
 								<div className="c-order-confirmation__value">
 									<p>{userData[0].price}.00$</p>
                 </div>
-                <hr />
 							</div>
 							<div className="c-order-confirmation__label total">
 								<p>TOTAL</p>
