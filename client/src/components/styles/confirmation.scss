@@ -1,5 +1,34 @@
 @import "../../styles/variables.scss";
 
+
+.c-order-confirmation h1, 
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.c-order-confirmation button {
+    display: flex;
+    justify-content: center;
+}
+
+.c-order-confirmation__grid {
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    // flex-direction: column;
+    }
+
+.c-order-confirmation__label {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+
+}
+// .c-order-confirmation__value {
+//     // text-align: right;
+// }
+
 .button--orangy {
     color: $white;
     background-color: $atomic-tangerine;
