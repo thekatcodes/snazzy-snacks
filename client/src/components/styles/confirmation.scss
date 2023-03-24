@@ -7,19 +7,19 @@ h1 {
 
 h2 {
     font-family: $coiny-font;
-    font-size: 35px;
+    font-size: 30px;
     -webkit-text-stroke: 2px $atomic-tangerine;
     color: white;
 }
 
 h4 {
-font-family: $coiny-font;
+    font-family: $coiny-font;
 }
 
 p {
     font-family: $regular-font;
 }
-    
+
 .tier-wrapper {
     border-bottom: 1px solid $jet;
 }
@@ -38,12 +38,13 @@ p {
     grid-gap: 35px;
 }
 
- .c-order-confirmation__value {
+.c-order-confirmation__value {
     text-align: right;
- }
+}
 
-.c-order-confirmation h1, 
-.button-container, h2{
+.c-order-confirmation h1,
+.button-container,
+h2 {
     display: flex;
     justify-content: center;
 }
@@ -82,6 +83,18 @@ p {
 
 /* On screens that are 650px or less */
 @media screen and (max-width: 650px) {
+    .details-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .c-order-confirmation__grid {
+        text-align: center;
+    }
 
 
+    .c-order-confirmation__label {
+        text-align: left;
+    }
 }
