@@ -20,6 +20,7 @@ app.use(express.urlencoded());
 
 // Helper and component specific functions
 const { getUsers, updateNewUser } = require('./users');
+const { getProducts } = require('./products');
 
 // Middleware to read req.body
 app.use(express.json());
@@ -38,6 +39,19 @@ app.get("/api", async(req, res) => {
     console.log(error);
   }
 });
+
+//////////////// SAMMA'S ATTEMPT ////////////////////
+
+app.get("/products", async(req, res) => {
+  try {
+    const products = await getProducts();
+    res.json(products);
+  } catch (error) { 
+    console.log(error);
+  }
+});
+
+///////////////////////////////////////////////////
 
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
