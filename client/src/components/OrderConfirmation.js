@@ -27,6 +27,12 @@ export default function OrderConfirmation(props) {
   }
 
   console.log(userData[0]);
+
+   // handle button click
+   const handleViewOrderHistory = () => {
+    window.location.href = "/account"; // navigate to new URL
+   };
+  
 	// if (userData[0].first_name === props.cookieValue) {
 		return (
 			<div className="c-order-confirmation">
@@ -75,7 +81,7 @@ export default function OrderConfirmation(props) {
 					</div>
 				</div>
 
-				<button>View order history</button>
+				<button onClick={handleViewOrderHistory}>View order history</button>
 				<Footer />
 			</div>
 		);
