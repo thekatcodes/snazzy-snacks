@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
-import Loader from "./Loader";
 import "./styles/confirmation.scss";
 
 export default function OrderConfirmation(props) {
