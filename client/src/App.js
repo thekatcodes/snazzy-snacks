@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
 
+import Address from './components/Address';
 import Account from './components/Account';
 import Profile from './components/Profile';
 import Subscription from './components/Subscription';
@@ -60,6 +61,12 @@ function App() {
           } />
           <Route path="profile" element={
             <Profile
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          } />
+          <Route path="address" element={
+            <Address
               cookieValue={cookieValue}
               setCookieValue={setCookieValue}
             />

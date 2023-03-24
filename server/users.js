@@ -28,8 +28,6 @@ async function updateNewUser(first_name, last_name, email, password) {
 }
 
 // Update existing user based on cookie 
-// Currently it changes it based on username - so duplicate username would cause error
-// Solution: template literal with two values - one for username so navbar can still grab username, and one for email, so it can be used for update purposes
 async function updateUser(email, password, cookie) {
   console.log("Email: ", email);
   console.log("Password: ", password);
@@ -48,4 +46,27 @@ async function updateUser(email, password, cookie) {
   }
 }
 
-module.exports = { getUsers, updateNewUser, updateUser };
+// Update existing address based on cookie 
+async function updateAddress(street, city, province, pCode, cookie) {
+  console.log("Street: ", street);
+  console.log("City: ", city);
+  console.log("Province: ", province);
+  console.log("Postal Code: ", pCode);
+  console.log("Cookie: ", cookie);
+  try {
+    await pool.query(`
+      UPDATE users
+      SET 
+        street = $1,
+        city = $2, 
+        province = $3, 
+        postal_code = $4
+      WHERE email = $5
+    `, [street, city, province, pCode, cookie]);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+
+module.exports = { getUsers, updateNewUser, updateUser, updateAddress };

@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // Helper functions for querying Users table
-const { getUsers, updateNewUser, updateUser } = require('./users');
+const { getUsers, updateNewUser, updateUser, updateAddress } = require('./users');
 
 // Middleware to read req.body
 app.use(express.json());
@@ -42,7 +42,6 @@ app.get("/api", async(req, res) => {
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
   try {
-
     const users = await getUsers();
     let login = false;
     let email = req.body.email;
@@ -163,6 +162,29 @@ app.put('/account/profile', async(req, res) => {
     console.log(err);
   }
 })
+
+// Updates user address in the database
+app.put('/account/address', async(req, res) => {
+  try {
+    let update = false;
+    
+    let street = req.body.street;
+    let city = req.body.city;
+    let province = req.body.province;
+    let pCode = req.body.pCode;
+    let cookie = req.session.cookie.email;
+
+    console.log("This is the logged in user: ", cookie);
+      
+    if (updateAddress(street, city, province, pCode, cookie)) {
+      update = true;
+    } 
+    res.json({ update: update });
+  } catch(err) {
+    console.log(err);
+  }
+})
+
 
 // Logout button, clears cookies in backend
 app.post('/logout', (req, res) => {

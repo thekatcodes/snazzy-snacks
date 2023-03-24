@@ -1,0 +1,42 @@
+.address {
+  position: relative;
+  margin-left: 15vw; /* If this is changed, make sure to change Sidebar.scss as well */
+  top: 30px; /* adjust this value to make sure it doesn't overlap with the header */
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-sizing: border-box;
+
+  input {
+    width: 19rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: solid 0.1rem lightgray;
+  }
+
+  select {
+    width: 19.5rem;
+    height: 2.7rem;
+    border-radius: 0.5rem;
+    border: solid 0.1rem lightgray;
+  }
+
+  .dropdown {
+    color: rgb(160, 160, 160);
+  }
+
+  ::placeholder {
+    color: rgb(160, 160, 160);
+  }
+}
+
+

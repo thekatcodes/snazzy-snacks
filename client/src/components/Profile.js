@@ -5,6 +5,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Button from './Button';
+
 import "./styles/Profile.scss";
 
 const Profile = (props) => {
@@ -44,8 +45,8 @@ const Profile = (props) => {
           cookieValue={props.cookieValue}
           setCookieValue={props.setCookieValue}
         />
-        {/* Error message display */}
         <div className="profile">
+          {/* Error message display */}
           <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
           <h1>Update Profile</h1>
           <form className="form-layout" onSubmit={updateProfile}>
@@ -77,7 +78,7 @@ const Profile = (props) => {
               placeholder="Confirm Password"
               required
             />
-            <Button>Update</Button>
+            <Button>Save</Button>
           </form>
         </div>
         <div><Footer /></div>
