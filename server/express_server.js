@@ -188,8 +188,8 @@ app.post("/register", async (req, res) => {
 		let email = req.body.email;
 		let password = bcrypt.hashSync(req.body.password, 10);
 
-		console.log("This is first name: ", firstname);
-		console.log("This is last name: ", lastname);
+		// console.log("This is first name: ", firstname);
+        // console.log("This is last name: ", lastname);
 
 		while (!regis) {
 			if (req.body.password !== req.body.password2) {
@@ -203,7 +203,7 @@ app.post("/register", async (req, res) => {
 			}
 
 			regis = true;
-			req.session.cookie = firstname;
+            req.session.cookie = firstname;
 			updateNewUser(firstname, lastname, email, password);
 		}
 
@@ -249,6 +249,7 @@ app.post("/create-checkout-session", async (req, res) => {
 // Grabs data from psql to send to front end
 // Could be renamed as order-confirmation
 app.get("/order-summary", async (req, res) => {
+    // console.log('order-summary');
 	try {
 		const summary = await orderSummary();
 		res.json(summary);
