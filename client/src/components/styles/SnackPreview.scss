@@ -1,0 +1,47 @@
+@import "../../styles/variables.scss";
+
+.preview-layout {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin: 3rem 0;
+  overflow-x: auto;
+  width: 100vw;
+}
+
+.disclaimer {
+  color: $atomic-tangerine;
+
+  h3 {
+    font-family: $coiny-font;
+  }
+}
+
+.product-scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 14%;
+  gap: 1.7rem;
+  margin: 2rem 0;
+  width: 95%;
+
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.product {
+  display: grid;
+  padding: 1rem;
+  grid-template-rows: min-content;
+  height: fit-content;
+
+  img {
+    inline-size: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+}
