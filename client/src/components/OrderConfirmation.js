@@ -33,9 +33,9 @@ export default function OrderConfirmation(props) {
 		window.location.href = "/account";
 	};
 
-	// if (userData[0].first_name === props.cookieValue) {
+	if (userData[0].first_name === props.cookieValue) {
 	return (
-		<div className="c-order-confirmation">
+		<div className="c-order-confirmation fade-in-div">
 			<h1>Your order is complete!</h1>
 			<div className="details-container">
 				<div className="c-order-confirmation__grid">
@@ -71,20 +71,20 @@ export default function OrderConfirmation(props) {
 								<p>{userData[0].subscription_tier} box</p>
 								<div className="c-order-confirmation__value">
 									<p>{userData[0].price}.00$</p>
-                </div>
+								</div>
 							</div>
 							<div className="c-order-confirmation__label total">
-								<p>TOTAL</p>
+								<p className="total">TOTAL</p>
 								<div className="c-order-confirmation__value">
-									<p>{userData[0].price}.00$</p>
+									<p className="total">{userData[0].price}.00$</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-        <h2>HAPPY SNACKING!</h2>
-      <div className="button-container">
+			<h2>HAPPY SNACKING!</h2>
+			<div className="button-container">
 				<button
 					className="button coiny button--orangy"
 					onClick={handleViewOrderHistory}
@@ -92,12 +92,11 @@ export default function OrderConfirmation(props) {
 					View order history
 				</button>
 			</div>
-
 			<Footer />
 		</div>
 	);
-	// }
-	// else {
-	//     <h1>You do not have access to this page</h1>
-	//   }
+	}
+	else {
+	    <h1>You do not have access to this page</h1>
+	  }
 }
