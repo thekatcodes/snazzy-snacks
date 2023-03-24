@@ -3,17 +3,14 @@ import axios from "axios";
 import Footer from "./Footer";
 
 export default function OrderConfirmation(props) {
-  console.log('TESTSETES');
-	console.log(props.cookieValue); // -> first_name
+	// console.log(props.cookieValue); // -> first_name
 	const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    console.log('USE EFFECT')
-
 		async function fetchData() {
 			try {
 				const response = await axios.get("/order-summary");
-				console.log("order confirmation response:", response.data);
+				// console.log("order confirmation response:", response.data);
 				setUserData(response.data);
 			} catch (error) {
 				console.log(error);
@@ -22,15 +19,16 @@ export default function OrderConfirmation(props) {
 		fetchData();
   }, []);
   
+  //replace with pretty loader later
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  console.log(userData[0]);
+  console.log(userData[0]); //logs the most recent order 
 
-   // handle button click
+   // handle button click which navigates to /account
    const handleViewOrderHistory = () => {
-    window.location.href = "/account"; // navigate to new URL
+    window.location.href = "/account";
    };
   
 	// if (userData[0].first_name === props.cookieValue) {
