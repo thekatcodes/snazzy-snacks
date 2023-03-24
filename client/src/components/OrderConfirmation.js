@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "./Footer";
+import confirmation from './styles/confirmation.scss'
 
 export default function OrderConfirmation(props) {
 	// console.log(props.cookieValue); // -> first_name
@@ -79,7 +80,7 @@ export default function OrderConfirmation(props) {
 					</div>
 				</div>
 
-				<button onClick={handleViewOrderHistory}>View order history</button>
+				<button className='button coiny button--orangy' onClick={handleViewOrderHistory}>View order history</button>
 				<Footer />
 			</div>
 		);
