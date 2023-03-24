@@ -8,7 +8,9 @@ import snack from "../images/snack.png";
 import chips from "../images/crisps.png";
 import snack2 from "../images/snack2.png";
 
-export default function Landing() {
+export default function Landing(props) {
+
+  console.log(props.cookieValue);
 
   return (
     <section className="landing-background landing-layout layout">
@@ -22,9 +24,16 @@ export default function Landing() {
         <h5>*starting at 20$/mo</h5>
       </div>
       <div>
-        <Link to="/login">
+        {props.cookieValue ? 
+          <Link to="/account">
           <Button>GET SNACKING!</Button>
-        </Link>
+          </Link>
+        :
+          <Link to="/login">
+            <Button>GET SNACKING!</Button>
+          </Link>
+        }
+        
       </div>
       <div className="landing-img">
         <img src={candy} alt="Candy" />

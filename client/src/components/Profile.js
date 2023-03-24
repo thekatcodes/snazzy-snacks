@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 import Sidebar from './Sidebar';
@@ -10,12 +9,11 @@ import "./styles/Profile.scss";
 
 const Profile = (props) => {
 
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwd2, setPwd2] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const [sucMsg, setSucMsg] = useState('');
 
   // Update Profile Function
   const updateProfile = (event) => {
@@ -24,7 +22,10 @@ const Profile = (props) => {
       axios.put('/account/profile', {email: email, password: pwd, password2: pwd2})
       .then((res) => {
         if(res.data.update) {
-          navigate("/account");
+          setSucMsg('Address updated!');
+          setEmail('');
+          setPwd('');
+          setPwd2('');
         }
       })
       .catch((err) => {
@@ -48,6 +49,7 @@ const Profile = (props) => {
         <div className="profile">
           {/* Error message display */}
           <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+          <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
           <h1>Update Profile</h1>
           <form className="form-layout" onSubmit={updateProfile}>
             <label htmlFor="email"/>
