@@ -47,7 +47,7 @@ async function updateUser(email, password, cookie) {
 }
 
 // Update existing address based on cookie 
-async function updateAddress(street, city, province, pCode, cookie) {
+async function updateCurrentAddress(street, city, province, pCode, cookie) {
   console.log("Street: ", street);
   console.log("City: ", city);
   console.log("Province: ", province);
@@ -69,4 +69,4 @@ async function updateAddress(street, city, province, pCode, cookie) {
   }
 }
 
-module.exports = { getUsers, updateNewUser, updateUser, updateAddress };
+module.exports = { getUsers, updateNewUser, updateUser, updateCurrentAddress };

@@ -15,15 +15,16 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const {
 	findUserId,
 	updateAddress,
-    createOrderNumber,
-    orderSummary
+  createOrderNumber,
+  orderSummary
 } = require("./order_confirmation");
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
 
 // Helper functions for querying Users table
-const { getUsers, updateNewUser, updateUser, updateAddress } = require('./users');
+const { getUsers, updateNewUser, updateUser, updateCurrentAddress } = require('./users');
+
 // Retrieve payment data after successful checkout
 // DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
 // MUST KEEP AT THE TOP!
@@ -54,9 +55,9 @@ app.post(
 			const session = event.data.object;
 			// console.log('SESSION PLS', session);
 			const subscriptionId = session.subscription;
-			// console.log("sub id:", subscriptionId);
+			console.log("sub id:", subscriptionId);
 			const address = session.customer_details.address;
-			// console.log(address);
+			console.log(address);
 			//retrieve address details to store in database
 			let street;
 			if (!address.line2) {
@@ -271,7 +272,7 @@ app.put('/account/address', async(req, res) => {
 
     console.log("This is the logged in user: ", cookie);
       
-    if (updateAddress(street, city, province, pCode, cookie)) {
+    if (updateCurrentAddress(street, city, province, pCode, cookie)) {
       update = true;
     } 
     res.json({ update: update });

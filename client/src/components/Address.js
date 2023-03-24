@@ -80,19 +80,19 @@ const Address = (props) => {
             <label htmlFor="province"/>
             <select id="province" onChange={(event) => setProvince(event.target.value)} value={province} required>
               <option className="dropdown" value="">Province</option>
-              <option value="Alberta">Alberta</option>
-              <option value="British Columbia">British Columbia</option>
-              <option value="Manitoba">Manitoba</option>
-              <option value="New Brunswick">New Brunswick</option>
-              <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-              <option value="Northwest Territories">Northwest Territories</option>
-              <option value="Nova Scotia">Nova Scotia</option>
-              <option value="Nunavut">Nunavut</option>
-              <option value="Ontario">Ontario</option>
-              <option value="Prince Edward Island">Prince Edward Island</option>
-              <option value="Quebec">Quebec</option>
-              <option value="Saskatchewan">Saskatchewan</option>
-              <option value="Yukon">Yukon</option>
+              <option value="Alberta">AB</option>
+              <option value="British Columbia">BC</option>
+              <option value="Manitoba">MB</option>
+              <option value="New Brunswick">NB</option>
+              <option value="Newfoundland and Labrador">NL</option>
+              <option value="Northwest Territories">NT</option>
+              <option value="Nova Scotia">NS</option>
+              <option value="Nunavut">NU</option>
+              <option value="Ontario">ON</option>
+              <option value="Prince Edward Island">PE</option>
+              <option value="Quebec">QC</option>
+              <option value="Saskatchewan">SK</option>
+              <option value="Yukon">YT</option>
             </select>
             <label htmlFor="postalcode"/>
             <input 

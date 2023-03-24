@@ -22,7 +22,7 @@ const Profile = (props) => {
       axios.put('/account/profile', {email: email, password: pwd, password2: pwd2})
       .then((res) => {
         if(res.data.update) {
-          setSucMsg('Address updated!');
+          setSucMsg('Profile updated!');
           setEmail('');
           setPwd('');
           setPwd2('');
