@@ -3,37 +3,49 @@ import axios from "axios";
 import Footer from "./Footer";
 
 export default function OrderConfirmation(props) {
+  console.log('TESTSETES');
 	console.log(props.cookieValue); // -> first_name
 	const [userData, setUserData] = useState(null);
 
-	useEffect(() => {
+  useEffect(() => {
+    console.log('USE EFFECT')
+
 		async function fetchData() {
 			try {
 				const response = await axios.get("/order-summary");
-				console.log("order confirmation response:", response.data[0]);
+				console.log("order confirmation response:", response.data);
 				setUserData(response.data);
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		fetchData();
-	}, []);
+  }, []);
+  
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
-	console.log(userData[0]);
-	if (userData[0].first_name === props.cookieValue) {
+  console.log(userData[0]);
+	// if (userData[0].first_name === props.cookieValue) {
 		return (
 			<div className="c-order-confirmation">
 				<h1>Your order is complete!</h1>
 				<div>
-					<div className="c-order-confirmation__grid">
-						<p>Order number: {userData[0].order_number}</p>
+          <div className="c-order-confirmation__grid">
+            <span>
+            <h4>Order number: </h4>
+            <p>{userData[0].order_number}</p>
+            </span>
 					</div>
-					<div className="c-order-confirmation__grid">
-						<h6>Email address</h6>
+          <div className="c-order-confirmation__grid">
+            <span>
+						<h4>Email address</h4>
 						<p>{userData[0].email}</p>
+            </span>
 					</div>
 					<div className="c-order-confirmation__grid">
-						<h6>Shipping address</h6>
+						<h4>Shipping address</h4>
 						<p>{userData[0].street}</p>
 						<p>
 							{userData[0].city}, {userData[0].province}{" "}
@@ -67,8 +79,8 @@ export default function OrderConfirmation(props) {
 				<Footer />
 			</div>
 		);
-	}
-	else {
-	    <h1>You do not have access to this page</h1>
-	  }
+	// }
+	// else {
+	//     <h1>You do not have access to this page</h1>
+	//   }
 }
