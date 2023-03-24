@@ -1,5 +1,19 @@
 @import "../../styles/variables.scss";
 
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-in-div {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+
 h1 {
     font-family: $coiny-font;
     color: $atomic-tangerine;
@@ -23,10 +37,13 @@ p {
     font-family: $regular-font;
 }
 
+.total{
+    font-weight: 700;
+}
+
 .tier-wrapper {
     border-bottom: 1px solid $jet;
 }
-
 
 .details-container {
     display: grid;
