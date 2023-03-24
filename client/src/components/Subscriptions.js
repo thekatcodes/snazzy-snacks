@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
 
 import "./styles/Subscriptions.scss";
 // import CheckoutForm from "./CheckoutForm";
 // import Button from "./Button";
 import SnackPreview from "./SnackPreview";
+// import Footer from "./Footer";
 
 import tier1 from "../images/tier1_image.png";
 import tier2 from "../images/tier2_image.png";
 import tier3 from "../images/tier3_image.png";
 
 function Subscriptions() {
-  // const tierClass = classNames("button", "coiny", {
-  //   "button--orangy": orangy, //if props.orangy is true, append className
-  // });
   const [tierInfo, setTierInfo] = useState(0);
+  const [preview, setPreview] = useState(false);
+  const [opacity, setOpacity] = useState();
 
   const boxTiers = [
     {
@@ -37,9 +37,21 @@ function Subscriptions() {
     }
   ];
 
-  const tierCards = boxTiers.map(box => {
+  const handleClick = (index) => {
+    setOpacity(index);
+  }
+
+  const tierCards = boxTiers.map((box, i) => {
     return (
-      <div className="tier-card" onClick={() => setTierInfo(box.price)}>
+      <div 
+        className={opacity === i ? "tier-card" : "tier-card halfOP"} 
+        id={i} 
+        onClick={() => {
+          setPreview(true); 
+          setTierInfo(box.price);
+          handleClick(i);
+        }}
+      >
         <h2>Tier {box.tier}</h2>
         <img src={box.img} alt="Snack" />
         <p>{box.quantity} full-size snacks<br />from all over the world!</p>
@@ -54,9 +66,10 @@ function Subscriptions() {
       <div className="tier-list">
         {tierCards}
       </div>
-      <SnackPreview tier={tierInfo} />
+      {preview && <SnackPreview tier={tierInfo} />}
+      {/* <Footer /> */}
+      {/* <CheckoutForm /> */}
     </section>
-    // <CheckoutForm />
   )
 }
 

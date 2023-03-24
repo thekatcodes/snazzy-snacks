@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
+import CheckoutForm from "./CheckoutForm";
+
 import "./styles/SnackPreview.scss";
-import classNames from "classnames";
+// import classNames from "classnames";
 
 
 export default function SnackPreview(props) {
@@ -20,7 +22,6 @@ export default function SnackPreview(props) {
 
   const productList = products.map(item => {
     if (item.tier === props.tier) {
-      console.log(props.tier);
       return (
         <div className="product">
           <img src={item.img_url} alt={item.name} />
@@ -39,6 +40,7 @@ export default function SnackPreview(props) {
       <div className="product-scroller">
         {productList}
       </div>
+      <CheckoutForm />
     </section>
   );
 }
