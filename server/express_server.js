@@ -4,39 +4,134 @@ const express = require("express");
 const e = require("express");
 const app = express();
 const bcrypt = require("bcryptjs");
-const cookieSession = require('cookie-session');
-const cookieParser = require('cookie-parser'); 
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 const PORT = 8080;
 
 //used for Stripe
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
-const stripe = require("stripe")(
-	process.env.STRIPE_SECRET_KEY
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const {
+	findUserId,
+	updateAddress,
+    createOrderNumber,
+    orderSummary
+} = require("./order_confirmation");
+const endpointSecret = process.env.WEBHOOK_SECRET;
 
-app.use(express.json());
 app.use(express.urlencoded());
 
 // Helper functions for querying Users table
 const { getUsers, updateNewUser, updateUser, updateAddress } = require('./users');
+// Retrieve payment data after successful checkout
+// DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
+// MUST KEEP AT THE TOP!
+// in terminal run: stripe listen --forward-to localhost:8080/webhook
+app.post(
+	"/webhook",
+	express.raw({ type: "application/json" }),
+	(request, response) => {
+		let event = request.body;
+		// Only verify the event if you have an endpoint secret defined.
+		// Otherwise use the basic event deserialized with JSON.parse
+		if (endpointSecret) {
+			// Get the signature sent by Stripe
+			const signature = request.headers["stripe-signature"];
+			try {
+				event = stripe.webhooks.constructEvent(
+					request.body,
+					signature,
+					endpointSecret
+				);
+			} catch (err) {
+				console.log(`⚠️  Webhook signature verification failed.`, err.message);
+				return response.sendStatus(400);
+			}
+		}
+
+		if (event.type === "checkout.session.completed") {
+			const session = event.data.object;
+			// console.log('SESSION PLS', session);
+			const subscriptionId = session.subscription;
+			// console.log("sub id:", subscriptionId);
+			const address = session.customer_details.address;
+			// console.log(address);
+			//retrieve address details to store in database
+			let street;
+			if (!address.line2) {
+				street = address.line1;
+			} else {
+				street = address.line1 + ", " + address.line2;
+			}
+
+			// console.log("street:", street); // '123 Queen Street West, unit 100'
+			const city = address.city;
+			// console.log("city:", city); //prints 'Toronto'
+			const province = address.state;
+			// console.log("province:", province); //prints 'ON'
+			const postalCode = address.postal_code;
+			// console.log("postal code:", postalCode); //prints 'A1A 1A1'
+			const countryCodes = {
+				CA: "Canada",
+			};
+			const country = address.country;
+			const countryName = countryCodes[country];
+			// console.log(countryName); // prints 'Canada'
+			const email = session.customer_details.email;
+			// console.log(email);
+			const userId = findUserId(email);
+		
+            const formattedDate = new Date().toISOString().substring(0, 10);
+
+            // Retrieve price data and set tier
+            const price = session.amount_total / 100;
+            let subscriptionTier;
+            if (price === 20) {
+                subscriptionTier = "Tier 1"
+            } else if (price === 40) {
+                subscriptionTier = "Tier 2"
+            } else if (price === 60) {
+                subscriptionTier = "Tier 3"
+            }
+            
+			updateAddress(
+				street,
+				city,
+				province,
+				countryName,
+				postalCode,
+				subscriptionId,
+                subscriptionTier,
+				email
+			);
+
+			createOrderNumber(userId, price, formattedDate);
+		}
+
+		// Return a 200 response to acknowledge receipt of the event
+		response.send();
+	}
+);
 
 // Middleware to read req.body
 app.use(express.json());
-app.use(cookieSession({
-  name: 'cookie',
-  keys: ['ae2201ymno3imKSaLa0t', '1i0aomteayS3mL20an2K']
-}));
+app.use(
+	cookieSession({
+		name: "cookie",
+		keys: ["ae2201ymno3imKSaLa0t", "1i0aomteayS3mL20an2K"],
+	})
+);
 app.use(cookieParser());
 
 // Grabs data from psql to send to front end
-app.get("/api", async(req, res) => {
-  try {
-    const users = await getUsers();
-    res.json(users);
-  } catch (error) { 
-    console.log(error);
-  }
+app.get("/api", async (req, res) => {
+	try {
+		const users = await getUsers();
+		res.json(users);
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 // Receives login details from front end, and checks whether the username & password matches
@@ -75,14 +170,14 @@ app.post("/login", async(req, res) => {
 });
 
 // Returning username
-app.get('/cookie', async(req, res) => {
-  try {
-    console.log("Sending back: ", req.session.cookie);
-    res.send(req.session.cookie);
-  } catch (err) {
-    console.log(err);
-  }
-})
+app.get("/cookie", async (req, res) => {
+	try {
+		console.log("Sending back: ", req.session.cookie);
+		res.send(req.session.cookie);
+	} catch (err) {
+		console.log(err);
+	}
+});
 
 // Returning email
 app.get('/email', async(req, res) => {
@@ -185,13 +280,11 @@ app.put('/account/address', async(req, res) => {
   }
 })
 
-
 // Logout button, clears cookies in backend
-app.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
-})
-
+app.post("/logout", (req, res) => {
+	req.session = null;
+	res.redirect("/");
+});
 
 //Render Stripe integrated checkout page
 app.post("/create-checkout-session", async (req, res) => {
@@ -207,11 +300,7 @@ app.post("/create-checkout-session", async (req, res) => {
 			},
 		],
 		mode: "subscription",
-        success_url: `${YOUR_DOMAIN}/order-confirmation`,
-        
-        //^^^ redirects to http://localhost:8080/order-confirmation 
-        // TO DO: CREATE order-confirmation router path + component
-
+		success_url: `${YOUR_DOMAIN}/order-confirmation`,
 		cancel_url: `${YOUR_DOMAIN}/subscriptions`,
 		billing_address_collection: "required",
 		shipping_address_collection: {
@@ -224,22 +313,20 @@ app.post("/create-checkout-session", async (req, res) => {
 	res.redirect(303, session.url);
 });
 
-// Retrieve payment data after successful checkout
-// app.post("/webhooks/stripe", async (req, res) => {
-//     const event = req.body;
-    
-//     if (event.type === "checkout.session.completed") {
-//       const session = event.data.object;
-//       // Here, you can retrieve the payment data from the `session` object
-//       console.log(session);
-//     }
-    
-//     res.sendStatus(200);
-//   });
-
+// Grabs data from psql to send to front end
+// Could be renamed as order-confirmation
+app.get("/order-summary", async (req, res) => {
+    // console.log('order-summary');
+	try {
+		const summary = await orderSummary();
+		res.json(summary);
+	} catch (error) {
+		console.log('could not get orderSummary', error);
+	}
+});
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
+	console.log(`Example app listening on port ${PORT}!`);
 });
 
 // Checking if cookies exist (REFERENCE FOR LATER)

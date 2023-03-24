@@ -12,7 +12,7 @@ import Account from './components/Account';
 import Profile from './components/Profile';
 import Subscription from './components/Subscription';
 import Subscriptions from "./components/Subscriptions";
-// import Profile from './components/Profile';
+import OrderConfirmation from "./components/OrderConfirmation"
 
 function App() {
 
@@ -49,6 +49,12 @@ function App() {
             setCookieValue={setCookieValue}
           />
         } />
+        <Route path="/order-confirmation" element={
+          <OrderConfirmation
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } />  
         <Route path="/account">
           <Route index element={
             <Account 
