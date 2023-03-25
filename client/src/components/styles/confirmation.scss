@@ -14,14 +14,14 @@
     animation-duration: 1s;
   }
 
-h1 {
+.order-complete {
     font-family: $coiny-font;
     color: $atomic-tangerine;
     margin-top: 60px;
     margin-bottom: 60px;
 }
 
-h2 {
+.happy-snacking {
     font-family: $coiny-font;
     font-size: 30px;
     -webkit-text-stroke: 2px $atomic-tangerine;
@@ -29,11 +29,11 @@ h2 {
     margin-bottom: 10px;
 }
 
-h4 {
+.order-sub-heading {
     font-family: $coiny-font;
 }
 
-p {
+.order-text {
     font-family: $regular-font;
 }
 
@@ -63,9 +63,9 @@ p {
     text-align: right;
 }
 
-.c-order-confirmation h1,
+.c-order-confirmation .order-complete,
 .button-container,
-h2 {
+.happy-snacking {
     display: flex;
     justify-content: center;
 }
@@ -105,12 +105,12 @@ h2 {
 /* On screens that are 650px or less */
 @media screen and (max-width: 860px) {
 
-    h1 {
+    .order-complete {
         margin-top: 10px;
         margin-bottom: 30px;
     }
 
-    h2 {
+    .happy-snacking {
         margin-top: 40px;
     }
 
