@@ -36,54 +36,54 @@ export default function OrderConfirmation(props) {
 	if (userData[0].first_name === props.cookieValue) {
 	return (
 		<div className="c-order-confirmation fade-in-div">
-			<h1>Your order is complete!</h1>
+			<h1 className="order-complete">Your order is complete!</h1>
 			<div className="details-container">
 				<div className="c-order-confirmation__grid">
 					<span>
-						<h4>Order number: {userData[0].order_number}</h4>
-						{/* <p></p> */}
+						<h4 className="order-sub-heading">Order number: {userData[0].order_number}</h4>
+						{/* <p className="order-text"></p> */}
 					</span>
 				</div>
 				<div className="c-order-confirmation__grid">
 					<span>
-						<h4>Email address</h4>
-						<p>{userData[0].email}</p>
+						<h4 className="order-sub-heading">Email address</h4>
+						<p className="order-text">{userData[0].email}</p>
 					</span>
 				</div>
 				<div className="c-order-confirmation__grid">
 					<div>
-						<h4>Shipping address</h4>
+						<h4 className="order-sub-heading">Shipping address</h4>
 						<div>
-							<p>{userData[0].street}</p>
-							<p>
+							<p className="order-text">{userData[0].street}</p>
+							<p className="order-text">
 								{userData[0].city}, {userData[0].province}{" "}
 								{userData[0].postal_code}
 							</p>
-							<p>{userData[0].country}</p>
+							<p className="order-text">{userData[0].country}</p>
 						</div>
 					</div>
 				</div>
 				<div className="c-order-confirmation__grid">
 					<div className="c-order-confirmation__total">
 						<div className="c-order-confirmation__total-wrapper">
-							<h4>Order summary</h4>
+							<h4 className="order-sub-heading">Order summary</h4>
 							<div className="c-order-confirmation__label tier-wrapper">
-								<p>{userData[0].subscription_tier} box</p>
+								<p className="order-text">{userData[0].subscription_tier} box</p>
 								<div className="c-order-confirmation__value">
-									<p>{userData[0].price}.00$</p>
+									<p className="order-text">{userData[0].price}.00$</p>
 								</div>
 							</div>
 							<div className="c-order-confirmation__label total">
-								<p className="total">TOTAL</p>
+								<p className="order-text total">TOTAL</p>
 								<div className="c-order-confirmation__value">
-									<p className="total">{userData[0].price}.00$</p>
+									<p className="order-text total">{userData[0].price}.00$</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<h2>HAPPY SNACKING!</h2>
+			<h2 className="happy-snacking">HAPPY SNACKING!</h2>
 			<div className="button-container">
 				<button
 					className="button coiny button--orangy"
