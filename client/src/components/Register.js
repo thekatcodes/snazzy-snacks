@@ -14,8 +14,7 @@ const Register = (props) => {
   // If cookie exist, it automatically redirects to homepage - blocks access to register page once logged in
   useEffect(() => {
     if(props.cookieValue) {
-      console.log("Hello");
-      navigate("/");
+      navigate("/account");
     } else {
       navigate("/register");
     }

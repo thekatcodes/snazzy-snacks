@@ -1,7 +1,9 @@
 import React from "react";
+
 import CheckoutForm from "./CheckoutForm";
 
-function Subscriptions() {
+function Subscriptions(props) {
+  
     return (
         <CheckoutForm />
     )

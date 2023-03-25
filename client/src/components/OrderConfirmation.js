@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import Footer from "./Footer";
 
 export default function OrderConfirmation(props) {
 	// console.log(props.cookieValue); // -> first_name
+
 	const [userData, setUserData] = useState(null);
 
   useEffect(() => {

@@ -64,6 +64,9 @@ const Address = (props) => {
 
   if(props.cookieValue && userData) {
     index = userData.findIndex(user => user.first_name === props.cookieValue);
+    if (index === -1) {
+      index = null;
+    }
   }
 
   return (
@@ -77,9 +80,9 @@ const Address = (props) => {
         <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
         <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
           <h1>Update Address</h1>
-          <div>Current Address</div>
           {index ?
           <>
+            <div>Current Address</div>
             <div>{userData[index].street}</div>
             <div>{userData[index].city}, {userData[index].province}</div>
             <div>{userData[index].postal_code}</div>

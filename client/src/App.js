@@ -23,6 +23,7 @@ function App() {
       <Route path="/" element={
         <Landing 
           cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
         />
       } />
       <Route element={

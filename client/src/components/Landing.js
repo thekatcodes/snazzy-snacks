@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import Button from "./Button";
 
@@ -10,7 +12,16 @@ import snack2 from "../images/snack2.png";
 
 export default function Landing(props) {
 
-  console.log(props.cookieValue);
+  // Function to retrieve cookie
+  useEffect(() => {
+    axios.get('/cookie')
+      .then((res) => {
+        props.setCookieValue(res.data.cookie);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [props.cookieValue]);
 
   return (
     <section className="landing-background landing-layout layout">

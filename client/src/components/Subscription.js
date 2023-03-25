@@ -1,6 +1,6 @@
 //Future account/subscription component
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -18,7 +18,6 @@ const Subscription = (props) => {
 		async function fetchData() {
 			try {
 				const response = await axios.get("/order-summary");
-				console.log("Response Data from /subscription: ", response.data);
         setUserData(response.data);
 			} catch (error) {
 				console.log(error);
@@ -31,6 +30,9 @@ const Subscription = (props) => {
 
   if (props.cookieValue && userData) {
     index = userData.findIndex(user => user.first_name === props.cookieValue);
+    if (index === -1) {
+      index = null;
+    }
   }
 
   return (
@@ -40,16 +42,7 @@ const Subscription = (props) => {
         setCookieValue={props.setCookieValue}
       />
       <div className="subscription">
-        {index === null ? (
-          <>
-            <div>No order has been made yet.</div>
-            {/* Route it to subscriptions? */}
-            <Link to="/subscriptions">
-              <Button>Get your first box</Button>
-            </Link>
-          </>
-        )
-        : 
+        {index ? (
           <>
             <div>My Subscription</div>
             <br></br>
@@ -64,6 +57,15 @@ const Subscription = (props) => {
             </Link>
             <Button>Cancel</Button>
             </div>
+          </>
+        )
+        : 
+          <>
+            <div>No order has been made yet.</div>
+            {/* Route it to subscriptions? */}
+            <Link to="/subscriptions">
+              <Button>Get your first box</Button>
+            </Link>
           </>
         }
       </div>
