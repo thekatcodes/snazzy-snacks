@@ -26,7 +26,7 @@ export default function Landing(props) {
       <div>
         {props.cookieValue ? 
           <Link to="/account">
-          <Button>GET SNACKING!</Button>
+            <Button>GET SNACKING!</Button>
           </Link>
         :
           <Link to="/login">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -8,6 +8,20 @@ import Button from './Button';
 import "./styles/Address.scss";
 
 const Address = (props) => {
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+		async function fetchData() {
+			try {
+				const response = await axios.get("/order-summary");
+				setUserData(response.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+  }, []);
 
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
@@ -46,6 +60,12 @@ const Address = (props) => {
     }
   }
 
+  let index = null;
+
+  if(props.cookieValue && userData) {
+    index = userData.findIndex(user => user.first_name === props.cookieValue);
+  }
+
   return (
     <section>
       <Sidebar 
@@ -57,6 +77,16 @@ const Address = (props) => {
         <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
         <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
           <h1>Update Address</h1>
+          <div>Current Address</div>
+          {index ?
+          <>
+            <div>{userData[index].street}</div>
+            <div>{userData[index].city}, {userData[index].province}</div>
+            <div>{userData[index].postal_code}</div>
+          </>
+          :
+          <div></div>
+          }
           <form className="form-layout" onSubmit={updateAddress}>
             <label htmlFor="street"/>
             <input 

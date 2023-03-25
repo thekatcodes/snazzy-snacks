@@ -16,7 +16,7 @@ const Sidebar = (props) => {
   };
 
   const path = window.location.pathname;
-  console.log(path === '/account');
+  
   return (
     <>
       <section className="sidebar">

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
 import Footer from './Footer';
+import Button from "./Button";
 
 import "./styles/Account.scss";
 
 const Account = (props) => {
 
-  const [orderHistory, setOrderHistory] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   // Function to return username - need to run it because if update profile is updated, it needs to re-render
   useEffect(() => {
@@ -21,16 +23,24 @@ const Account = (props) => {
       });
   }, [props.cookieValue]);
 
-  // Logic for grabbing order history from backend - no backend at the moment
+  // Grab user data for boxes
   useEffect(() => {
-    axios.get('/api/order_history')
-      .then((res) => {
-        setOrderHistory(res.data);
-      })
-      .catch((err) => {
-        console.log("It doesn't work right now, so don't worry about it");
-      })
+		async function fetchData() {
+			try {
+				const response = await axios.get("/order-summary");
+        setUserData(response.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
   }, []);
+
+  let filteredUser = [];
+
+  if(props.cookieValue && userData) {
+    filteredUser = userData.filter(user => user.first_name === props.cookieValue);
+  }
 
   return (
     <section>
@@ -39,13 +49,15 @@ const Account = (props) => {
         setCookieValue={props.setCookieValue}
       />
       <div className="account">
-        {/* {orderHistory.length === 0 ? (
+        {filteredUser.length === 0 ? (
           <>
             <div>No order has been made yet.</div>
-            <Button>Get your first box</Button>
+            <Link to="/subscriptions">
+              <Button>Get your first box</Button>
+            </Link>
           </>
         ) 
-        : */}
+        :
           <>
             <div>Order History</div>
             <br></br><br></br>
@@ -60,24 +72,18 @@ const Account = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Test</td>
-                  <td>Best one</td>
-                  <td>Today</td>
-                  <td>Tree fiddy</td>
-                </tr>
-                {orderHistory.map((order, index) => (
-                  <tr>
+                {filteredUser.map((order, index) => (
+                  <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{order.product}</td>
-                    <td>{order.date}</td>
-                    <td>$ {order.price}</td>
+                    <td>{order.subscription_tier}</td>
+                    <td>{order.order_date.substring(0, 10)}</td>
+                    <td>${order.price}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </>
-        {/* } */}
+        }
       </div>
       <div><Footer /></div>
     </section>  

@@ -1,4 +1,4 @@
-.rename {
+.subscription {
   // copy pasta from account.scss
   position: relative;
   margin-left: 25vw; /* If this is changed, make sure to change Sidebar.scss as well */
@@ -18,4 +18,9 @@
 
 .info {
   font-size: 25px;
+}
+
+.tier {
+  display: inline;
+  font-weight: 900;
 }
