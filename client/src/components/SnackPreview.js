@@ -20,12 +20,19 @@ export default function SnackPreview(props) {
 			.catch((error) => console.log(error));
 	}, []);
 
-	console.log(products);
+	// console.log(products);
 
 	let priceId;
 
 	const productList = products.map((item) => {
 		if (item.tier === props.tier) {
+            if (item.tier === 20) {
+                priceId = "price_1MncSlGdWagE6Ui8ya3zUfDR";
+            } else if (item.tier === 40) {
+                priceId = "price_1MncT2GdWagE6Ui89i2sgMdO";
+            } else if (item.tier === 60) {
+                priceId = 'price_1MncTLGdWagE6Ui8Q4pi6t4j';
+            }
             return (
                 <div className="product">
 					<img
@@ -36,16 +43,9 @@ export default function SnackPreview(props) {
 				</div>
 			);
 		}
-        if (item.tier === 20) {
-            priceId = "price_1MncSlGdWagE6Ui8ya3zUfDR";
-        } else if (item.tier === 40) {
-            priceId = "price_1MncT2GdWagE6Ui89i2sgMdO";
-        } else if (item.tier === 60) {
-            priceId = 'price_1MncTLGdWagE6Ui8Q4pi6t4j';
-        }
 	});
     
-    //console.log('PRICE ID PLS', priceId)
+    // console.log('PRICE ID PLS', priceId)
     //tier 1: price_1MncSlGdWagE6Ui8ya3zUfDR
     //tier 2: price_1MncT2GdWagE6Ui89i2sgMdO
     //tier 3: price_1MncTLGdWagE6Ui8Q4pi6t4j
@@ -63,10 +63,15 @@ export default function SnackPreview(props) {
 					<strong>
 						<em>selected tier</em>
 					</strong>
-					.
 				</div>
 			</div>
 			<div className="product-scroller">{productList}</div>
+            <form action="/create-checkout-session" method="POST">
+                <input type="hidden" name="priceId" value={priceId} />
+                <Button orangy type="submit">
+                    Continue
+                </Button>
+            </form>
 		</section>
 	);
 }
