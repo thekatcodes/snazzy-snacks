@@ -5,12 +5,14 @@
 }
 
 .landing-layout {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: $white;
   text-align: center;
   min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  top: 10vh;
 
   h1 {
     font-size: 5rem;
@@ -22,33 +24,30 @@
 
 }
 
-.landing-img {
-  display: flex;
-  width: 100vw;
-  justify-content: space-around;
-  margin: 5rem;
-  
-  img {
-    width: 7rem;
-  }
+img {
+  position: fixed;
+  width: 7rem;
+}
 
-  .landing-snack {
-    transform: rotate(30deg);
-  }
+.landing-candy {
+  left: 25vw;
+  bottom: 18vh;
 }
 
 .landing-chip {
-  position: fixed;
-  left: 6rem;
-  bottom: 13rem;
-  width: 7rem;
+  left: 10vw;
+  bottom: 30vh;
+}
+
+.landing-snack {
+  transform: rotate(30deg);
+  right: 25vw;
+  bottom: 18vh;
 }
 
 .landing-bar {
-  position: fixed;
-  right: 6rem;
-  bottom: 13rem;
-  width: 7rem;
+  right: 10vw;
+  bottom: 30vh;
 }
 
 @media only screen and (max-width: 960px) {
