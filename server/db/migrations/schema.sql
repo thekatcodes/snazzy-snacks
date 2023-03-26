@@ -18,6 +18,7 @@ CREATE TABLE users (
     country varchar(255),
     postal_code varchar(255),
     stripe_sub_id varchar(255),
+    subscribe boolean,
     CONSTRAINT user_email UNIQUE (email)
 );
 

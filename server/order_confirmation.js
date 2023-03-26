@@ -28,7 +28,7 @@ async function updateAddress(street, city, province, countryName, postalCode, su
     }
 }
   
-// Updates boxes table with new row (order number)
+// Updates boxes table with new row (order number) & users table's order value to truthy
 async function createOrderNumber(userId, subscriptionTier, price, formattedDate) {
     try {
       const id = await userId;
@@ -36,6 +36,9 @@ async function createOrderNumber(userId, subscriptionTier, price, formattedDate)
         INSERT INTO boxes (customer_id, subscription_tier, price, order_date)
         VALUES ($1, $2, $3, $4);
       `, [id, subscriptionTier, price, formattedDate]);
+      await pool.query(`
+        UPDATE users set subscribe=$1
+      `, [true]);
       console.log("Order number created successfully");
     } catch (err) {
       console.log("Error creating boxes table row", err);
@@ -46,7 +49,7 @@ async function createOrderNumber(userId, subscriptionTier, price, formattedDate)
 async function orderSummary() {
         try {
           const order = await pool.query(`
-            SELECT users.id AS user_id, first_name, last_name, email, street, city, province, country, postal_code, boxes.subscription_tier AS subscription_tier, boxes.price AS price, boxes.id AS order_number, boxes.order_date AS order_date
+            SELECT users.id AS user_id, first_name, last_name, email, street, city, province, country, postal_code, subscribe, boxes.subscription_tier AS subscription_tier, boxes.price AS price, boxes.id AS order_number, boxes.order_date AS order_date
             FROM users
             INNER JOIN boxes ON users.id = boxes.customer_id
             ORDER BY order_number DESC;

@@ -11,10 +11,14 @@ export default function Button(props) {
     "button--orangy": orangy, //if props.orangy is true, append className
   });
 
+  const handleClick = (event) => {
+    props.onClick && props.onClick(event);
+  }
+
   return (
     <button
       className={buttonClass}
-      // onClick={onClick}
+      onClick={handleClick}
     >
       {children}
     </button>

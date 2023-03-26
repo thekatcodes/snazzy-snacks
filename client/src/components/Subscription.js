@@ -1,6 +1,6 @@
 //Future account/subscription component
 import React, { useState, useEffect } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -11,6 +11,8 @@ import "./styles/Subscription.scss";
 
 const Subscription = (props) => {
 
+  const navigate = useNavigate();
+  
   const [userData, setUserData] = useState(null);
 
   // Grab user data for boxes
@@ -28,10 +30,25 @@ const Subscription = (props) => {
 
   let index = null;
 
+  console.log("This is userData on subscription page: ", userData);
   if (props.cookieValue && userData) {
     index = userData.findIndex(user => user.first_name === props.cookieValue);
     if (index === -1) {
       index = null;
+    }
+  }
+
+  const cancelSubscription = (event) => {
+    event.preventDefault();
+    if (window.confirm('Are you sure you want to cancel your subscription?')) {
+      axios.put("/cancel-subscription")
+      .then((res) => {
+        console.log("Your subscription is now: ", res.data.subscription);
+        navigate(0);
+      })
+      .catch((err) => {
+        console.log("You are about to cancel your subscription (ERR)");
+      });
     }
   }
 
@@ -42,7 +59,7 @@ const Subscription = (props) => {
         setCookieValue={props.setCookieValue}
       />
       <div className="subscription">
-        {index ? (
+        {index && userData[index].subscribe ? (
           <>
             <div>My Subscription</div>
             <br></br>
@@ -55,7 +72,7 @@ const Subscription = (props) => {
             <Link to="/subscriptions">
               <Button>Change Tier</Button>
             </Link>
-            <Button>Cancel</Button>
+            <Button onClick={cancelSubscription}>Cancel</Button>
             </div>
           </>
         )

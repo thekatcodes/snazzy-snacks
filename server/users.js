@@ -69,4 +69,20 @@ async function updateCurrentAddress(street, city, province, pCode, cookie) {
   }
 }
 
-module.exports = { getUsers, updateNewUser, updateUser, updateCurrentAddress };
+async function cancelSubscription(subscription, cookie) {
+  console.log("This is subscription in boolean value: ", subscription);
+  try {
+    await pool.query(`
+    UPDATE users
+    SET
+      subscribe = $1
+    WHERE 
+      email = $2`
+    , [subscription, cookie]);
+    return console.log(`Subscription value for user ${cookie} has been set to ${subscription}`);
+  } catch(err) {
+    return console.log(err);
+  }
+}
+
+module.exports = { getUsers, updateNewUser, updateUser, updateCurrentAddress, cancelSubscription };

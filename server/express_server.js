@@ -23,7 +23,7 @@ const endpointSecret = process.env.WEBHOOK_SECRET;
 app.use(express.urlencoded());
 
 // Helper functions for querying Users table
-const { getUsers, updateNewUser, updateUser, updateCurrentAddress } = require('./users');
+const { getUsers, updateNewUser, updateUser, updateCurrentAddress, cancelSubscription } = require('./users');
 
 // Helper functions for querying Products table
 const { getProducts } = require('./products');
@@ -343,6 +343,16 @@ app.get("/order-summary", async (req, res) => {
 		console.log('could not get orderSummary', error);
 	}
 });
+
+app.put("/cancel-subscription", (req, res) => {
+  const cookie = req.session.cookie.email;
+
+  console.log("This is the logged in user: ", cookie);
+
+  cancelSubscription(false, cookie);
+  res.json({ subscription: false });
+})
+
 
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}!`);
