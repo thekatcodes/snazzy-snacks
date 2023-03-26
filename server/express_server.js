@@ -90,6 +90,7 @@ app.post(
 
             // Retrieve price data and set tier
             const price = session.amount_total / 100;
+            console.log('price:', price)
             let subscriptionTier;
             if (price === 20) {
                 subscriptionTier = "Tier 1"
@@ -99,18 +100,17 @@ app.post(
                 subscriptionTier = "Tier 3"
             }
             
-			updateAddress(
-				street,
-				city,
-				province,
-				countryName,
-				postalCode,
-				subscriptionId,
-                subscriptionTier,
-				email
-			);
+            updateAddress(
+                street,
+                city,
+                province,
+                countryName,
+                postalCode,
+                subscriptionId,
+                email
+            );
 
-			createOrderNumber(userId, price, formattedDate);
+            createOrderNumber(userId, subscriptionTier, price, formattedDate);
 		}
 
 		// Return a 200 response to acknowledge receipt of the event

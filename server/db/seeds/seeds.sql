@@ -1,8 +1,8 @@
-INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code, subscription_tier, stripe_sub_id) 
+INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code, stripe_sub_id) 
 VALUES 
-('example1@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Samma', 'Su', '1 Street', 'Toronto', 'ON', 'Canada', 'A1A A1A', 'Tier 1', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo'),
-('example2@example.com', '$2a$10$MR8lu1PZ68iwyi9XgTXQOewAMode11V2lNiMw84xsebub5yjoqaFa', 'Katie', 'Liu', '2 Street', 'Toronto', 'ON', 'Canada', 'B2B B2B', 'Tier 1', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo'),
-('example3@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Lyon', 'Lee', '3 Street', 'Toronto', 'ON', 'Canada', 'C3C C3C', 'Tier 1', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo');
+('example1@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Samma', 'Su', '1 Street', 'Toronto', 'ON', 'Canada', 'A1A A1A', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo'),
+('example2@example.com', '$2a$10$MR8lu1PZ68iwyi9XgTXQOewAMode11V2lNiMw84xsebub5yjoqaFa', 'Katie', 'Liu', '2 Street', 'Toronto', 'ON', 'Canada', 'B2B B2B', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo'),
+('example3@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Lyon', 'Lee', '3 Street', 'Toronto', 'ON', 'Canada', 'C3C C3C', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo');
 
 INSERT INTO users (email, password, first_name, last_name)
 VALUES
@@ -49,11 +49,11 @@ VALUES
 ('Nora Seaweed Snacks Spicy', 60, 'Chips', 'https://dr9wvh6oz7mzp.cloudfront.net/i/e69368a7ded33d00b8fd4ecdc8f68c95_ra,w380,h380_pa,w380,h380.png', 'Take a little trip with Nora down the crispy spicy road.');
 
 
-INSERT INTO boxes (customer_id, price)
+INSERT INTO boxes (customer_id, subscription_tier, price)
 VALUES
-(1, 20),
-(2, 20),
-(3, 20);
+(1,'Tier 1', 20),
+(2, 'Tier 1', 20),
+(3, 'Tier 1', 20);
 
 
 INSERT INTO selections (box_id, product_id)
