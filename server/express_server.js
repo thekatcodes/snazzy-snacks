@@ -8,6 +8,9 @@ const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const PORT = 8080;
 
+const bodyParser = require("body-parser"); //Samma
+const nodemailer = require("nodemailer"); //Samma
+
 //used for Stripe
 const YOUR_DOMAIN = "http://localhost:3000";
 require("dotenv").config();
@@ -21,6 +24,11 @@ const {
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
+
+app.use(bodyParser.urlencoded({extended: true})); //Samma
+app.use(bodyParser.json()); //Samma
+
+
 
 // Retrieve payment data after successful checkout
 // DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
@@ -114,7 +122,7 @@ app.post(
 
 // Helper and component specific functions
 const { getUsers, updateNewUser } = require('./users');
-const { getProducts } = require('./products');
+const { getProducts, getOrder } = require('./products');
 
 // Middleware to read req.body
 app.use(express.json());
@@ -271,6 +279,38 @@ app.get("/order-summary", async (req, res) => {
 		console.log('could not get orderSummary', error);
 	}
 });
+
+//////////////// CONFIRMATION EMAIL ////////////////////
+
+app.get("/order", async(req, res) => {
+  try {
+    const order = await getOrder();
+    res.json(order);
+  } catch (error) { 
+    console.log(error);
+  }
+});
+
+app.post("/send_mail", async (req, res) => {
+  let {text} = req.body;
+
+  const transport = nodemailer.createTransport({
+    service: "hotmail",
+    auth: {
+      user: "snazzysnacks@hotmail.com",
+      pass: "123456Ss"
+    }
+  });
+
+  await transport.sendMail({
+    from: "snazzysnacks@hotmail.com",
+    to: "samma118@hotmail.com",
+    subject: "Order Confirmation",
+    html: `<div>${text}</div>`
+  });
+});
+
+///////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}!`);
