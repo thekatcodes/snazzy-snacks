@@ -28,13 +28,16 @@
     height: 2.7rem;
     border-radius: 0.5rem;
     border: solid 0.1rem lightgray;
-
+    color: black;
   }
 
-  .dropdown {
-    font-size:x-large;
-    color: rgb(160, 160, 160);
-  }
+  // select option[value=""] {
+  //   color: rgb(160, 160, 160);
+  // }
+
+  // select:checked + option[value=""] {
+  //   color: rgb(160, 160, 160);
+  // }
 
   ::placeholder {
     color: rgb(160, 160, 160);

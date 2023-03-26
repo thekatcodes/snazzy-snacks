@@ -25,7 +25,7 @@ const Address = (props) => {
 
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
-  const [province, setProvince] = useState('Province');
+  const [province, setProvince] = useState('');
   const [pCode, setPCode] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [sucMsg, setSucMsg] = useState('');
@@ -111,8 +111,11 @@ const Address = (props) => {
               required
             />
             <label htmlFor="province"/>
-            <select id="province" onChange={(event) => setProvince(event.target.value)} value={province} required>
-              <option className="dropdown" value="">Province</option>
+            <select 
+              id="province" 
+              onChange={(event) => setProvince(event.target.value)} 
+              value={province} style={province ==='' ? {color: 'gray'} : {color: 'black'}} required>
+              <option value="">Province</option>
               <option value="Alberta">AB</option>
               <option value="British Columbia">BC</option>
               <option value="Manitoba">MB</option>
