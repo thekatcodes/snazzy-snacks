@@ -72,9 +72,9 @@ const Account = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredUser.map((order, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
+                {filteredUser.map((order) => (
+                  <tr>
+                    <td>{order.order_number}</td>
                     <td>{order.subscription_tier}</td>
                     <td>{order.order_date.substring(0, 10)}</td>
                     <td>${order.price}</td>
