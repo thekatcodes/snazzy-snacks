@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -79,18 +80,14 @@ const Address = (props) => {
         {/* Error message display */}
         <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
         <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
-          <h1>Update Address</h1>
           {index ?
           <>
+            <h1>Update Address</h1>
             <div>Current Address</div>
             <div>{userData[index].street}</div>
             <div>{userData[index].city}, {userData[index].province}</div>
             <div>{userData[index].postal_code}</div>
-          </>
-          :
-          <div></div>
-          }
-          <form className="form-layout" onSubmit={updateAddress}>
+            <form className="form-layout" onSubmit={updateAddress}>
             <label htmlFor="street"/>
             <input 
               type="text" 
@@ -141,6 +138,17 @@ const Address = (props) => {
             />
             <Button>Save</Button>
           </form>
+          </>
+          :
+          <>
+          <div>No order has been made yet.</div>
+          {/* Route it to subscriptions? */}
+          <Link to="/subscriptions">
+            <Button>Get your first box</Button>
+          </Link>
+        </>
+          }
+
       </div>
       <div><Footer /></div>
     </section>  
