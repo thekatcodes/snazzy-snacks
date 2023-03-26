@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
 import SnackPreview from './components/SnackPreview';
+import Email from "./components/ConfirmationEmail";
 
 // import Profile from './components/Profile';
 import Subscriptions from "./components/Subscriptions";
@@ -62,6 +63,12 @@ function App() {
             setCookieValue={setCookieValue}
           />
         } /> */}
+      <Route path="/email" element={
+        <Email
+          cookieValue={cookieValue}
+          setCookieValue={setCookieValue}
+        />
+      } />
     </Routes>
   );
 
