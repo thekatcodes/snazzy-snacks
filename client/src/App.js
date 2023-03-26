@@ -6,6 +6,7 @@ import NavigationBar from './components/NavigationBar';
 import Landing from "./components/Landing";
 import Login from './components/Login';
 import Register from './components/Register';
+import SnackPreview from './components/SnackPreview';
 
 import Address from './components/Address';
 import Account from './components/Account';
@@ -83,6 +84,12 @@ function App() {
           } />
         </Route>
       </Route>
+      {/* <Route path="/preview" element={
+          <SnackPreview
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        } /> */}
     </Routes>
   );
 }

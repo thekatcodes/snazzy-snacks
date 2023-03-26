@@ -1,0 +1,133 @@
+@import "../../styles/variables.scss";
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-in-div {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+
+.order-complete {
+    font-family: $coiny-font;
+    color: $atomic-tangerine;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.happy-snacking {
+    font-family: $coiny-font;
+    font-size: 30px;
+    -webkit-text-stroke: 2px $atomic-tangerine;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.order-sub-heading {
+    font-family: $coiny-font;
+}
+
+.order-text {
+    font-family: $regular-font;
+}
+
+.total{
+    font-weight: 700;
+}
+
+.tier-wrapper {
+    border-bottom: 1px solid $jet;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: $jet;
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+.c-order-confirmation__label {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 35px;
+}
+
+.c-order-confirmation__value {
+    text-align: right;
+}
+
+.c-order-confirmation .order-complete,
+.button-container,
+.happy-snacking {
+    display: flex;
+    justify-content: center;
+}
+
+.c-order-confirmation button {
+    display: flex;
+    justify-content: center;
+}
+
+.c-order-confirmation__grid {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 60px;
+}
+
+// .c-order-confirmation__value {
+//     // text-align: right;
+// }
+
+.button--orangy {
+    color: $white;
+    background-color: $atomic-tangerine;
+    border-color: $atomic-tangerine;
+    border: 2px solid;
+}
+
+.button--orangy:hover {
+    color: $atomic-tangerine;
+    background-color: $white;
+    border-color: $atomic-tangerine;
+    border: 2px solid;
+}
+
+
+
+/* On screens that are 650px or less */
+@media screen and (max-width: 860px) {
+
+    .order-complete {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .happy-snacking {
+        margin-top: 40px;
+    }
+
+    .details-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .c-order-confirmation__grid {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+
+    .c-order-confirmation__label {
+        text-align: left;
+    }
+}

@@ -25,6 +25,9 @@ app.use(express.urlencoded());
 // Helper functions for querying Users table
 const { getUsers, updateNewUser, updateUser, updateCurrentAddress } = require('./users');
 
+// Helper functions for querying Products table
+const { getProducts } = require('./products');
+
 // Retrieve payment data after successful checkout
 // DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
 // MUST KEEP AT THE TOP!
@@ -115,6 +118,8 @@ app.post(
 	}
 );
 
+
+
 // Middleware to read req.body
 app.use(express.json());
 app.use(
@@ -134,6 +139,19 @@ app.get("/api", async (req, res) => {
 		console.log(error);
 	}
 });
+
+//////////////// SAMMA'S ATTEMPT ////////////////////
+
+app.get("/products", async(req, res) => {
+  try {
+    const products = await getProducts();
+    res.json(products);
+  } catch (error) { 
+    console.log(error);
+  }
+});
+
+///////////////////////////////////////////////////
 
 // Receives login details from front end, and checks whether the username & password matches
 app.post("/login", async(req, res) => {
