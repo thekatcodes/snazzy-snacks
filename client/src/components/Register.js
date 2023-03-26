@@ -33,7 +33,7 @@ const Register = (props) => {
     try {
       axios.post('/register', {firstname: firstname, lastname: lastname, email: email, password: pwd, password2: pwd2})
       .then((res) => {
-        if(res.data.registration) {
+        if(res.data.update) {
           props.setCookieValue(res.data.firstname);
           navigate("/subscriptions");
         }

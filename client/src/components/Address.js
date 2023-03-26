@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -9,6 +9,8 @@ import Button from './Button';
 import "./styles/Address.scss";
 
 const Address = (props) => {
+
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null);
 
@@ -29,21 +31,19 @@ const Address = (props) => {
   const [province, setProvince] = useState('');
   const [pCode, setPCode] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [sucMsg, setSucMsg] = useState('');
 
   // Update Address Function
   const updateAddress = (event) => {
     event.preventDefault();
     try {
-      console.log("This is the street value: ", street);
       axios.put('/account/address', {street: street, city: city, province: province, pCode: pCode})
       .then((res) => {
         if(res.data.update) {
-          setSucMsg('Address updated!');
           setStreet('');        
           setCity('');        
           setProvince('Province');
           setPCode('');
+          navigate(0);
         } else {
           setErrMsg('Address update failed.');
         }
@@ -79,7 +79,6 @@ const Address = (props) => {
       <div className="address">
         {/* Error message display */}
         <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
-        <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
           {index ?
           <>
             <h1>Update Address</h1>
