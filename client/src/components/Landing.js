@@ -42,10 +42,12 @@ export default function Landing(props) {
             }
           </div>
         </div>
-        <img className="landing-candy" src={candy} alt="Candy" />
-        <img className="landing-snack" src={snack} alt="Snack" />
-        <img className="landing-chip" src={chips} alt="Chips" />
-        <img className="landing-bar" src={snack2} alt="Snack" />
+        <div className="landing-icons">
+          <img className="landing-candy" src={candy} alt="Candy" />
+          <img className="landing-snack" src={snack} alt="Snack" />
+          <img className="landing-chip" src={chips} alt="Chips" />
+          <img className="landing-bar" src={snack2} alt="Snack" />
+        </div>
       </div>
     </section>
   );
