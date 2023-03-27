@@ -6,7 +6,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 1.5rem;
+  position: fixed;
+  padding: 1.2rem 1.5rem 0.6rem 1.5rem;
+  background: $white;
+  z-index: 99;
+  left: 0;
+  right: 0;
 }
 
 .logo {
@@ -19,7 +24,6 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-end;
   gap: 1.5rem;
   font-size: 1.1rem;
   
@@ -59,6 +63,8 @@
   display: none;
   top: 100%;
   right: 0;
+  background: $white;
+  border-radius: 0.5rem;
 
   button {
     font-family: $regular-font;

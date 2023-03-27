@@ -31,36 +31,34 @@ const NavigationBar = (props) => {
     <>
       <div className="header coiny">
         <div className="logo">SNAZZY<br />SNACKS</div>
-        <div className="login-register">
-          { props.cookieValue ?
-            <>
-              <div className="intro">Hello {props.cookieValue}!</div>
-              <div className="dropdown">
-                <i class="fa-regular fa-user fa-xl dropdown-hover"></i>
-                <div className="dropdown-menu">
-                  <Link to="/account">
-                    <button>My Account</button>
-                  </Link>
-                  <button className="logout" onClick={handleLogout}>Log Out</button>
-                </div>
+        { props.cookieValue ?
+          <div className="login-register">
+            <div className="intro">Hello {props.cookieValue}!</div>
+            <div className="dropdown">
+              <i class="fa-regular fa-user fa-xl dropdown-hover"></i>
+              <div className="dropdown-menu">
+                <Link to="/account">
+                  <button>My Account</button>
+                </Link>
+                <button className="logout" onClick={handleLogout}>Log Out</button>
               </div>
-            </>
-            :
-            <ul className="login-register">
-              <li>
-                <NavLink className="inactive" to="/login">
-                  {/* <button >Log In</button> */}
-                  Log In
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="inactive" to="/register">
-                  Sign Up
-                </NavLink>
-              </li>
-            </ul>
-          }
-        </div>
+            </div>
+          </div>
+          :
+          <ul className="login-register">
+            <li>
+              <NavLink className="inactive" to="/login">
+                {/* <button >Log In</button> */}
+                Log In
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="inactive" to="/register">
+                Sign Up
+              </NavLink>
+            </li>
+          </ul>
+        }
       </div>
       <Outlet />
     </>
