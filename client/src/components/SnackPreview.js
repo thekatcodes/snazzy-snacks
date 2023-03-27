@@ -3,10 +3,9 @@ import axios from "axios";
 
 // import CheckoutForm from "./CheckoutForm";
 import Button from "./Button";
-
+import SubsFooter from "./SubsFooter";
 
 import "./styles/SnackPreview.scss";
-// import classNames from "classnames";
 
 export default function SnackPreview(props) {
 	const [products, setProducts] = useState([]);
@@ -20,26 +19,24 @@ export default function SnackPreview(props) {
 			.catch((error) => console.log(error));
 	}, []);
 
-	// console.log(products);
-
 	let priceId;
 
 	const productList = products.map((item) => {
 		if (item.tier === props.tier) {
-            if (item.tier === 20) {
-                priceId = "price_1MncSlGdWagE6Ui8ya3zUfDR";
-            } else if (item.tier === 40) {
-                priceId = "price_1MncT2GdWagE6Ui89i2sgMdO";
-            } else if (item.tier === 60) {
-                priceId = 'price_1MncTLGdWagE6Ui8Q4pi6t4j';
-            }
-            return (
-                <div className="product">
-					<img
-						src={item.img_url}
-						alt={item.name}
-                        />
-					<p>{item.name}</p>
+      if (item.tier === 20) {
+        priceId = "price_1MncSlGdWagE6Ui8ya3zUfDR";
+      } else if (item.tier === 40) {
+        priceId = "price_1MncT2GdWagE6Ui89i2sgMdO";
+      } else if (item.tier === 60) {
+        priceId = 'price_1MncTLGdWagE6Ui8Q4pi6t4j';
+      }
+      return (
+        <div className="product">
+          <img
+            src={item.img_url}
+            alt={item.name}
+          />
+          <p>{item.name}</p>
 				</div>
 			);
 		}
@@ -66,12 +63,15 @@ export default function SnackPreview(props) {
 				</div>
 			</div>
 			<div className="product-scroller">{productList}</div>
-            <form action="/create-checkout-session" method="POST">
-                <input type="hidden" name="priceId" value={priceId} />
-                <Button orangy type="submit">
-                    Continue
-                </Button>
-            </form>
+      <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="priceId" value={priceId} />
+          <Button orangy type="submit">
+              Continue
+          </Button>
+      </form>
+      <div>
+        <SubsFooter />
+      </div>
 		</section>
 	);
 }
