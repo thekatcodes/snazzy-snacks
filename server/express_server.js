@@ -236,7 +236,7 @@ app.post('/register', async(req, res) => {
       
       regis = true;
       req.session.cookie = {cookie: firstname, email: email};
-      updateNewUser(firstname, lastname, email, password);
+      updateNewUser(firstname, lastname, email, password, false);
     }
     
     res.json({ update: regis, firstname: firstname });
