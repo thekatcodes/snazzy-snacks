@@ -26,25 +26,21 @@ export default function Landing(props) {
   return (
     <section className="landing-background layout">
       <div className="landing-layout">
-        <div className="coiny">
-          <h1>SNAZZY SNACKS</h1>
-        </div>
-        <div>
+        <div className='landing-text'>
+          <h1 className="coiny">SNAZZY SNACKS</h1>
           <h3>Upgrade your snacking game with pizazz-packed treats.<br />Every month at your doorstep!</h3>
-        </div>
-        <div>
           <h5>*starting at 20$/mo</h5>
-        </div>
-        <div>
-        {props.cookieValue ? 
-          <Link to="/account">
-            <Button>GET SNACKING!</Button>
-          </Link>
-        :
-            <Link to="/login">
-              <Button>GET SNACKING!</Button>
-            </Link>
-        }
+          <div>
+            {props.cookieValue ? 
+              <Link to="/account">
+                <Button>GET SNACKING!</Button>
+              </Link>
+            :
+                <Link to="/login">
+                  <Button>GET SNACKING!</Button>
+                </Link>
+            }
+          </div>
         </div>
         <img className="landing-candy" src={candy} alt="Candy" />
         <img className="landing-snack" src={snack} alt="Snack" />
