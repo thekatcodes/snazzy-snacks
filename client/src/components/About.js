@@ -1,11 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Button from "./Button";
+
 
 import katie from "../images/Katie.png";
 import lyon from "../images/Lyon.png";
 import samma from "../images/Samma.png";
+import account from "../images/account.png";
+import packaging from "../images/packaging.png";
+import surprise_box from "../images/surprise_box.png";
 
-
-export default function About() {
+export default function About(props) {
 	return (
 		<div>
 			<h1>About us</h1>
@@ -30,27 +35,68 @@ export default function About() {
 						alt="Katie"
 					/>
 					<p>KATIE</p>
-                </div>
-                
-                <div>
+				</div>
+
+				<div>
 					<img
 						className="avatar"
 						src={lyon}
 						alt="Lyon"
 					/>
 					<p>LYON</p>
-                </div>
-                <div>
+				</div>
+				<div>
 					<img
 						className="avatar"
 						src={samma}
 						alt="Samma"
 					/>
 					<p>SAMMA</p>
-                </div>
+				</div>
 			</div>
 
 			<h2>How it works</h2>
+			<div>
+				<div>
+					<img
+						className="account-how"
+						src={account}
+						alt="Create account"
+					/>
+					<h3>Create account</h3>
+					<p>Create a customer account to keep track of your subscription</p>
+                </div>
+                <div>
+					<img
+						className="packaging-how"
+						src={packaging}
+						alt="Three packages"
+					/>
+					<h3>Select a size</h3>
+					<p>Choose between three sizes of monthly boxes: Tier 1, Tier 2, or Tier 3</p>
+                </div>
+                <div>
+					<img
+						className="surprise-how"
+						src={surprise_box}
+						alt="Surprise box"
+					/>
+					<h3>Select a size</h3>
+					<p>Choose between three sizes of monthly boxes: Tier 1, Tier 2, or Tier 3</p>
+                </div>
+            </div>
+            <div>
+        {props.cookieValue ? 
+          <Link to="/account">
+            <Button>GET SNACKING!</Button>
+          </Link>
+        :
+          <Link to="/login">
+            <Button>GET SNACKING!</Button>
+          </Link>
+        }
+        
+      </div>
 		</div>
 	);
 }
