@@ -13,7 +13,8 @@ import Account from './components/Account';
 import Profile from './components/Profile';
 import Subscription from './components/Subscription';
 import Subscriptions from "./components/Subscriptions";
-import OrderConfirmation from "./components/OrderConfirmation"
+import OrderConfirmation from "./components/OrderConfirmation";
+import Misc from './components/Misc';
 
 function App() {
 
@@ -99,14 +100,13 @@ function App() {
             </PrivateRoute>
           } />
         </Route>
-        <Route path="*" element={
-          <Landing 
-            cookieValue={cookieValue}
-            setCookieValue={setCookieValue}
-          />
-        }/>
       </Route>
-
+      <Route path="*" element={
+        <Misc />
+      }/>
+      <Route path="/account/*" element={
+        <Misc />
+      }/>
       {/* <Route path="/preview" element={
           <SnackPreview
             cookieValue={cookieValue}
