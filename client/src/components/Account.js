@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'; 
 
 import Sidebar from './Sidebar';
@@ -9,6 +9,13 @@ import Button from "./Button";
 import "./styles/Account.scss";
 
 const Account = (props) => {
+
+  const navigate = useNavigate();
+
+  if(!props.cookieValue) {
+    console.log("This is the cookie value: ", props.cookieValue);
+    navigate('/login');
+  }
 
   const [userData, setUserData] = useState(null);
 
