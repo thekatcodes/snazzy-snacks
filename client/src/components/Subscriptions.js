@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-// import classNames from "classnames";
 
 import "./styles/Subscriptions.scss";
-// import CheckoutForm from "./CheckoutForm";
-// import Button from "./Button";
+
 import SnackPreview from "./SnackPreview";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 
 import tier1 from "../images/tier1_image.png";
 import tier2 from "../images/tier2_image.png";
@@ -66,9 +64,7 @@ function Subscriptions() {
       <div className="tier-list">
         {tierCards}
       </div>
-      {preview && <SnackPreview tier={tierInfo} />}
-      {/* <Footer /> */}
-      {/* <CheckoutForm /> */}
+      {preview ? <SnackPreview tier={tierInfo} /> : <Footer />}
     </section>
   )
 }
