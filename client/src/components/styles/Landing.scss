@@ -58,6 +58,30 @@
   width: 7rem;
 }
 
+@keyframes floating {
+    0% {
+      transform: translate(0, 0px);
+    }
+    50% {
+      transform: translate(0, 15px);
+    }
+    100% {
+      transform: translate(0, -0px);
+    }
+  }
+  
+.arrow-container {
+    margin-bottom: -8em;
+    .down-arrow{
+        width: 50px;    
+        animation-name: floating;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        margin-top: 5px;
+    }
+}
+
 @media only screen and (max-width: 960px) {
   .landing-chip {
     display: none;
@@ -66,4 +90,10 @@
   .landing-bar {
     display: none;
   }
+}
+
+@media only screen and (max-width: 400px) {
+    .arrow-container {
+        margin-bottom: 0em;
+    }
 }

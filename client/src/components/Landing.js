@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import axios from 'axios';
 
 import Button from "./Button";
+import About from './About';
 
 import "./styles/Landing.scss";
 import candy from "../images/candy.png";
 import snack from "../images/snack.png";
 import chips from "../images/crisps.png";
 import snack2 from "../images/snack2.png";
+import down_arrow from "../images/down_arrow.png"
 
 export default function Landing(props) {
 
@@ -23,7 +26,8 @@ export default function Landing(props) {
       });
   }, [props.cookieValue]);
 
-  return (
+    return (
+      <>
     <section className="landing-background layout">
       <div className="landing-layout">
         <div className='landing-text'>
@@ -47,6 +51,17 @@ export default function Landing(props) {
         <img className="landing-chip" src={chips} alt="Chips" />
         <img className="landing-bar" src={snack2} alt="Snack" />
       </div>
+      <img className="landing-chip" src={chips} alt="Chips" />
+      <img className="landing-bar" src={snack2} alt="Snack" />
+      <div className='arrow-container'>
+        <HashLink smooth duration={1000} delay={200} to="/#about">
+            <img className="down-arrow" src={down_arrow} alt="Down arrow" />
+        </HashLink>
+      </div>
     </section>
+      <section id='about'>
+              <About cookieValue={props.cookieValue} setCookieValue={props.setCookieValue}/>
+      </section>
+      </>
   );
 }

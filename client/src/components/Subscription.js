@@ -33,10 +33,17 @@ const Subscription = (props) => {
   console.log("This is userData on subscription page: ", userData);
   if (props.cookieValue && userData) {
     index = userData.findIndex(user => user.first_name === props.cookieValue);
+    console.log('INDEX:', index)
+    // console.log(userData[index].subscribe)
     if (index === -1) {
       index = null;
     }
   }
+
+  if (index !== null) {
+    index += 1;
+  }
+  console.log('INDEX AFTER:', index);
 
   const cancelSubscription = (event) => {
     event.preventDefault();
@@ -60,13 +67,13 @@ const Subscription = (props) => {
           setCookieValue={props.setCookieValue}
         />
         <div className="subscription">
-          {index && userData[index].subscribe ? (
+          { index && userData[index-1].subscribe ? (
             <>
               <div>My Subscription</div>
               <br></br>
               <div className="subs-info">Current Subscription:
                 <div className="tier">
-                  &nbsp;{userData[index].subscription_tier}
+                  &nbsp;{userData[index-1].subscription_tier}
                 </div>
               </div>
               <br></br>

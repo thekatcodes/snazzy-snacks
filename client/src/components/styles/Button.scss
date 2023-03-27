@@ -15,6 +15,7 @@
 
 .button:hover {
   @include button-active;
+  transition: ease-in-out 100ms;
 
   color: $white;
   background-color: $atomic-tangerine;
