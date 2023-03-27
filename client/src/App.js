@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.scss";
-import { Route, Routes } from "react-router-dom";
 
 import NavigationBar from './components/NavigationBar';
 import Landing from "./components/Landing";
@@ -18,6 +18,10 @@ import OrderConfirmation from "./components/OrderConfirmation"
 function App() {
 
   const [cookieValue, setCookieValue] = useState('');
+
+  const PrivateRoute = ({ children }) => {
+    return cookieValue ? children : <Navigate to="/login"/>
+  }
 
   return (
     <Routes>
@@ -46,44 +50,63 @@ function App() {
           /> 
         } />
         <Route path="/subscriptions" element={
-          <Subscriptions
-            cookieValue={cookieValue}
-            setCookieValue={setCookieValue}
-          />
+          <PrivateRoute>
+            <Subscriptions
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          </PrivateRoute>
         } />
         <Route path="/order-confirmation" element={
-          <OrderConfirmation
-            cookieValue={cookieValue}
-            setCookieValue={setCookieValue}
-          />
+          <PrivateRoute>
+            <OrderConfirmation
+              cookieValue={cookieValue}
+              setCookieValue={setCookieValue}
+            />
+          </PrivateRoute>
         } />  
         <Route path="/account">
           <Route index element={
-            <Account 
-              cookieValue={cookieValue}
-              setCookieValue={setCookieValue}
-            />
+            <PrivateRoute>
+              <Account 
+                cookieValue={cookieValue}
+                setCookieValue={setCookieValue}
+              />
+            </PrivateRoute>
           } />
           <Route path="subscription" element={
-            <Subscription 
-              cookieValue={cookieValue}
-              setCookieValue={setCookieValue}
-            />
+            <PrivateRoute>
+              <Subscription 
+                cookieValue={cookieValue}
+                setCookieValue={setCookieValue}
+              />
+            </PrivateRoute>
           } />
           <Route path="profile" element={
-            <Profile
-              cookieValue={cookieValue}
-              setCookieValue={setCookieValue}
-            />
+            <PrivateRoute>
+              <Profile
+                cookieValue={cookieValue}
+                setCookieValue={setCookieValue}
+              />
+            </PrivateRoute>
           } />
           <Route path="address" element={
-            <Address
-              cookieValue={cookieValue}
-              setCookieValue={setCookieValue}
-            />
+            <PrivateRoute>
+              <Address
+                cookieValue={cookieValue}
+                setCookieValue={setCookieValue}
+              />
+            </PrivateRoute>
           } />
         </Route>
+        <Route path="*" element={
+          <Landing 
+            cookieValue={cookieValue}
+            setCookieValue={setCookieValue}
+          />
+        }/>
       </Route>
+
       {/* <Route path="/preview" element={
           <SnackPreview
             cookieValue={cookieValue}
