@@ -53,7 +53,7 @@ const Login = (props) => {
   }
 
   return (
-    <section className="login-layout layout">
+    <section className="login-layout layout navbar-padding">
       {/* Error message display */}
       <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
       <h1>Log In</h1>

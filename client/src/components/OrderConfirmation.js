@@ -37,7 +37,7 @@ export default function OrderConfirmation(props) {
 
 	if (userData[0].first_name === props.cookieValue) {
 	return (
-		<div className="c-order-confirmation fade-in-div">
+		<div className="c-order-confirmation fade-in-div navbar-padding">
 			<h1 className="order-complete">Your order is complete!</h1>
 			<div className="details-container">
 				<div className="c-order-confirmation__grid">

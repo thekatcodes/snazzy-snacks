@@ -61,7 +61,7 @@ function Subscriptions() {
   });
 
   return (
-    <section className="subs-layout layout">
+    <section className="subs-layout layout navbar-padding">
       <h1>Choose Your Tier!</h1>
       <div className="tier-list">
         {tierCards}
