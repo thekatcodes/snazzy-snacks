@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10em;
+    margin-right: 10em;
+.about-header {
+    font-size: 50px;
+    color:$atomic-tangerine
+}
+ p {
+    text-align: center;
+    font-size: 20px;
+ }
+ 
+ .team-container {
+     display: flex;
+     justify-content: space-between;
+    //  align-items: center;
+     flex-direction: row;
+    img {
+        width: 200px;
+    }
+    .member2 {
+        margin: 0 30px 0;
+    }
+ }
+
+
+}
