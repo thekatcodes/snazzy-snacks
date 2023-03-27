@@ -16,20 +16,20 @@ export default function About(props) {
 		<>
 			<div className="about-container">
 				<h1 className="about-header coiny">About us</h1>
-				<p>
+				<p className="about-text">
 					Welcome to Snazzy Snacks, the snack subscription service that's here
 					to satisfy your cravings and put a smile on your face! We know that
 					snacking is serious business, and we take it just as seriously as you
 					do.
 				</p>
-				<p>
+				<p className="about-text">
 					At Snazzy Snacks, we believe that snacking should be an adventure.
 					That's why we've scoured the world for the most delicious, unusual,
 					and downright quirky snacks we could find. From spicy chips to sweet
 					treats, we've got it all, and we're constantly on the hunt for the
 					next big thing in snacking.
 				</p>
-				<p>
+				<p className="about-text">
 					So if you're ready to join the Snazzy Snacks party, sign up today and
 					let us take care of your snacking needs. Who knows, you might even
 					discover your new favorite snack!
@@ -72,8 +72,8 @@ export default function About(props) {
 							alt="Create account"
 						/>
 						<h3>Create account</h3>
-						<p>
-							Join the Snazzy Snackers club to keep track of your subscription
+						<p className="how-desc">
+                        Create an account to keep track of your subscription
 						</p>
 					</div>
 					<div className="how2">
@@ -83,7 +83,7 @@ export default function About(props) {
 							alt="Three packages"
 						/>
 						<h3>Select a size</h3>
-						<p>
+						<p className="how-desc">
 							Choose between three sizes of monthly boxes: Tier 1, Tier 2, or
 							Tier 3
 						</p>
@@ -95,7 +95,7 @@ export default function About(props) {
 							alt="Surprise box"
 						/>
 						<h3>Get snacks!</h3>
-						<p>Enjoy delicious snacks imported exclusively by Snazzy Snacks</p>
+						<p className="how-desc">Enjoy delicious snacks imported exclusively by Snazzy Snacks</p>
 					</div>
 				</div>
 				<div className="about-snacking-btn">
