@@ -35,7 +35,7 @@ const NavigationBar = (props) => {
           <div className="login-register">
             <div className="intro">Hello {props.cookieValue}!</div>
             <div className="dropdown">
-              <i class="fa-regular fa-user fa-xl dropdown-hover"></i>
+              <i className="fa-regular fa-user fa-xl dropdown-hover"></i>
               <div className="dropdown-menu">
                 <Link to="/account">
                   <button>My Account</button>

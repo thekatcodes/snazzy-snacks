@@ -72,82 +72,84 @@ const Address = (props) => {
 
   return (
     <section>
-      <Sidebar 
-        cookieValue={props.cookieValue}
-        setCookieValue={props.setCookieValue}
-      />
-      <div className="address">
-        {/* Error message display */}
-        <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+      <div className="account-layout">
+        <Sidebar 
+          cookieValue={props.cookieValue}
+          setCookieValue={props.setCookieValue}
+        />
+        <div className="address">
+          {/* Error message display */}
+          <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
           {index ?
-          <>
-            <h1>Update Address</h1>
-            <div>Current Address</div>
-            <div>{userData[index].street}</div>
-            <div>{userData[index].city}, {userData[index].province}</div>
-            <div>{userData[index].postal_code}</div>
-            <form className="form-layout" onSubmit={updateAddress}>
-            <label htmlFor="street"/>
-            <input 
-              type="text" 
-              id="street"
-              autoComplete="off"
-              onChange={(event) => setStreet(event.target.value)}
-              value={street}
-              placeholder="Street"
-              required
-            />
-            <label htmlFor="city"/>
-            <input 
-              type="text" 
-              id="city"
-              onChange={(event) => setCity(event.target.value)}
-              value={city}
-              placeholder="City"
-              required
-            />
-            <label htmlFor="province"/>
-            <select 
-              id="province" 
-              onChange={(event) => setProvince(event.target.value)} 
-              value={province} style={province ==='' ? {color: 'gray'} : {color: 'black'}} required>
-              <option value="">Province</option>
-              <option value="Alberta">AB</option>
-              <option value="British Columbia">BC</option>
-              <option value="Manitoba">MB</option>
-              <option value="New Brunswick">NB</option>
-              <option value="Newfoundland and Labrador">NL</option>
-              <option value="Northwest Territories">NT</option>
-              <option value="Nova Scotia">NS</option>
-              <option value="Nunavut">NU</option>
-              <option value="Ontario">ON</option>
-              <option value="Prince Edward Island">PE</option>
-              <option value="Quebec">QC</option>
-              <option value="Saskatchewan">SK</option>
-              <option value="Yukon">YT</option>
-            </select>
-            <label htmlFor="postalcode"/>
-            <input 
-              type="text" 
-              id="postalcode"
-              onChange={(event) => setPCode(event.target.value)}
-              value={pCode}
-              placeholder="Postal Code"
-              required
-            />
-            <Button>Save</Button>
-          </form>
-          </>
+            <>
+              <div className="address-title">Update Address</div>
+              <br />
+              <div>Current Address</div>
+              <div>{userData[index].street}</div>
+              <div>{userData[index].city}, {userData[index].province}</div>
+              <div>{userData[index].postal_code}</div>
+              <form className="form-layout" onSubmit={updateAddress}>
+                <label htmlFor="street"/>
+                <input 
+                  type="text" 
+                  id="street"
+                  autoComplete="off"
+                  onChange={(event) => setStreet(event.target.value)}
+                  value={street}
+                  placeholder="Street"
+                  required
+                />
+                <label htmlFor="city"/>
+                <input 
+                  type="text" 
+                  id="city"
+                  onChange={(event) => setCity(event.target.value)}
+                  value={city}
+                  placeholder="City"
+                  required
+                />
+                <label htmlFor="province"/>
+                <select 
+                  id="province" 
+                  onChange={(event) => setProvince(event.target.value)} 
+                  value={province} style={province ==='' ? {color: 'gray'} : {color: 'black'}} required>
+                  <option value="">Province</option>
+                  <option value="Alberta">AB</option>
+                  <option value="British Columbia">BC</option>
+                  <option value="Manitoba">MB</option>
+                  <option value="New Brunswick">NB</option>
+                  <option value="Newfoundland and Labrador">NL</option>
+                  <option value="Northwest Territories">NT</option>
+                  <option value="Nova Scotia">NS</option>
+                  <option value="Nunavut">NU</option>
+                  <option value="Ontario">ON</option>
+                  <option value="Prince Edward Island">PE</option>
+                  <option value="Quebec">QC</option>
+                  <option value="Saskatchewan">SK</option>
+                  <option value="Yukon">YT</option>
+                </select>
+                <label htmlFor="postalcode"/>
+                <input 
+                  type="text" 
+                  id="postalcode"
+                  onChange={(event) => setPCode(event.target.value)}
+                  value={pCode}
+                  placeholder="Postal Code"
+                  required
+                />
+                <Button orangy>Save</Button>
+              </form>
+            </>
           :
-          <>
-          <div>No order has been made yet.</div>
-          {/* Route it to subscriptions? */}
-          <Link to="/subscriptions">
-            <Button>Get your first box</Button>
-          </Link>
-        </>
+            <>
+              <div className="address-title">You have not set up your address yet.</div>
+              {/* Route it to subscriptions? */}
+              <Link to="/subscriptions">
+                <Button orangy>Get your first box</Button>
+              </Link>
+            </>
           }
-
+        </div>
       </div>
       <div><Footer /></div>
     </section>  

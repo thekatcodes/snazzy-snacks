@@ -54,37 +54,40 @@ const Subscription = (props) => {
 
   return (
     <section>
-      <Sidebar
-        cookieValue={props.cookieValue}
-        setCookieValue={props.setCookieValue}
-      />
-      <div className="subscription">
-        {index && userData[index].subscribe ? (
-          <>
-            <div>My Subscription</div>
-            <br></br>
-            <div>Current Subscription:
-              <div className="tier">
-                &nbsp;{userData[index].subscription_tier}
+      <div className="account-layout">
+        <Sidebar
+          cookieValue={props.cookieValue}
+          setCookieValue={props.setCookieValue}
+        />
+        <div className="subscription">
+          {index && userData[index].subscribe ? (
+            <>
+              <div>My Subscription</div>
+              <br></br>
+              <div className="subs-info">Current Subscription:
+                <div className="tier">
+                  &nbsp;{userData[index].subscription_tier}
+                </div>
               </div>
-            </div>
-            <div className="buttons">
-            <Link to="/subscriptions">
-              <Button>Change Tier</Button>
-            </Link>
-            <Button onClick={cancelSubscription}>Cancel</Button>
-            </div>
-          </>
-        )
-        : 
-          <>
-            <div>No order has been made yet.</div>
-            {/* Route it to subscriptions? */}
-            <Link to="/subscriptions">
-              <Button>Get your first box</Button>
-            </Link>
-          </>
-        }
+              <br></br>
+              <div className="buttons">
+                <Link to="/subscriptions">
+                  <Button orangy>Change Tier</Button>
+                </Link>
+                <Button tomato onClick={cancelSubscription}>Cancel</Button>
+              </div>
+            </>
+          )
+          : 
+            <>
+              <div>You have no active subscription yet.</div>
+              {/* Route it to subscriptions? */}
+              <Link to="/subscriptions">
+                <Button orangy>Get Your First Box</Button>
+              </Link>
+            </>
+          }
+        </div>
       </div>
       <div><Footer /></div>
     </section>

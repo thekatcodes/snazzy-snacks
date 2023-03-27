@@ -1,23 +1,26 @@
 .subscription {
   // copy pasta from account.scss
-  position: relative;
-  margin-left: 15vw; /* If this is changed, make sure to change Sidebar.scss as well */
-  top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
   padding: 3em;
-  font-size: 30px;
+  font-size: 1.9rem;
   font-weight: bold;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  text-align: center;
 }
 
 .buttons {
+  display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: 2.5rem;
 }
 
-.info {
-  font-size: 25px;
+.subs-info {
+  font-size: 1.5rem;
 }
 
 .tier {

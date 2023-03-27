@@ -42,46 +42,49 @@ const Profile = (props) => {
   return (
     <>
       <section>
-        <Sidebar 
-          cookieValue={props.cookieValue}
-          setCookieValue={props.setCookieValue}
-        />
-        <div className="profile">
-          {/* Error message display */}
-          <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
-          <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
-          <h1>Update Profile</h1>
-          <form className="form-layout" onSubmit={updateProfile}>
-            <label htmlFor="email"/>
-            <input 
-              type="email" 
-              id="email"
-              autoComplete="off"
-              onChange={(event) => setEmail(event.target.value)}
-              value={email}
-              placeholder="Email"
-              required
-            />
-            <label htmlFor="password"/>
-            <input 
-              type="password" 
-              id="password"
-              onChange={(event) => setPwd(event.target.value)}
-              value={pwd}
-              placeholder="Password"
-              required
-            />
-            <label htmlFor="password2"/>
-            <input 
-              type="password" 
-              id="password2"
-              onChange={(event) => setPwd2(event.target.value)}
-              value={pwd2}
-              placeholder="Confirm Password"
-              required
-            />
-            <Button>Save</Button>
-          </form>
+        <div className="account-layout">
+          <Sidebar 
+            cookieValue={props.cookieValue}
+            setCookieValue={props.setCookieValue}
+          />
+          <div className="profile">
+            {/* Error message display */}
+            <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
+            <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>
+            <div className="profile-title">Update Profile</div>
+            <br />
+            <form className="form-layout" onSubmit={updateProfile}>
+              <label htmlFor="email"/>
+              <input 
+                type="email" 
+                id="email"
+                autoComplete="off"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                placeholder="Email"
+                required
+              />
+              <label htmlFor="password"/>
+              <input 
+                type="password" 
+                id="password"
+                onChange={(event) => setPwd(event.target.value)}
+                value={pwd}
+                placeholder="Password"
+                required
+              />
+              <label htmlFor="password2"/>
+              <input 
+                type="password" 
+                id="password2"
+                onChange={(event) => setPwd2(event.target.value)}
+                value={pwd2}
+                placeholder="Confirm Password"
+                required
+              />
+              <Button orangy>Save</Button>
+            </form>
+          </div>
         </div>
         <div><Footer /></div>
       </section>  
