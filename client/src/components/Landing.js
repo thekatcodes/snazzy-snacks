@@ -56,7 +56,7 @@ export default function Landing(props) {
       <img className="landing-bar" src={snack2} alt="Snack" />
       </section>
       <section>
-              <About />
+              <About cookieValue={props.cookieValue} setCookieValue={props.setCookieValue}/>
       </section>
       </>
   );
