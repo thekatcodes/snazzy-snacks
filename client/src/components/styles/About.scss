@@ -5,42 +5,93 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   margin: 0 15em 0;
-.about-header {
-    font-size: 50px;
-    color:$atomic-tangerine;
-    // margin: 60px 0;
-    margin-top: 70px
-}
-h2 {
-    font-size: 30px;
-    color:$atomic-tangerine;
-    margin: 60px 0;
-}
- p {
-    text-align: center;
-    font-size: 20px;
- }
- 
- .team-container, .how-container {
-     display: flex;
-     justify-content: center;
-     flex-direction: row;
-     text-align: center;
+    margin: 0 15em 0;
 
-    img {
-        width: 200px;
+    .about-header {
+        font-size: 50px;
+        color: $atomic-tangerine;
+        // margin: 60px 0;
+        margin-top: 70px
     }
-    .member2 {
-        margin: 0 30px 0;
+
+    h2 {
+        font-size: 30px;
+        color: $atomic-tangerine;
+        margin: 60px 0;
     }
-.how2 {
-    margin: 0 50px 0;
+
+    p {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .team-container,
+    .how-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        text-align: center;
+
+        img {
+            width: 200px;
+        }
+
+        .member2 {
+            margin: 0 30px 0;
+        }
+
+        .how2 {
+            margin: 0 50px 0;
+        }
+
+    }
+
+    .about-snacking-btn {
+        margin: 60px 0;
+    }
+
 }
 
- }
- .about-snacking-btn {
-    margin: 60px 0;
- }
+/* On screens that are 750px or less */
+@media screen and (max-width: 860px) {
+
+    .about-container {
+        margin: 0 3em 0;
+
+        .about-header {
+            margin-top: 50px
+        }
+
+        .about-text {
+            font-size: 16px;
+        }
+
+        h2 {
+            margin: 30px 0;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .team-container,
+        .how-container {
+            img {
+                width: 90px;
+            }
+
+            .how2 {
+                margin: 0 30px 0;
+            }
+
+            .how-desc {
+                display: none;
+            }
+
+            h3 {
+                white-space: nowrap;
+            }
+        }
+    }
 
 }
