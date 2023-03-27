@@ -15,12 +15,18 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const {
 	findUserId,
 	updateAddress,
-    createOrderNumber,
-    orderSummary
+  createOrderNumber,
+  orderSummary
 } = require("./order_confirmation");
 const endpointSecret = process.env.WEBHOOK_SECRET;
 
 app.use(express.urlencoded());
+
+// Helper functions for querying Users table
+const { getUsers, updateNewUser, updateUser, updateCurrentAddress, cancelSubscription } = require('./users');
+
+// Helper functions for querying Products table
+const { getProducts } = require('./products');
 
 // Retrieve payment data after successful checkout
 // DO NOT MOVE THIS app.post("/webhook") AFTER app.use(express.json());
@@ -52,9 +58,9 @@ app.post(
 			const session = event.data.object;
 			// console.log('SESSION PLS', session);
 			const subscriptionId = session.subscription;
-			// console.log("sub id:", subscriptionId);
+			console.log("sub id:", subscriptionId);
 			const address = session.customer_details.address;
-			// console.log(address);
+			console.log(address);
 			//retrieve address details to store in database
 			let street;
 			if (!address.line2) {
@@ -84,6 +90,7 @@ app.post(
 
             // Retrieve price data and set tier
             const price = session.amount_total / 100;
+            console.log('price:', price)
             let subscriptionTier;
             if (price === 20) {
                 subscriptionTier = "Tier 1"
@@ -93,18 +100,17 @@ app.post(
                 subscriptionTier = "Tier 3"
             }
             
-			updateAddress(
-				street,
-				city,
-				province,
-				countryName,
-				postalCode,
-				subscriptionId,
-                subscriptionTier,
-				email
-			);
+            updateAddress(
+                street,
+                city,
+                province,
+                countryName,
+                postalCode,
+                subscriptionId,
+                email
+            );
 
-			createOrderNumber(userId, price, formattedDate);
+            createOrderNumber(userId, subscriptionTier, price, formattedDate);
 		}
 
 		// Return a 200 response to acknowledge receipt of the event
@@ -112,9 +118,7 @@ app.post(
 	}
 );
 
-// Helper and component specific functions
-const { getUsers, updateNewUser } = require('./users');
-const { getProducts } = require('./products');
+
 
 // Middleware to read req.body
 app.use(express.json());
@@ -150,35 +154,38 @@ app.get("/products", async(req, res) => {
 ///////////////////////////////////////////////////
 
 // Receives login details from front end, and checks whether the username & password matches
-app.post("/login", async (req, res) => {
-	try {
-		const users = await getUsers();
-		let login = false;
-		let email = req.body.email;
-		let password = req.body.password;
+app.post("/login", async(req, res) => {
+  try {
+    const users = await getUsers();
+    let login = false;
+    let email = req.body.email;
+    let password = req.body.password;
+    
+    let index = 0;
 
-		let index = 0;
+    for(const user of users) {
+      if(user.email === email && bcrypt.compareSync(password, user.password)) {
+        const name = user.first_name;
+        const email = user.email;
+        
+        req.session.cookie = {cookie: name, email: email};
+        console.log("setsessioncookieset", req.session.cookie);
+        console.log("Cookie's name: ", req.session.cookie.cookie);
+        console.log("Cookie's email: ", req.session.cookie.email);
+        login = true;
+        break;
+      }
+      index++;
+    }
 
-		for (const user of users) {
-			if (user.email === email && bcrypt.compareSync(password, user.password)) {
-				req.session.cookie = user.first_name;
-				console.log("setsessioncookieset", req.session.cookie);
-				login = true;
-				break;
-			}
-			index++;
-		}
-
-		if (!login) {
-			return res
-				.status(400)
-				.send("Login failed! Please check your username and password.");
-		}
-
-		res.json({ login: login, firstname: users[index].first_name });
-	} catch (err) {
-		console.log(err);
-	}
+    if(!login) {
+      return res.status(400).send('Login failed! Please check your username and password.');
+    }
+    
+    res.json({ login: login, firstname: users[index].first_name});
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Returning username
@@ -191,41 +198,106 @@ app.get("/cookie", async (req, res) => {
 	}
 });
 
+// Returning email
+app.get('/email', async(req, res) => {
+  try {
+    console.log("This is the cookie: ", req.session.cookie);
+    console.log("Sending back email: ", req.session.cookie.email);
+    res.send(req.session.cookie.email);
+  } catch (err) {
+    console.log(err);
+  }
+})
+
 // Receives data from register (axios), and add the information to the database
-app.post("/register", async (req, res) => {
-	try {
-		const users = await getUsers();
-		let regis = false;
+app.post('/register', async(req, res) => {
+  try {
+    const users = await getUsers();
+    let regis = false;
+    
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, 10);
+    
+    console.log("This is first name: ", firstname);
+    console.log("This is last name: ", lastname);
 
-		let firstname = req.body.firstname;
-		let lastname = req.body.lastname;
-		let email = req.body.email;
-		let password = bcrypt.hashSync(req.body.password, 10);
+    while (!regis) {
+      if (req.body.password !== req.body.password2) {
+        return res.status(400).send('Passwords do not match!');
+      }
+      
+      for(const user of users) {
+        if(user.email === email) {
+          return res.status(400).send('Email already exists!');
+        } 
+      }
+      
+      regis = true;
+      req.session.cookie = {cookie: firstname, email: email};
+      updateNewUser(firstname, lastname, email, password);
+    }
+    
+    res.json({ update: regis, firstname: firstname });
+    
+  } catch(err) {
+    console.log(err);
+  }
+})
 
-		// console.log("This is first name: ", firstname);
-        // console.log("This is last name: ", lastname);
+// Updates user information in the database
+app.put('/account/profile', async(req, res) => {
+  try {
+    const users = await getUsers();
+    let update = false;
+    
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, 10);
+    let cookie = req.session.cookie.email;
 
-		while (!regis) {
-			if (req.body.password !== req.body.password2) {
-				return res.status(400).send("Passwords do not match!");
-			}
+    console.log("This is the logged in user: ", cookie);
 
-			for (const user of users) {
-				if (user.email === email) {
-					return res.status(400).send("Email already exists!");
-				}
-			}
+    if (req.body.password !== req.body.password2) {
+      return res.status(400).send('Passwords do not match!');
+    }
+      
+    for (const user of users) {
+      if(user.email === email) {
+        return res.status(400).send('Email already exists!');
+      } 
+    }
+      
+    if (updateUser(email, password, cookie)) {
+      update = true;
+    } 
+    res.json({ update: update, firstname: cookie });
+  } catch(err) {
+    console.log(err);
+  }
+})
 
-			regis = true;
-            req.session.cookie = firstname;
-			updateNewUser(firstname, lastname, email, password);
-		}
+// Updates user address in the database
+app.put('/account/address', async(req, res) => {
+  try {
+    let update = false;
+    
+    let street = req.body.street;
+    let city = req.body.city;
+    let province = req.body.province;
+    let pCode = req.body.pCode;
+    let cookie = req.session.cookie.email;
 
-		res.json({ registration: regis, firstname: firstname });
-	} catch (err) {
-		console.log(err);
-	}
-});
+    console.log("This is the logged in user: ", cookie);
+      
+    if (updateCurrentAddress(street, city, province, pCode, cookie)) {
+      update = true;
+    } 
+    res.json({ update: update });
+  } catch(err) {
+    console.log(err);
+  }
+})
 
 // Logout button, clears cookies in backend
 app.post("/logout", (req, res) => {
@@ -271,6 +343,16 @@ app.get("/order-summary", async (req, res) => {
 		console.log('could not get orderSummary', error);
 	}
 });
+
+app.put("/cancel-subscription", (req, res) => {
+  const cookie = req.session.cookie.email;
+
+  console.log("This is the logged in user: ", cookie);
+
+  cancelSubscription(false, cookie);
+  res.json({ subscription: false });
+})
+
 
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}!`);

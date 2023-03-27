@@ -1,5 +1,7 @@
 const pool = require("./db/index");
 
+// Functions that query backend for users table
+
 // Grab users table from PSQL
 async function getUsers() {
   try {
@@ -13,7 +15,7 @@ async function getUsers() {
   }
 }
 
-// Updates users table from PSQL when registration is successful
+// Adds new user to users table when registration is successful
 async function updateNewUser(first_name, last_name, email, password) {
   try {
     await pool.query(`
@@ -25,4 +27,62 @@ async function updateNewUser(first_name, last_name, email, password) {
   }
 }
 
-module.exports = { getUsers, updateNewUser };
+// Update existing user based on cookie 
+async function updateUser(email, password, cookie) {
+  console.log("Email: ", email);
+  console.log("Password: ", password);
+  console.log("Cookie: ", cookie);
+  try {
+    await pool.query(`
+      UPDATE users
+      SET 
+        email = $1,
+        password = $2
+      WHERE email = $3
+    `, [email, password, cookie]);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+
+// Update existing address based on cookie 
+async function updateCurrentAddress(street, city, province, pCode, cookie) {
+  console.log("Street: ", street);
+  console.log("City: ", city);
+  console.log("Province: ", province);
+  console.log("Postal Code: ", pCode);
+  console.log("Cookie: ", cookie);
+  try {
+    await pool.query(`
+      UPDATE users
+      SET 
+        street = $1,
+        city = $2, 
+        province = $3, 
+        postal_code = $4
+      WHERE email = $5
+    `, [street, city, province, pCode, cookie]);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+
+async function cancelSubscription(subscription, cookie) {
+  console.log("This is subscription in boolean value: ", subscription);
+  try {
+    await pool.query(`
+    UPDATE users
+    SET
+      subscribe = $1
+    WHERE 
+      email = $2`
+    , [subscription, cookie]);
+    return console.log(`Subscription value for user ${cookie} has been set to ${subscription}`);
+  } catch(err) {
+    return console.log(err);
+  }
+}
+
+module.exports = { getUsers, updateNewUser, updateUser, updateCurrentAddress, cancelSubscription };

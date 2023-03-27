@@ -18,8 +18,7 @@ const Login = (props) => {
   // If cookie exist, it automatically redirects to homepage - blocks access to login page once logged in
   useEffect(() => {
     if(props.cookieValue) {
-      console.log("Hello");
-      navigate("/");
+      navigate("/account");
     } else {
       navigate("/login");
     }

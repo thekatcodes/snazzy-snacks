@@ -1,32 +1,26 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import axios from 'axios';
+
+import { logout } from '../helpers/logout';
+
 import './styles/NavigationBar.scss';
 
 const NavigationBar = (props) => {
 
-  const logout = async (event) => {
-    event.preventDefault();
-    try{
-      await axios.post('/logout')
-      .then((res) => {
-        props.setCookieValue('');
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(props.setCookieValue);
+    navigate('/');
+  };
 
   // Function to return username
   useEffect(() => {
     axios.get('/cookie')
       .then((res) => {
-        props.setCookieValue(res.data);
+        props.setCookieValue(res.data.cookie);
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +41,7 @@ const NavigationBar = (props) => {
                   <Link to="/account">
                     <button>My Account</button>
                   </Link>
-                  <button className="logout" onClick={logout}>Log Out</button>
+                  <button className="logout" onClick={handleLogout}>Log Out</button>
                 </div>
               </div>
             </>
