@@ -20,9 +20,15 @@
         margin: 60px 0;
     }
 
+    h3 {
+        font-size: 24px;
+        color: $jet;
+    }
+
     p {
         text-align: center;
         font-size: 20px;
+        color: $jet;
     }
 
     .team-container,
@@ -80,6 +86,11 @@
 
         .team-container,
         .how-container {
+
+            h3 {
+                font-size: 16px;
+            }
+
             img {
                 width: 90px;
             }
@@ -87,7 +98,7 @@
             .how {
                 width: 100px;
             }
-    
+
             .how2 {
                 margin: 0 30px 0;
             }
