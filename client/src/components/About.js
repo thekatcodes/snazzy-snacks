@@ -1,5 +1,10 @@
 import React from "react";
 
+import katie from "../images/Katie.png";
+import lyon from "../images/Lyon.png";
+import samma from "../images/Samma.png";
+
+
 export default function About() {
 	return (
 		<div>
@@ -16,13 +21,35 @@ export default function About() {
 				sign up today and let us take care of your snacking needs. Who knows,
 				you might even discover your new favorite snack!
 			</p>
-            <h2>Meet the team</h2>
-            <div>
-                <div>
-
+			<h2>Meet the team</h2>
+			<div>
+				<div>
+					<img
+						className="avatar"
+						src={katie}
+						alt="Katie"
+					/>
+					<p>KATIE</p>
                 </div>
-            </div>
-            
+                
+                <div>
+					<img
+						className="avatar"
+						src={lyon}
+						alt="Lyon"
+					/>
+					<p>LYON</p>
+                </div>
+                <div>
+					<img
+						className="avatar"
+						src={samma}
+						alt="Samma"
+					/>
+					<p>SAMMA</p>
+                </div>
+			</div>
+
 			<h2>How it works</h2>
 		</div>
 	);
