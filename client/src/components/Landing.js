@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 import Button from "./Button";
+import About from './About';
 
 import "./styles/Landing.scss";
 import candy from "../images/candy.png";
@@ -23,7 +24,8 @@ export default function Landing(props) {
       });
   }, [props.cookieValue]);
 
-  return (
+    return (
+      <>
     <section className="landing-background landing-layout layout">
       <div className="coiny">
         <h1>SNAZZY SNACKS</h1>
@@ -52,6 +54,10 @@ export default function Landing(props) {
       </div>
       <img className="landing-chip" src={chips} alt="Chips" />
       <img className="landing-bar" src={snack2} alt="Snack" />
-    </section>
+      </section>
+      <section>
+              <About />
+      </section>
+      </>
   );
 }
