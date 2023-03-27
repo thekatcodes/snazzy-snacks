@@ -56,7 +56,7 @@ export default function Landing(props) {
       </div>
       <img className="landing-chip" src={chips} alt="Chips" />
       <img className="landing-bar" src={snack2} alt="Snack" />
-      <div>
+      <div className='arrow-container'>
         <HashLink smooth duration={1000} delay={200} to="/#about">
             <img className="down-arrow" src={down_arrow} alt="Down arrow" />
         </HashLink>
