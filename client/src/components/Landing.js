@@ -10,6 +10,7 @@ import candy from "../images/candy.png";
 import snack from "../images/snack.png";
 import chips from "../images/crisps.png";
 import snack2 from "../images/snack2.png";
+import down_arrow from "../images/down_arrow.png"
 
 export default function Landing(props) {
 
@@ -54,7 +55,10 @@ export default function Landing(props) {
       </div>
       <img className="landing-chip" src={chips} alt="Chips" />
       <img className="landing-bar" src={snack2} alt="Snack" />
-      </section>
+      <div>
+        <img className="down-arrow" src={down_arrow} alt="Down arrow" />
+      </div>
+            </section>
       <section>
               <About cookieValue={props.cookieValue} setCookieValue={props.setCookieValue}/>
       </section>
