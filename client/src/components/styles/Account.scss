@@ -5,15 +5,28 @@
 }
 
 .account {
-  padding: 3em;
-  font-size: 1.9rem;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  color: $jet;
+    padding: 3em;
+    font-size: 1.9rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: $jet;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    .fade-in-div {
+      animation-name: fadeIn;
+      animation-duration: 1s;
+    }
 }
 
 .orderby {

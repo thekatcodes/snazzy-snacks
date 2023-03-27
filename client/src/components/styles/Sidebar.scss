@@ -8,6 +8,20 @@
   // position: fixed;
   top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
   left: 0;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-in-div {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+  }
 }
 
 .sidebar-title {
