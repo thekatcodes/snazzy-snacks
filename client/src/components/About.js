@@ -34,7 +34,7 @@ export default function About(props) {
 					let us take care of your snacking needs. Who knows, you might even
 					discover your new favorite snack!
 				</p>
-				<h2 className="coiny">Meet the team</h2>
+				<h2 className="coiny">Meet our team</h2>
 				<div className="team-container">
 					<div className="member">
 						<img
