@@ -83,7 +83,7 @@ const Address = (props) => {
           cookieValue={props.cookieValue}
           setCookieValue={props.setCookieValue}
         />
-        <div className="address">
+        <div className="address fade-in-div">
           {/* Error message display */}
           <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
           {index ?

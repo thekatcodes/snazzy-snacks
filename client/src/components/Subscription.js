@@ -66,7 +66,7 @@ const Subscription = (props) => {
           cookieValue={props.cookieValue}
           setCookieValue={props.setCookieValue}
         />
-        <div className="subscription">
+        <div className="subscription fade-in-div">
           { index && userData[index-1].subscribe ? (
             <>
               <div>My Subscription</div>

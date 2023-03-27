@@ -56,7 +56,7 @@ const Account = (props) => {
           cookieValue={props.cookieValue}
           setCookieValue={props.setCookieValue}
         />
-        <div className="account">
+        <div className="account fade-in-div">
           {filteredUser.length === 0 ? (
             <>
               <div>No order has been made yet.</div>
