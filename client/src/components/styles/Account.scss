@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .account-layout {
   display: flex;
 }
@@ -11,6 +13,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  color: $jet;
 }
 
 .orderby {
@@ -23,15 +26,15 @@ table {
   font-size: 1.3rem;
   width: 100%;
   border-collapse: separate;
-  border: solid black 1px;
+  border: 1px solid rgba(53, 53, 53, 0.5);
   border-radius: 10px;
   border-spacing: 0;
 }
 
 th,
 td {
-  border-left: solid black 1px;
-  border-top: solid black 1px;
+  border-left: 1px solid rgba(53, 53, 53, 0.5);
+  border-top: 1px solid rgba(53, 53, 53, 0.5);
   padding: .5em;
   text-align: center;
   vertical-align: middle;
