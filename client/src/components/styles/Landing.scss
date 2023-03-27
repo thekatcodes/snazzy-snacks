@@ -2,6 +2,7 @@
 
 .landing-background {
   background-image: radial-gradient(circle at 84.96% 15.64%, #F39563, transparent 74%),radial-gradient(circle at 45.03% 51.05%, #F45156, transparent 71%),radial-gradient(circle at 88.92% 85.85%, #ffeb87, transparent 100%),radial-gradient(circle at 53.83% 41.02%, #ffffff, transparent 37%),radial-gradient(circle at 17.06% 4.64%, #ff722b, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%);
+  min-height: 100vh;
 }
 
 .landing-layout {
@@ -9,7 +10,7 @@
   flex-direction: column;
   color: $white;
   text-align: center;
-  min-height: 100vh;
+
   width: 100vw;
 
   .landing-text {
@@ -28,30 +29,33 @@
 
 }
 
-.landing-icons {
-  position: fixed;
-  width: 7rem;
-}
-
 .landing-candy {
   left: 25vw;
   bottom: 18vh;
+  position: fixed;
+  width: 7rem;
 }
 
 .landing-chip {
   left: 10vw;
   bottom: 30vh;
+  position: fixed;
+  width: 7rem;
 }
 
 .landing-snack {
   transform: rotate(30deg);
   right: 25vw;
   bottom: 18vh;
+  position: fixed;
+  width: 7rem;
 }
 
 .landing-bar {
   right: 10vw;
   bottom: 30vh;
+  position: fixed;
+  width: 7rem;
 }
 
 @media only screen and (max-width: 960px) {
