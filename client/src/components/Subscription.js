@@ -34,7 +34,7 @@ const Subscription = (props) => {
     if (props.cookieValue && userData) {
         index = userData.findIndex(user => user.first_name === props.cookieValue);
         console.log('INDEX:', index)
-        console.log(userData[index].subscribe)
+        // console.log(userData[index].subscribe)
     if (index === -1) {
       index = null;
     }
@@ -67,7 +67,7 @@ const Subscription = (props) => {
         setCookieValue={props.setCookieValue}
       />
       <div className="subscription">
-        { userData && userData[index-1].subscribe ? (
+        { index && userData[index-1].subscribe ? (
           <>
             <div>My Subscription</div>
             <br></br>
