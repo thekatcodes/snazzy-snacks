@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .sidebar {
   font-weight: bold;
   height: 50vh; /* half of the viewport height */
@@ -30,9 +32,10 @@
 }
 
 .link.active {
-  color:black
+  color:$jet;
 }
 
 .link:hover {
-  background-color: gray;
+font-weight: 700;
+color: $jet;
 }
