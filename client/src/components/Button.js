@@ -5,10 +5,11 @@ import classNames from "classnames";
 
 
 export default function Button(props) {
-  const { children, orangy } = props;
+  const { children, orangy, tomato } = props;
 
   const buttonClass = classNames("button", "coiny", {
     "button--orangy": orangy, //if props.orangy is true, append className
+    "button--tomato": tomato,
   });
 
   const handleClick = (event) => {

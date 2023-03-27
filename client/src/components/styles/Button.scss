@@ -34,6 +34,20 @@
   border: 2px solid;
 }
 
+.button--tomato {
+  color: $imperial-red;
+  background-color: $white;
+  border-color: $imperial-red;
+  border: 2px solid;
+}
+
+.button--tomato:hover {
+  color: $white;
+  background-color: $imperial-red;
+  border-color: $imperial-red;
+  border: 2px solid;
+}
+
 .button:focus {
   outline: none;
 }
