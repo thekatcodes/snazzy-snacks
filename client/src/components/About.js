@@ -65,7 +65,7 @@ export default function About(props) {
 
 				<h2 className="coiny">How it works</h2>
 				<div className="how-container">
-					<div>
+					<div className="how">
 						<img
 							className="account-how"
 							src={account}
@@ -76,7 +76,7 @@ export default function About(props) {
                         Create an account to keep track of your subscription
 						</p>
 					</div>
-					<div className="how2">
+					<div className=" how how2">
 						<img
 							className="packaging-how"
 							src={packaging}
@@ -88,7 +88,7 @@ export default function About(props) {
 							Tier 3
 						</p>
 					</div>
-					<div>
+					<div className="how">
 						<img
 							className="surprise-how"
 							src={surprise_box}
