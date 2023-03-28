@@ -8,7 +8,7 @@ const Misc = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/");
-    }, 90000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
