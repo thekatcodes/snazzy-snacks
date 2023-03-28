@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .sidebar {
   font-weight: bold;
   height: 50vh; /* half of the viewport height */
@@ -6,6 +8,20 @@
   // position: fixed;
   top: 60px; /* adjust this value to make sure it doesn't overlap with the header */
   left: 0;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-in-div {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+  }
 }
 
 .sidebar-title {
@@ -30,9 +46,10 @@
 }
 
 .link.active {
-  color:black
+  color:$jet;
 }
 
 .link:hover {
-  background-color: gray;
+font-weight: 700;
+color: $jet;
 }

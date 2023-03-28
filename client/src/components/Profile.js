@@ -47,7 +47,7 @@ const Profile = (props) => {
             cookieValue={props.cookieValue}
             setCookieValue={props.setCookieValue}
           />
-          <div className="profile">
+          <div className="profile fade-in-div">
             {/* Error message display */}
             <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
             <p className={sucMsg ? "sucmsg" : "offscreen"}>{sucMsg}</p>

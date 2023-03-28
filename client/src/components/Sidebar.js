@@ -19,7 +19,7 @@ const Sidebar = (props) => {
   
   return (
     <>
-      <section className="sidebar">
+      <section className="sidebar fade-in-div">
         <div className="sidebar-title">My Account</div>
         <a href="/account" className={`sidebar-row link ${path === '/account' ? 'active' : ''}`}>Orders</a>
         <a href="/account/subscription" className={`sidebar-row link ${path === '/account/subscription' ? 'active' : ''}`}>Subscription</a>

@@ -1,6 +1,23 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/variables.scss";
 
+.account-layout {
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    .fade-in-div {
+      animation-name: fadeIn;
+      animation-duration: 1s;
+    }
+}
+
 .subscription {
   // copy pasta from account.scss
   padding: 3em;
@@ -12,6 +29,7 @@
   align-items: center;
   width: 100%;
   text-align: center;
+
 }
 
 .buttons {
@@ -24,6 +42,7 @@
 
 .subs-info {
   font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .tier {
@@ -35,6 +54,10 @@
   font-family: "Coiny", cursive;
 }
 
+.swal2-image {
+    border-radius: 50px;
+}
+
 .swal2-styled.swal2-confirm {
   border: 0;
   border-radius: 0.25em;
@@ -44,8 +67,12 @@
   font-size: 1em;
 }
 
-.swal2-styled.swal2-confirm:focus {
+.swal2-styled.swal2-confirm:hover {
   box-shadow: 0 0 0 3px rgba(255, 138, 40, .5);
+}
+
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgb(255 138 40 / 50%);
 }
 
 .swal2-styled.swal2-cancel {
@@ -56,9 +83,17 @@
   background-color: #fff;
   color: rgba(255, 138, 40, 1);
   font-size: 1em;
+  background-image: none;
 }
 
+.swal2-actions:not(.swal2-loading) .swal2-styled:hover {
+    background-image: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0 / 0%));
+}
+
+.swal2-styled.swal2-default-outline:focus {
+    box-shadow: 0 0 0 3px rgb(255 138 40 / 50%);}
+
 // For adding shadow to the border to cancel button
-.swal2-styled.swal2-cancel:focus {
+.swal2-styled.swal2-cancel:hover {
   box-shadow: 0 0 0 3px rgba(255, 138, 40, .5);
 }
