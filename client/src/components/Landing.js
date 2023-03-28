@@ -26,42 +26,42 @@ export default function Landing(props) {
       });
   }, [props.cookieValue]);
 
-    return (
-      <>
-    <section className="landing-background layout">
-      <div className="landing-layout">
-        <div className='landing-text'>
-          <h1 className="coiny">SNAZZY SNACKS</h1>
-          <h3>Upgrade your snacking game with pizazz-packed treats.<br />Every month at your doorstep!</h3>
-          <h5>*starting at 20$/mo</h5>
-          <div>
-            {props.cookieValue ? 
-              <Link to="/account">
-                <Button>GET SNACKING!</Button>
-              </Link>
-            :
+  return (
+    <>
+      <section className="landing-background layout">
+        <div className="landing-layout">
+          <div className='landing-text'>
+            <h1 className="coiny">SNAZZY SNACKS</h1>
+            <h3>Upgrade your snacking game with pizazz-packed treats.<br />Every month at your doorstep!</h3>
+            <h5>*starting at 20$/mo</h5>
+            <div>
+              {props.cookieValue ? 
+                <Link to="/account">
+                  <Button>GET SNACKING!</Button>
+                </Link>
+              :
                 <Link to="/login">
                   <Button>GET SNACKING!</Button>
                 </Link>
-            }
+              }
+            </div>
+          </div>
+          <div className="img-layout">
+            <img className="landing-chip" src={chips} alt="Chips" />
+            <img className="landing-candy" src={candy} alt="Candy" />
+            <div className='arrow-container'>
+              <HashLink smooth duration={1000} delay={200} to="/#about">
+                <img className="down-arrow" src={down_arrow} alt="Down arrow" />
+              </HashLink>
+            </div>
+            <img className="landing-snack" src={snack} alt="Snack" />
+            <img className="landing-bar" src={snack2} alt="Snack" />
           </div>
         </div>
-        <img className="landing-candy" src={candy} alt="Candy" />
-        <img className="landing-snack" src={snack} alt="Snack" />
-        <img className="landing-chip" src={chips} alt="Chips" />
-        <img className="landing-bar" src={snack2} alt="Snack" />
-      </div>
-      <img className="landing-chip" src={chips} alt="Chips" />
-      <img className="landing-bar" src={snack2} alt="Snack" />
-      <div className='arrow-container'>
-        <HashLink smooth duration={1000} delay={200} to="/#about">
-            <img className="down-arrow" src={down_arrow} alt="Down arrow" />
-        </HashLink>
-      </div>
-    </section>
-      <section id='about'>
-              <About cookieValue={props.cookieValue} setCookieValue={props.setCookieValue}/>
       </section>
-      </>
+      <section id='about'>
+        <About cookieValue={props.cookieValue} setCookieValue={props.setCookieValue}/>
+      </section>
+    </>
   );
 }
