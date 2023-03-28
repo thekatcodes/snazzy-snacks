@@ -71,10 +71,6 @@ const Address = (props) => {
       index = null;
     }
   }
-    
-    if (index !== null) {
-        index += 1;
-    }
 
   if (index !== null) {
     index += 1;

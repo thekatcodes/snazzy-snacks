@@ -112,7 +112,7 @@ const Subscription = (props) => {
           )
           : 
             <>
-              <div>You have no active subscription yet.</div>
+              <div>You have no active subscription...yet</div>
               {/* Route it to subscriptions? */}
               <Link to="/subscriptions">
                 <Button orangy>Get Your First Box</Button>
