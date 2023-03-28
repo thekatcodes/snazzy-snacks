@@ -52,7 +52,7 @@ const Subscription = (props) => {
 
     createModal({
       title: 'Mistakes happen.',
-      text: "But it's okay, we got you! Just click on the 'Take me back' button :)",
+      text: "But it's okay, we got you! Just click on the 'Take me back' button 😃",
       icon: 'warning',
       confirmButtonText: 'No, I want to cancel',
       cancelButtonText: 'Take me back!',
@@ -67,13 +67,14 @@ const Subscription = (props) => {
       });
     }).then(() => {
       return createModal({
-        text: " Please stay, we will miss you :( ",
+        text: " Please stay, we will miss you 😔 ",
         imageUrl: sadCatUrl,
         imageWidth: 300,
         imageHeight: 300,
         imageAlt: 'Custom image',
         confirmButtonText: 'Cancel',
-        cancelButtonText: ':D ',
+        // cancelButtonText: ' :D ',
+        cancelButtonText: ' 😃 😃 😃 ',
       });
     }).then(() => {
       return axios.put("/cancel-subscription");

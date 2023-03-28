@@ -59,12 +59,14 @@
 }
 
 .swal2-styled.swal2-confirm {
-  border: 0;
-  border-radius: 0.25em;
-  background: initial;
-  background-color: rgba(255, 138, 40, 1);
-  color: #fff;
-  font-size: 1em;
+    border: 2px solid;
+    border-radius: 0.25em;
+    border-color: rgba(255, 138, 40, 1);
+    background: initial;
+    background-color: #fff !important;
+    color: rgba(255, 138, 40, 1);
+    font-size: 1em;
+    background-image: none;
 }
 
 .swal2-styled.swal2-confirm:hover {
@@ -76,14 +78,12 @@
 }
 
 .swal2-styled.swal2-cancel {
-  border: 2px solid;
-  border-radius: 0.25em;
-  border-color: rgba(255, 138, 40, 1);
-  background: initial;
-  background-color: #fff;
-  color: rgba(255, 138, 40, 1);
-  font-size: 1em;
-  background-image: none;
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: rgba(255, 138, 40, 1);
+    color: #fff;
+    font-size: 1em;
 }
 
 .swal2-actions:not(.swal2-loading) .swal2-styled:hover {
