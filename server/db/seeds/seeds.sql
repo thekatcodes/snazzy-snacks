@@ -1,8 +1,8 @@
 INSERT INTO users (email, password, first_name, last_name, street, city, province, country, postal_code, stripe_sub_id, subscribe) 
 VALUES 
 ('example1@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Samma', 'Su', '1 Street', 'Toronto', 'ON', 'Canada', 'A1A A1A', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo', true),
-('example2@example.com', '$2a$10$MR8lu1PZ68iwyi9XgTXQOewAMode11V2lNiMw84xsebub5yjoqaFa', 'Katie', 'Liu', '2 Street', 'Toronto', 'ON', 'Canada', 'B2B B2B', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo', false),
-('example3@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Lyon', 'Lee', '3 Street', 'Toronto', 'ON', 'Canada', 'C3C C3C', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo', false);
+('example2@example.com', '$2a$10$MR8lu1PZ68iwyi9XgTXQOewAMode11V2lNiMw84xsebub5yjoqaFa', 'Katie', 'Liu', '2 Street', 'Toronto', 'ON', 'Canada', 'B2B B2B', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo', true),
+('example3@example.com', '$2a$10$qVu2GxLdZVQIjLvIjqQPMukdy344IC91DY/xkxHeCNG4241ao3O/2', 'Lyon', 'Lee', '3 Street', 'Toronto', 'ON', 'Canada', 'C3C C3C', 'sub_1MoxzrGdWagE6Ui8jq5fS3Oo', true);
 
 INSERT INTO users (email, password, first_name, last_name)
 VALUES
