@@ -21,8 +21,10 @@ function App() {
   const navigate = useNavigate();
 
   const [cookieValue, setCookieValue] = useState('');
+  console.log("This is cookie value when page is rendered: ", cookieValue);
 
   const PrivateRoute = ({ children }) => {
+    console.log("This is cookie value inside PrivateRoute: ", cookieValue);
     return cookieValue ? children : navigate("/login")
   }
 

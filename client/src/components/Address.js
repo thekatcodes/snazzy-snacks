@@ -76,6 +76,10 @@ const Address = (props) => {
         index += 1;
     }
 
+  if (index !== null) {
+    index += 1;
+  }
+
   return (
     <section>
       <div className="account-layout">

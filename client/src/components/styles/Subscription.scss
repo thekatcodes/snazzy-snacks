@@ -1,3 +1,6 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
 .subscription {
   // copy pasta from account.scss
   padding: 3em;
@@ -26,4 +29,36 @@
 .tier {
   display: inline;
   font-weight: 900;
+}
+
+.swal2-styled {
+  font-family: "Coiny", cursive;
+}
+
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: rgba(255, 138, 40, 1);
+  color: #fff;
+  font-size: 1em;
+}
+
+.swal2-styled.swal2-confirm:focus {
+  box-shadow: 0 0 0 3px rgba(255, 138, 40, .5);
+}
+
+.swal2-styled.swal2-cancel {
+  border: 2px solid;
+  border-radius: 0.25em;
+  border-color: rgba(255, 138, 40, 1);
+  background: initial;
+  background-color: #fff;
+  color: rgba(255, 138, 40, 1);
+  font-size: 1em;
+}
+
+// For adding shadow to the border to cancel button
+.swal2-styled.swal2-cancel:focus {
+  box-shadow: 0 0 0 3px rgba(255, 138, 40, .5);
 }
