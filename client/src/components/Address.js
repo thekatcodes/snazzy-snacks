@@ -91,9 +91,11 @@ const Address = (props) => {
               <div className="address-title">Update Address</div>
               <br />
               <div>Current Address</div>
-              <div>{userData[index-1].street}</div>
-              <div>{userData[index-1].city}, {userData[index-1].province}</div>
-              <div>{userData[index-1].postal_code}</div>
+              <div className="current-address-container">  
+                <div>{userData[index-1].street}</div>
+                <div>{userData[index-1].city}, {userData[index-1].province}</div>
+                <div>{userData[index-1].postal_code}</div>
+              </div>
               <form className="form-layout" onSubmit={updateAddress}>
                 <label htmlFor="street"/>
                 <input 

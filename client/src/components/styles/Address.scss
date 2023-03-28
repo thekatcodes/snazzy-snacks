@@ -20,11 +20,18 @@
     animation-name: fadeIn;
     animation-duration: 1s;
   }
+
+  .current-address-container {
+      font-weight: 400;
+      margin-top: 10px;
+      text-align: center;
+  }
 }
 
 .address-title {
  font-size: 1.9rem;
 }
+
 
 .form-layout {
   display: flex;
