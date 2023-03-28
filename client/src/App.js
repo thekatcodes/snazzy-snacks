@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.scss";
 
 import NavigationBar from './components/NavigationBar';
@@ -18,10 +18,14 @@ import Misc from './components/Misc';
 
 function App() {
 
+  const navigate = useNavigate();
+
   const [cookieValue, setCookieValue] = useState('');
+  console.log("This is cookie value when page is rendered: ", cookieValue);
 
   const PrivateRoute = ({ children }) => {
-    return cookieValue ? children : <Navigate to="/login"/>
+    console.log("This is cookie value inside PrivateRoute: ", cookieValue);
+    return cookieValue ? children : navigate("/login")
   }
 
   return (

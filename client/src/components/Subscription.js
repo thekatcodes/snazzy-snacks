@@ -2,10 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'; 
+import Swal from 'sweetalert2';
 
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Button from "./Button";
+
+import { createModal, showSuccessMessage } from "../helpers/createModal";
+import sadCatUrl from "../images/sadcat.jpg";
 
 import "./styles/Subscription.scss";
 
@@ -28,28 +32,54 @@ const Subscription = (props) => {
 		fetchData();
   }, []);
 
+  // Identifying the location of the current user using index
   let index = null;
 
-  console.log("This is userData on subscription page: ", userData);
   if (props.cookieValue && userData) {
     index = userData.findIndex(user => user.first_name === props.cookieValue);
     if (index === -1) {
       index = null;
     }
   }
-
+  if (index !== null) {
+    index += 1;
+  }
+  
   const cancelSubscription = (event) => {
     event.preventDefault();
-    if (window.confirm('Are you sure you want to cancel your subscription?')) {
-      axios.put("/cancel-subscription")
-      .then((res) => {
-        console.log("Your subscription is now: ", res.data.subscription);
-        navigate(0);
-      })
-      .catch((err) => {
-        console.log("You are about to cancel your subscription (ERR)");
+
+    createModal({
+      title: 'Mistakes happen.',
+      text: "But it's okay, we got you! Just click on the 'Take me back' button :)",
+      icon: 'warning',
+      confirmButtonText: 'No, I want to cancel',
+      cancelButtonText: 'Take me back!',
+      confirmButtonColor: '#ff8a28'
+    }).then(() => {
+      return createModal({
+        title: 'Wha... What?',
+        text: "Wait, you're leaving? Is this just a sugar-deprived delusion?",
+        icon: 'warning',
+        confirmButtonText: 'I still want to cancel.',
+        cancelButtonText: "You're right, I was just hangry.",
       });
-    }
+    }).then(() => {
+      return createModal({
+        text: " Please stay, we will miss you :( ",
+        imageUrl: sadCatUrl,
+        imageWidth: 300,
+        imageHeight: 300,
+        imageAlt: 'Custom image',
+        confirmButtonText: 'Cancel',
+        cancelButtonText: ':D ',
+      });
+    }).then(() => {
+      return axios.put("/cancel-subscription");
+    }).then(() => {
+      navigate(0);
+    }).catch(() => {
+      showSuccessMessage();
+    });
   }
 
   return (
@@ -59,13 +89,13 @@ const Subscription = (props) => {
         setCookieValue={props.setCookieValue}
       />
       <div className="subscription">
-        {index && userData[index].subscribe ? (
+        {index && userData[index-1].subscribe ? (
           <>
             <div>My Subscription</div>
             <br></br>
             <div>Current Subscription:
               <div className="tier">
-                &nbsp;{userData[index].subscription_tier}
+                &nbsp;{userData[index-1].subscription_tier}
               </div>
             </div>
             <div className="buttons">

@@ -20,7 +20,7 @@ async function updateNewUser(first_name, last_name, email, password) {
   try {
     await pool.query(`
       INSERT INTO users (first_name, last_name, email, password)
-      VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, password]);
+      VALUES ($1, $2, $3, $4, $5)`, [first_name, last_name, email, password, false]);
     return ("User created successfully");
   } catch (err) {
     console.log(err);

@@ -70,6 +70,10 @@ const Address = (props) => {
     }
   }
 
+  if (index !== null) {
+    index += 1;
+  }
+
   return (
     <section>
       <Sidebar 
@@ -83,9 +87,9 @@ const Address = (props) => {
           <>
             <h1>Update Address</h1>
             <div>Current Address</div>
-            <div>{userData[index].street}</div>
-            <div>{userData[index].city}, {userData[index].province}</div>
-            <div>{userData[index].postal_code}</div>
+            <div>{userData[index-1].street}</div>
+            <div>{userData[index-1].city}, {userData[index-1].province}</div>
+            <div>{userData[index-1].postal_code}</div>
             <form className="form-layout" onSubmit={updateAddress}>
             <label htmlFor="street"/>
             <input 
