@@ -1,22 +1,26 @@
 .misc-background {
   background-image: radial-gradient(circle at 84.96% 15.64%, #F39563, transparent 74%),radial-gradient(circle at 45.03% 51.05%, #F45156, transparent 71%),radial-gradient(circle at 88.92% 85.85%, #ffeb87, transparent 100%),radial-gradient(circle at 53.83% 41.02%, #ffffff, transparent 37%),radial-gradient(circle at 17.06% 4.64%, #ff722b, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%);
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 
-  .misc-box {
-    text-align: center;
-    color: #fff;
-  }
+}
 
-  .misc-title {
-    font-size: 5rem;
-    margin-bottom: 2rem;
-  }
+.misc-box {
+  text-align: center;
+  color: #fff;
+  width: 93%;
+}
 
-  .misc-text {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
+.misc-title {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.misc-text {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }

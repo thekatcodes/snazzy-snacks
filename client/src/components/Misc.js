@@ -8,7 +8,7 @@ const Misc = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/");
-    }, 10000);
+    }, 90000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -16,7 +16,7 @@ const Misc = () => {
   return (
     <section className="misc-background">
       <div className="misc-box">
-        <h1 className="misc-title">Uh oh!</h1>
+        <div className="misc-title">Uh oh!</div>
         <p className="misc-text">It looks like you've stumbled upon an empty snack aisle.</p>
         <p className="misc-text">We're sorry, but the snack you're looking for is out of stock, or it never existed in the first place!</p>
         <p className="misc-text">Don't worry though, we'll guide you back to our main snack selection, where you can find something else to munch on.</p>
