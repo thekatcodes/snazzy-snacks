@@ -6,15 +6,32 @@ Created in collaboration with [Katie Liu](https://github.com/thekatcodes) and [S
 
 ## Features
 
-- Simple yet colourful user interface
+- Simple and colour-coordinated user interface
 - User-friendly and intuitive navigation
 - Responsive design
 - Easy payment process
-- omething about security feature???
+- Something about security feature???
 
 ## Final Product
 
 ?? VIDEO OF APPLICATION ??
+
+## Getting Started
+
+1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+2. Update the .env file with your correct local information 
+  - username: `labber` 
+  - password: `labber` 
+  - database: `finals`
+3. Install dependencies:
+  - cd \client, then `npm install`
+  - cd \server, then `npm install`
+4. Fix to binaries for sass: `npm rebuild node-sass`
+5. Reset database: `npm run db:reset`
+  - Check the db folder to see what gets created and seeded in the SDB
+7. Run the servers, 
+  - Note: nodemon is used, so you should not have to restart your server
+8. Visit `http://localhost:8080/`
 
 ## Setup
 
