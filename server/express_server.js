@@ -270,6 +270,7 @@ app.put('/account/profile', async(req, res) => {
       
     if (updateUser(email, password, cookie)) {
       update = true;
+      req.session.cookie.email = email;
     } 
     res.json({ update: update, firstname: cookie });
   } catch(err) {
