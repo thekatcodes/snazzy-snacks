@@ -27,13 +27,18 @@ Snazzy Snacks was created in collaboration with [Katie Liu](https://github.com/t
   - cd \client, then `npm install`
   - cd \server, then `npm install`
 
->What do we have to do about stripe? 
+4. [Install Stripe CLI] (https://stripe.com/docs/stripe-cli) and listen to webhooks
+```
+brew install stripe/stripe-cli/stripe
+stripe login
+stripe listen --forward-to localhost:8080/webhook
+```
 
-4. Fix to binaries for sass: `npm rebuild node-sass`
+5. Fix to binaries for sass: `npm rebuild node-sass`
 
 >Did we use sass? 
 
-5. Reset database: 
+6. Reset database: 
   - To reset and repopulate the database, while in PSQL at the /final-project directory, follow these steps:
     - /i server/db/migrations/schema.sql
     - /i server/db/seeds/seeds/sql
