@@ -27,7 +27,7 @@ Snazzy Snacks was created in collaboration with [Katie Liu](https://github.com/t
   - cd \client, then `npm install`
   - cd \server, then `npm install`
 
-4. [Install Stripe CLI] (https://stripe.com/docs/stripe-cli) and listen to webhooks
+4. [Install Stripe CLI](https://stripe.com/docs/stripe-cli) and listen to webhooks
 ```
 brew install stripe/stripe-cli/stripe
 stripe login
