@@ -32,6 +32,7 @@ VALUES
 ('Life Savers Hard Candy', 40, 'Candy', 'https://dr9wvh6oz7mzp.cloudfront.net/i/24bb1759798262e520c21bfb72c45246_ra,w380,h380_pa,w380,h380.jpg', 'A classic hard candy, featuring the famous Cherry, Pineapple, Orange, Lime and Lemon fruit flavours.'),
 ('Cadbury Crunchie Rocks', 40, 'Chocolate', 'https://candybar.snackcrate.com/wp-content/uploads/2021/09/Cadbury_Crunchie_Rocks_482x482_.png', 'Clusters of crunchy golden honeycomb and crispy corn flakes, covered in Cadbury milk chocolate.'),
 
+('Farm Bourgouin Sweet Potato', 60, 'Candy', 'https://northof49naturals.com/wp-content/uploads/2021/08/Sweet-Potato.png', 'Delicious organic free range sweet potato, harvested with love.'),
 ('Ojas Vegan Vanilla Quinoa Pops', 60, 'Chips', 'https://dr9wvh6oz7mzp.cloudfront.net/i/d09b90e92ca902a7db8fa06b794739d8_ra,w380,h380_pa,w380,h380.png', 'Light and airy vanilla flavoured quinoa pops.'),
 ('c''est BONBON Cocktail Mix', 60, 'Candy', 'https://dr9wvh6oz7mzp.cloudfront.net/i/d13772f2c8369b1cfa085a2a0a09cb5e_ra,w380,h380_pa,w380,h380.png', 'The cocktail mix gummies are fat free, gluten free and very soft.'),
 ('Dufflet Dark Chocolate & Sea Salt Blondie Thins', 60, 'Cookie', 'https://dr9wvh6oz7mzp.cloudfront.net/i/d77e468a097ca68699d2d7c69e4efe02_ra,w380,h380_pa,w380,h380.jpg', 'Crisp, sumptuous and intense dark chocolate and sea salt blondie thins.'),
@@ -39,7 +40,6 @@ VALUES
 ('Kit Kat Big Little Pouch Strawberry', 60, 'Chocolate', 'https://candybar.snackcrate.com/wp-content/uploads/2021/09/KitKat_Strawberry_Balls_482x482_082321.png', 'It''s bite-sized and easy to eat. The balanced taste of crispy wafers and milk chocolate with a hint of strawberry.'),
 ('SmartSweets Lollipops', 60, 'Candy', 'https://dr9wvh6oz7mzp.cloudfront.net/i/56573b2ba6fba0a855d87980b2daa1ef_ra,w380,h380_pa,w380,h380.png', 'Kick sugar, keep candy. Enjoy these lollipops with both blue raspberry and watermelon flavours.'),
 ('Hardbite Wild Onion & Yogurt', 60, 'Chips', 'https://candybar.snackcrate.com/wp-content/uploads/2023/01/Can_OnionYogurt_482x482.png', 'A tantalizing mix of wild onion and creamy yogurt seasonings, these chips pack a flavorful punch.'),
-('Diamond Bakery Taro Macnut', 60, 'Cookie', 'https://candybar.snackcrate.com/wp-content/uploads/2021/09/Hawaii_Taro_Chips_482x482_.png', 'This buttery shortbread cookie is infused with the decadent flavors of sweet taro and macadamia nuts.'),
 ('Valeo Raspberry & Coconut Ruffles', 60, 'Chocolate', 'https://candybar.snackcrate.com/wp-content/uploads/2022/01/Valentines_RaspRuffles_482x482_.png', 'Delicious raspberry-flavored coconut fondant is covered with dark chocolate for a touch of decadence.'),
 ('Chimes Toasted Coconut Toffee with Sea Salt', 60, 'Candy', 'https://dr9wvh6oz7mzp.cloudfront.net/i/e8420599059c269e5de3fa356b1e467d_ra,w380,h380_pa,w380,h380.jpg', 'Delicious toasted coconut toffee made with real coconut milk and sea salt.'),
 ('Walkers Italian Lemon and White Chocolate Biscuits', 60, 'Cookie', 'https://dr9wvh6oz7mzp.cloudfront.net/i/7189bf3fd4f0894386dd12c8311986b3_ra,w380,h380_pa,w380,h380.jpg', 'Italian lemon and white chocolate biscuits.'),
