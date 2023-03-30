@@ -2,7 +2,7 @@
 
 Snazzy Snacks is a single page application built using React as frontend, with the support of Express and PostgresSQL as backend. It features monthly subscription service that delivers random assortment of snacks, based on one of three tiers. 
 
-Snazzy Snacks was created in collaboration with [Katie Liu](https://github.com/thekatcodes) and [Samma Su](https://github.com/EuphieSS).
+Snazzy Snacks was created in collaboration with [Lyon Lee](https://github.com/BBB0920) and [Samma Su](https://github.com/EuphieSS).
 
 [See project report here](https://drive.google.com/file/d/1EHMbCzF5vQ-SZRdiaXvMm74s7b8yYQTy/view)
 
