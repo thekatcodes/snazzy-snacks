@@ -4,6 +4,10 @@ Snazzy Snacks is a single page application built using React as frontend, with t
 
 Snazzy Snacks was created in collaboration with [Katie Liu](https://github.com/thekatcodes) and [Samma Su](https://github.com/EuphieSS).
 
+[See project report here](https://drive.google.com/file/d/1EHMbCzF5vQ-SZRdiaXvMm74s7b8yYQTy/view)
+
+[See project planning details and design here](https://www.figma.com/file/aOt9SnYI73BygD3qeNrvT2/LHL---Final-Project?node-id=0%3A1&t=Kpb9bmLjjNpqNzai-1)
+
 ## Features
 
 - Simple and colour-coordinated user interface
@@ -14,7 +18,10 @@ Snazzy Snacks was created in collaboration with [Katie Liu](https://github.com/t
 
 ## Final Product
 
-?? VIDEO OF APPLICATION ??
+
+https://user-images.githubusercontent.com/83685887/228967757-bb8d9d83-5f80-4636-9578-20809ba156e4.mov
+
+
 
 ## Getting Started
 
@@ -35,8 +42,6 @@ stripe listen --forward-to localhost:8080/webhook
 ```
 
 5. Fix to binaries for sass: `npm rebuild node-sass`
-
->Did we use sass? 
 
 6. Reset database: 
   - To reset and repopulate the database, while in PSQL at the /final-project directory, follow these steps:
