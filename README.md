@@ -4,9 +4,9 @@ Snazzy Snacks is a single page application built using React as frontend, with t
 
 Snazzy Snacks was created in collaboration with [Lyon Lee](https://github.com/BBB0920) and [Samma Su](https://github.com/EuphieSS).
 
-[See project report here](https://drive.google.com/file/d/1EHMbCzF5vQ-SZRdiaXvMm74s7b8yYQTy/view)
+[See project report](https://drive.google.com/file/d/1EHMbCzF5vQ-SZRdiaXvMm74s7b8yYQTy/view)
 
-[See project planning details and design here](https://www.figma.com/file/aOt9SnYI73BygD3qeNrvT2/LHL---Final-Project?node-id=0%3A1&t=Kpb9bmLjjNpqNzai-1)
+[See project planning details and design](https://www.figma.com/file/aOt9SnYI73BygD3qeNrvT2/LHL---Final-Project?node-id=0%3A1&t=Kpb9bmLjjNpqNzai-1)
 
 ## Features
 
